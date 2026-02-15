@@ -1,0 +1,19 @@
+# Основные правила для всех роботов
+User-agent: *
+Disallow: /chuvash-souvenir.ru/cart.html
+Disallow: /chuvash-souvenir.ru/account.html
+Disallow: /chuvash-souvenir.ru/checkout.html
+Disallow: /chuvash-souvenir.ru/order-success.html
+Disallow: /chuvash-souvenir.ru/order-confirmation.html
+Disallow: /chuvash-souvenir.ru/login.html
+Disallow: /chuvash-souvenir.ru/register.html
+Disallow: /chuvash-souvenir.ru/404.html
+Disallow: /chuvash-souvenir.ru/images/
+Disallow: /*?*   # Запрет на страницы с параметрами
+
+# Правила для робота Яндекса
+User-agent: Yandex
+Allow: /
+
+# Указываем путь к файлу Sitemap
+Sitemap: https://danyastar.github.io/chuvash-souvenir.ru/sitemap.xml
