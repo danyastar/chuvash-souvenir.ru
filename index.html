@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="Интернет-магазин изделий ручной работы. Уникальные авторские товары от мастеров.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чувашский сувенир - Главная</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-content">
+        <header class="header">
+            <div class="ornament-top"></div>
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="images/logo.png" alt="Чувашский сувенир">
+                        </a>
+                    </div>
+
+                    <nav class="nav">
+                        <a href="index.html" class="nav-link">Главная</a>
+                        <a href="catalog.html" class="nav-link">Каталог</a>
+                        <a href="about.html" class="nav-link">О мастерах</a>
+                        <a href="contacts.html" class="nav-link">Контакты</a>
+                    </nav>
+
+                    <div class="header-actions">
+                        <div class="search-box">
+                            <input type="text" placeholder="Поиск товаров..." class="search-input">
+                            <button class="search-btn">🔍</button>
+                        </div>
+                        <div class="header-icons">
+                            
+                            <a href="account.html" class="icon-link" title="Личный кабинет">
+                                <span class="icon">👤</span>
+                            </a>
+                            <a href="cart.html" class="icon-link cart-link" title="Корзина">
+                                <span class="icon">🛒</span>
+                                <span class="cart-count">0</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ornament-header-bottom"></div>
+        </header>
+
+        <section class="hero container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Национальные сувениры<br>высокого качества</h1>
+                    <a href="catalog.html" class="btn">Перейти в каталог</a>
+                </div>
+                <div class="hero-image-wrapper">
+                    <img src="images/girl.png" alt="Девушка в национальном костюме" class="hero-girl">
+                </div>
+            </div>
+        </section>
+
+        <div class="ornament-middle"></div>
+
+        <section class="popular container">
+            <h2>Популярные товары</h2>
+            <div class="popular-grid">
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(45deg, #FBE8C7, #FFF6E1)"></div>
+                    <div class="card-content">
+                        <h3>Вышитая рубаха</h3>
+                        <p>Традиционная чувашская вышивка</p>
+                        <span class="price">2 500 ₽</span>
+                        <a href="product.html" class="btn">Подробнее</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(45deg, #FFF6E1, #FFE8C7)"></div>
+                    <div class="card-content">
+                        <h3>Кукла-оберег</h3>
+                        <p>Ручная работа</p>
+                        <span class="price">1 800 ₽</span>
+                        <a href="product.html" class="btn">Подробнее</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(45deg, #FFE8C7, #FFD8A8)"></div>
+                    <div class="card-content">
+                        <h3>Деревянная посуда</h3>
+                        <p>Расписные изделия с орнаментами</p>
+                        <span class="price">3 200 ₽</span>
+                        <a href="product.html" class="btn">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="ornament-between"></div>
+
+        <section class="about container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>О нас</h2>
+                    <p>
+                        «Чувашский сувенир» — это не просто интернет-магазин, а живой мост между богатым
+                        культурным наследием Чувашии и современным миром. Мы создали уникальное пространство,
+                        где каждая вещь рассказывает свою историю. Каждый орнамент хранит многовековую мудрость,
+                        а каждое изделие — это частица души чувашского народа.
+                    </p>
+                    <a href="#" class="btn btn-outline">Узнать больше</a>
+                </div>
+                <div class="about-art">
+                    <img src="https://i.imgur.com/YbHbX2U.png" alt="Чувашский орнамент">
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="ornament-bottom"></div>
+            <div class="container footer-grid">
+                <div>
+                    <h3>Контакты</h3>
+                    <p>
+                        +7 (999) 444-44-44<br>
+                        test@gmail.com
+                    </p>
+                </div>
+                <div>
+                    <h3>Разделы</h3>
+                    <p>
+                        <a href="index.html">Главная</a><br>
+                        <a href="catalog.html">Каталог</a><br>
+                        <a href="#">О мастерах</a>
+                    </p>
+                </div>
+                <div>
+                    <h3>Мы в соц-сетях</h3>
+                    <div class="social-icons">
+                        <span>🟦</span>
+                        <span>🌀</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const addToCartButtons = document.querySelectorAll('.card .btn');
+        
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (this.textContent === 'Подробнее') return;
+                
+                e.preventDefault();
+                const card = this.closest('.card');
+                const productName = card.querySelector('h3').textContent;
+                const productPrice = parseInt(card.querySelector('.price').textContent.replace(/\D/g, ''));
+                
+                addToCart(productName, productPrice);
+            });
+        });
+    });
+
+    function addToCart(name, price) {
+        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        
+        const existingItem = cartItems.find(item => item.name === name);
+        
+        if (existingItem) {
+            if (existingItem.quantity < 10) {
+                existingItem.quantity++;
+            } else {
+                alert('Максимальное количество товара в корзине - 10');
+                return;
+            }
+        } else {
+            cartItems.push({
+                id: Date.now(),
+                name: name,
+                description: "Традиционный чувашский сувенир",
+                price: price,
+                quantity: 1,
+                image: "linear-gradient(45deg, #FBE8C7, #FFF6E1)",
+                inStock: true
+            });
+        }
+        
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        showMessage(`"${name}" добавлен в корзину`, 'success');
+    }
+
+    function showMessage(message, type) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${type}`;
+        messageDiv.textContent = message;
+        messageDiv.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            z-index: 10000;
+            animation: slideIn 0.3s ease;
+            max-width: 300px;
+        `;
+        
+        messageDiv.style.background = type === 'success' ? '#4CAF50' : '#E24A2C';
+        document.body.appendChild(messageDiv);
+        
+        setTimeout(() => messageDiv.remove(), 3000);
+    }
+    </script>
+</body>
+</html>

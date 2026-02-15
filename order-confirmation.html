@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подтверждение заказа - Чувашский сувенир</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-content">
+        <header class="header">
+            <div class="ornament-top"></div>
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="images/logo.png" alt="Чувашский сувенир">
+                        </a>
+                    </div>
+
+                    <nav class="nav">
+                        <a href="index.html" class="nav-link">Главная</a>
+                        <a href="catalog.html" class="nav-link">Каталог</a>
+                        <a href="about.html" class="nav-link">О мастерах</a>
+                        <a href="contacts.html" class="nav-link">Контакты</a>
+                    </nav>
+
+                    <div class="header-actions">
+                        <div class="search-box">
+                            <input type="text" placeholder="Поиск товаров..." class="search-input">
+                            <button class="search-btn">🔍</button>
+                        </div>
+                        <div class="header-icons">
+            
+                            <a href="account.html" class="icon-link" title="Личный кабинет">
+                                <span class="icon">👤</span>
+                            </a>
+                            <a href="cart.html" class="icon-link cart-link" title="Корзина">
+                                <span class="icon">🛒</span>
+                                <span class="cart-count">0</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ornament-header-bottom"></div>
+        </header>
+
+        <div class="container">
+            <div class="confirmation-header">
+                <h1>Заказ успешно оформлен!</h1>
+                <div class="checkout-steps">
+                    <div class="step completed">
+                        <span class="step-number">✓</span>
+                        <span class="step-text">Корзина</span>
+                    </div>
+                    <div class="step completed">
+                        <span class="step-number">✓</span>
+                        <span class="step-text">Оформление</span>
+                    </div>
+                    <div class="step active">
+                        <span class="step-number">3</span>
+                        <span class="step-text">Подтверждение</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="confirmation-content">
+                <div class="confirmation-card">
+                    <div class="confirmation-icon">
+                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                            <circle cx="40" cy="40" r="38" fill="#4CAF50" stroke="#4CAF50" stroke-width="4"/>
+                            <path d="M25 40L35 50L55 30" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    
+                    <h2>Спасибо за ваш заказ!</h2>
+                    <p class="confirmation-message">
+                        Ваш заказ №<span id="orderNumber">0000</span> успешно оформлен. 
+                        В ближайшее время с вами свяжется наш менеджер для подтверждения заказа.
+                    </p>
+                    
+                    <div class="order-summary-card">
+                        <h3>Детали заказа</h3>
+                        
+                        <div class="summary-grid">
+                            <div class="summary-item">
+                                <span class="summary-label">Номер заказа:</span>
+                                <span class="summary-value" id="orderNumberDetail">0000</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Дата оформления:</span>
+                                <span class="summary-value" id="orderDate"></span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Сумма заказа:</span>
+                                <span class="summary-value" id="orderTotal">0 ₽</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Способ оплаты:</span>
+                                <span class="summary-value" id="paymentMethod"></span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Способ доставки:</span>
+                                <span class="summary-value" id="deliveryMethod"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="customer-info">
+                        <h3>Информация о получателе</h3>
+                        <div class="customer-details">
+                            <p id="customerName"></p>
+                            <p id="customerPhone"></p>
+                            <p id="customerEmail"></p>
+                            <p id="deliveryAddress"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="order-items-summary">
+                        <h3>Состав заказа</h3>
+                        <div class="order-items-list" id="orderItemsList">
+                        </div>
+                    </div>
+                    
+                    <div class="confirmation-actions">
+                        <button class="btn btn-primary" onclick="printOrder()">Распечатать заказ</button>
+                        <button class="btn btn-secondary" onclick="goToHome()">Вернуться на главную</button>
+                    </div>
+                    
+                    <div class="support-info">
+                        <p>Если у вас есть вопросы по заказу, свяжитесь с нами:</p>
+                        <p class="support-contacts">
+                            📞 +7 (999) 444-44-44<br>
+                            ✉️ test@gmail.com
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="ornament-bottom"></div>
+            <div class="container footer-grid">
+                <div>
+                    <h3>Контакты</h3>
+                    <p>
+                        +7 (999) 444-44-44<br>
+                        test@gmail.com
+                    </p>
+                </div>
+                <div>
+                    <h3>Разделы</h3>
+                    <p>
+                        Главная<br>
+                        О мастерах<br>
+                        Каталог
+                    </p>
+                </div>
+                <div>
+                    <h3>Мы в соц-сетях</h3>
+                    <div class="social-icons">
+                        <span>🟦</span>
+                        <span>🌀</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        loadOrderData();
+        generateOrderNumber();
+        setOrderDate();
+    });
+
+    function loadOrderData() {
+        const orderData = JSON.parse(localStorage.getItem('lastOrder'));
+        
+        if (orderData) {
+            document.getElementById('orderTotal').textContent = orderData.total;
+            document.getElementById('paymentMethod').textContent = getPaymentMethodText(orderData.payment);
+            document.getElementById('deliveryMethod').textContent = getDeliveryMethodText(orderData.address.delivery);
+            
+            document.getElementById('customerName').textContent = 
+                `${orderData.customer.firstName} ${orderData.customer.lastName}`;
+            document.getElementById('customerPhone').textContent = orderData.customer.phone;
+            document.getElementById('customerEmail').textContent = orderData.customer.email;
+            document.getElementById('deliveryAddress').textContent = 
+                `${orderData.address.country}, ${orderData.address.city}, ${orderData.address.address}`;
+            
+            renderOrderItems(orderData.items);
+        } else {
+            document.querySelector('.confirmation-message').textContent = 
+                'Не удалось найти информацию о заказе. Пожалуйста, свяжитесь с нашей службой поддержки.';
+        }
+    }
+
+    function generateOrderNumber() {
+        const orderNumber = Math.floor(1000 + Math.random() * 9000);
+        document.getElementById('orderNumber').textContent = orderNumber;
+        document.getElementById('orderNumberDetail').textContent = orderNumber;
+    }
+
+    function setOrderDate() {
+        const now = new Date();
+        const options = { 
+            day: 'numeric', 
+            month: 'long', 
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        };
+        document.getElementById('orderDate').textContent = now.toLocaleDateString('ru-RU', options);
+    }
+
+    function getPaymentMethodText(paymentMethod) {
+        const methods = {
+            'card': 'Банковская карта',
+            'cash': 'Наличными при получении',
+            'online': 'Онлайн-кошелек'
+        };
+        return methods[paymentMethod] || paymentMethod;
+    }
+
+    function getDeliveryMethodText(deliveryMethod) {
+        const methods = {
+            'courier': 'Курьерская доставка',
+            'post': 'Почта России',
+            'pickup': 'Самовывоз'
+        };
+        return methods[deliveryMethod] || deliveryMethod;
+    }
+
+    function renderOrderItems(items) {
+        const orderItemsList = document.getElementById('orderItemsList');
+        orderItemsList.innerHTML = '';
+        
+        items.forEach(item => {
+            const itemElement = document.createElement('div');
+            itemElement.className = 'order-item-summary';
+            itemElement.innerHTML = `
+                <div class="item-image-summary" style="background: ${item.image}"></div>
+                <div class="item-details-summary">
+                    <h4>${item.name}</h4>
+                    <p>${item.description}</p>
+                    <div class="item-quantity-summary">
+                        Количество: ${item.quantity}
+                    </div>
+                </div>
+                <div class="item-price-summary">${formatPrice(item.price * item.quantity)}</div>
+            `;
+            orderItemsList.appendChild(itemElement);
+        });
+    }
+
+    function formatPrice(price) {
+        return new Intl.NumberFormat('ru-RU', {
+            style: 'currency',
+            currency: 'RUB',
+            minimumFractionDigits: 0
+        }).format(price);
+    }
+
+    function printOrder() {
+        window.print();
+    }
+
+    function goToHome() {
+        window.location.href = 'index.html';
+    }
+
+    function openModal(modalId) {
+        console.log('Открытие модального окна:', modalId);
+    }
+    </script>
+
+    <style>
+    .confirmation-header {
+        text-align: center;
+        margin: 40px 0;
+    }
+
+    .confirmation-header h1 {
+        font-size: 36px;
+        color: #4CAF50;
+        margin-bottom: 30px;
+    }
+
+    .confirmation-content {
+        max-width: 800px;
+        margin: 0 auto 60px;
+    }
+
+    .confirmation-card {
+        background: white;
+        border-radius: 15px;
+        padding: 40px;
+        box-shadow: 0 4px 20px rgba(90, 31, 0, 0.1);
+        border: 1px solid #f0f0f0;
+        text-align: center;
+    }
+
+    .confirmation-icon {
+        margin-bottom: 20px;
+    }
+
+    .confirmation-card h2 {
+        color: #8B2000;
+        margin-bottom: 15px;
+        font-size: 24px;
+    }
+
+    .confirmation-message {
+        color: #5A1F00;
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+    }
+
+    .order-summary-card, 
+    .customer-info, 
+    .order-items-summary {
+        background: #FFF6E1;
+        border-radius: 12px;
+        padding: 25px;
+        margin-bottom: 25px;
+        text-align: left;
+        border: 1px solid #E0A400;
+    }
+
+    .order-summary-card h3,
+    .customer-info h3,
+    .order-items-summary h3 {
+        color: #8B2000;
+        margin-bottom: 20px;
+        font-size: 18px;
+        border-bottom: 2px solid #E0A400;
+        padding-bottom: 10px;
+    }
+
+    .summary-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    .summary-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(224, 164, 0, 0.2);
+    }
+
+    .summary-item:last-child {
+        border-bottom: none;
+    }
+
+    .summary-label {
+        color: #5A1F00;
+        font-weight: 600;
+    }
+
+    .summary-value {
+        color: #E24A2C;
+        font-weight: 600;
+    }
+
+    .customer-details p {
+        margin: 10px 0;
+        color: #5A1F00;
+        font-size: 15px;
+    }
+
+    .order-item-summary {
+        display: flex;
+        gap: 15px;
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(224, 164, 0, 0.2);
+    }
+
+    .order-item-summary:last-child {
+        border-bottom: none;
+    }
+
+    .item-image-summary {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(45deg, #FBE8C7, #FFF6E1);
+        border-radius: 8px;
+        flex-shrink: 0;
+    }
+
+    .item-details-summary {
+        flex: 1;
+    }
+
+    .item-details-summary h4 {
+        margin: 0 0 5px 0;
+        color: #5A1F00;
+        font-size: 16px;
+    }
+
+    .item-details-summary p {
+        margin: 0 0 8px 0;
+        color: #666;
+        font-size: 14px;
+    }
+
+    .item-quantity-summary {
+        font-size: 14px;
+        color: #5A1F00;
+    }
+
+    .item-price-summary {
+        font-weight: 600;
+        color: #E24A2C;
+        font-size: 16px;
+    }
+
+    .confirmation-actions {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin: 30px 0;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 600;
+        display: inline-block;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #E24A2C, #E66830);
+        color: white;
+        box-shadow: 0 4px 12px rgba(226, 74, 44, 0.3);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(226, 74, 44, 0.4);
+        background: linear-gradient(135deg, #E66830, #E24A2C);
+    }
+
+    .btn-secondary {
+        background: #FFF1CD;
+        color: #5A1F00;
+        border: 2px solid #E0A400;
+    }
+
+    .btn-secondary:hover {
+        background: #E0A400;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .support-info {
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid #f0f0f0;
+        color: #5A1F00;
+    }
+
+    .support-contacts {
+        font-weight: 600;
+        margin-top: 10px;
+    }
+
+    @media print {
+        .header, .footer, .confirmation-actions, .support-info {
+            display: none;
+        }
+        
+        .confirmation-card {
+            box-shadow: none;
+            border: none;
+            padding: 0;
+        }
+        
+        body {
+            background: white;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .confirmation-card {
+            padding: 25px;
+        }
+        
+        .summary-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .confirmation-actions {
+            flex-direction: column;
+        }
+        
+        .confirmation-header h1 {
+            font-size: 28px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .confirmation-card {
+            padding: 20px;
+        }
+        
+        .order-item-summary {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .item-image-summary {
+            align-self: center;
+        }
+    }
+    </style>
+</body>
+</html>

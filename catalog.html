@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог - Чувашский сувенир</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-content">
+        <header class="header">
+            <div class="ornament-top"></div>
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="images/logo.png" alt="Чувашский сувенир">
+                        </a>
+                    </div>
+
+                    <nav class="nav">
+                        <a href="index.html" class="nav-link">Главная</a>
+                        <a href="catalog.html" class="nav-link active">Каталог</a>
+                        <a href="about.html" class="nav-link">О мастерах</a>
+                        <a href="contacts.html" class="nav-link">Контакты</a>
+                    </nav>
+
+                    <div class="header-actions">
+                        <div class="search-box">
+                            <input type="text" placeholder="Поиск товаров..." class="search-input" id="searchInput">
+                            <button class="search-btn" id="searchBtn">🔍</button>
+                        </div>
+                        <div class="header-icons">
+                            <a href="account.html" class="icon-link" title="Личный кабинет">
+                                <span class="icon">👤</span>
+                            </a>
+                            <a href="cart.html" class="icon-link cart-link" title="Корзина">
+                                <span class="icon">🛒</span>
+                                <span class="cart-count">0</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ornament-header-bottom"></div>
+        </header>
+
+        <div class="container">
+            <div class="catalog-page">
+                <h2>Каталог товаров</h2>
+
+                <div class="filters">
+                    <select id="categoryFilter">
+                        <option value="all">Все категории</option>
+                        <option value="clothing">Одежда</option>
+                        <option value="dolls">Куклы</option>
+                        <option value="dishes">Посуда</option>
+                    </select>
+                    
+                    <input type="number" id="priceMin" placeholder="Цена от">
+                    
+                    <input type="number" id="priceMax" placeholder="Цена до">
+                    
+                    <select id="sortBy">
+                        <option value="default">По умолчанию</option>
+                        <option value="price_asc">Дешевые</option>
+                        <option value="price_desc">Дорогие</option>
+                    </select>
+                </div>
+
+                <div class="catalog-grid">
+                    <div class="card">
+                        <div class="card-image" style="background: linear-gradient(45deg, #FBE8C7, #FFF6E1)"></div>
+                        <div class="card-content">
+                            <h3>Вышитая рубаха</h3>
+                            <p>Традиционная чувашская рубаха с ручной вышивкой</p>
+                            <div class="price">2500 ₽</div>
+                            <button class="btn add-to-cart">В корзину</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-image" style="background: linear-gradient(45deg, #FFF6E1, #FFE8C7)"></div>
+                        <div class="card-content">
+                            <h3>Кукла-оберег</h3>
+                            <p>Ручная работа из натуральных материалов</p>
+                            <div class="price">1800 ₽</div>
+                            <button class="btn add-to-cart">В корзину</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-image" style="background: linear-gradient(45deg, #FFE8C7, #FFD8A8)"></div>
+                        <div class="card-content">
+                            <h3>Деревянная посуда</h3>
+                            <p>Набор посуды с традиционными орнаментами</p>
+                            <div class="price">3200 ₽</div>
+                            <button class="btn add-to-cart">В корзину</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-image" style="background: linear-gradient(45deg, #E8F5E8, #C8E6C9)"></div>
+                        <div class="card-content">
+                            <h3>Чувашский платок</h3>
+                            <p>Шерстяной платок с традиционным орнаментом</p>
+                            <div class="price">1500 ₽</div>
+                            <button class="btn add-to-cart">В корзину</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-image" style="background: linear-gradient(45deg, #FCE4EC, #F8BBD0)"></div>
+                        <div class="card-content">
+                            <h3>Вышитая сумка</h3>
+                            <p>Сумка с чувашской вышивкой</p>
+                            <div class="price">2200 ₽</div>
+                            <button class="btn add-to-cart">В корзину</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-image" style="background: linear-gradient(45deg, #FFF3E0, #FFE0B2)"></div>
+                        <div class="card-content">
+                            <h3>Головной убор</h3>
+                            <p>Традиционный женский головной убор</p>
+                            <div class="price">2800 ₽</div>
+                            <button class="btn add-to-cart">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pagination">
+                    <button class="active">1</button>
+                    <button>2</button>
+                    <button>3</button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="ornament-bottom"></div>
+            <div class="container footer-grid">
+                <div>
+                    <h3>Контакты</h3>
+                    <p>+7 (999) 444-44-44<br>test@gmail.com</p>
+                </div>
+                <div>
+                    <h3>Разделы</h3>
+                    <p>
+                        <a href="index.html">Главная</a><br>
+                        <a href="catalog.html">Каталог</a><br>
+                        <a href="about.html">О мастерах</a>
+                    </p>
+                </div>
+                <div>
+                    <h3>Мы в соц-сетях</h3>
+                    <div class="social-icons">
+                        <span>VK</span>
+                        <span>TG</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        updateCartCounter();
+        
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const productName = this.closest('.card').querySelector('h3').textContent;
+                const productPrice = this.closest('.card').querySelector('.price').textContent;
+                
+                addToCart(productName, productPrice);
+            });
+        });
+    });
+
+    function addToCart(name, price) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push({ name, price });
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCounter();
+        alert(`Товар "${name}" добавлен в корзину!`);
+    }
+
+    function updateCartCounter() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartCount = document.querySelector('.cart-count');
+        if (cartCount) {
+            cartCount.textContent = cart.length;
+            cartCount.style.display = cart.length > 0 ? 'flex' : 'none';
+        }
+    }
+    </script>
+</body>
+</html>
