@@ -1,0 +1,2 @@
+# chuvash-souvenir.ru
+Diplom
