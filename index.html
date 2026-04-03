@@ -16,14 +16,45 @@
 <noscript><div><img src="https://mc.yandex.ru/watch/106842036" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 
-
-
     <meta charset="UTF-8">
     <meta name="robots" content="index, follow">
     <meta name="description" content="Интернет-магазин изделий ручной работы. Уникальные авторские товары от мастеров.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Чувашский сувенир - Главная</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Дополнительные стили для картинок, чтобы ничего не ломалось */
+        .card-image {
+            height: 200px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .card:hover .card-image img {
+            transform: scale(1.05);
+        }
+        .about-art img {
+            max-width: 220px;
+            height: auto;
+            border-radius: 12px;
+        }
+        .social-icon {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+            font-size: 16px;
+        }
+        .social-icon:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <div class="main-content">
@@ -50,7 +81,6 @@
                             <button class="search-btn">🔍</button>
                         </div>
                         <div class="header-icons">
-                            
                             <a href="account.html" class="icon-link" title="Личный кабинет">
                                 <span class="icon">👤</span>
                             </a>
@@ -82,8 +112,12 @@
         <section class="popular container">
             <h2>Популярные товары</h2>
             <div class="popular-grid">
+                
+                <!-- Товар 1: Вышитая рубаха -->
                 <div class="card">
-                    <div class="card-image" style="background: linear-gradient(45deg, #FBE8C7, #FFF6E1)"></div>
+                    <div class="card-image">
+                        <img src="images/shirt.jpg" alt="Вышитая рубаха">
+                    </div>
                     <div class="card-content">
                         <h3>Вышитая рубаха</h3>
                         <p>Традиционная чувашская вышивка</p>
@@ -91,8 +125,12 @@
                         <a href="product.html" class="btn">Подробнее</a>
                     </div>
                 </div>
+                
+                <!-- Товар 2: Кукла-оберег -->
                 <div class="card">
-                    <div class="card-image" style="background: linear-gradient(45deg, #FBE8C7, #FFF6E1)"></div>
+                    <div class="card-image">
+                        <img src="images/doll.jpg" alt="Кукла-оберег">
+                    </div>
                     <div class="card-content">
                         <h3>Кукла-оберег</h3>
                         <p>Ручная работа</p>
@@ -100,8 +138,12 @@
                         <a href="product.html" class="btn">Подробнее</a>
                     </div>
                 </div>
+                
+                <!-- Товар 3: Деревянная посуда -->
                 <div class="card">
-                    <div class="card-image" style="background: linear-gradient(45deg, #FFE8C7, #FFD8A8)"></div>
+                    <div class="card-image">
+                        <img src="images/wooden-dishes.jpg" alt="Деревянная посуда">
+                    </div>
                     <div class="card-content">
                         <h3>Деревянная посуда</h3>
                         <p>Расписные изделия с орнаментами</p>
@@ -109,6 +151,7 @@
                         <a href="product.html" class="btn">Подробнее</a>
                     </div>
                 </div>
+                
             </div>
         </section>
 
@@ -127,7 +170,7 @@
                     <a href="#" class="btn btn-outline">Узнать больше</a>
                 </div>
                 <div class="about-art">
-                    <img src="" alt="Чувашский орнамент">
+                    <img src="images/ornament-pattern.png" alt="Чувашский орнамент">
                 </div>
             </div>
         </section>
@@ -147,15 +190,14 @@
                     <p>
                         <a href="index.html">Главная</a><br>
                         <a href="catalog.html">Каталог</a><br>
-                        <a href="#">О мастерах</a>
+                        <a href="about.html">О мастерах</a>
                     </p>
                 </div>
                 <div>
                     <h3>Мы в соц-сетях</h3>
-                   <div>
-                <a href="#" class="social-icon">VK</a>
-                <a href="#" class="social-icon">TG</a>
-                    </div>
+                    <div>
+                        <a href="#" class="social-icon">VK</a>
+                        <a href="#" class="social-icon">TG</a>
                     </div>
                 </div>
             </div>
@@ -232,7 +274,4 @@
     }
     </script>
 </body>
-
 </html>
-
-
