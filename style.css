@@ -566,6 +566,7 @@ body {
     margin-bottom: 15px;
     font-size: 18px;
     position: relative;
+    text-decoration: no;
 }
 
 .footer h3::after {
