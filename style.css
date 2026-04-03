@@ -1669,6 +1669,6 @@ body {
 .contact-form .form-group input,
 .contact-form .form-group select,
 .contact-form .form-group textarea {
-    max-width: 380px;
+    max-width: 300px;
     width: 100%;
 }
