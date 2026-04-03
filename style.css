@@ -2569,3 +2569,26 @@ body {
         opacity: 1;
     }
 }
+.cart-content {
+    display: block;
+    position: relative;
+    min-height: 500px;
+}
+
+.cart-left {
+    width: 65%;
+    float: left;
+}
+
+.cart-right {
+    width: 30%;
+    float: right;
+    position: sticky;
+    top: 20px;
+}
+
+.cart-content::after {
+    content: "";
+    display: table;
+    clear: both;
+}
