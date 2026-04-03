@@ -566,7 +566,7 @@ body {
     margin-bottom: 15px;
     font-size: 18px;
     position: relative;
-    text-decoration: no;
+    text-decoration: none;
 }
 
 .footer h3::after {
@@ -584,7 +584,9 @@ body {
     margin: 0;
     font-size: 14px;
 }
-
+.footer a {
+    text-decoration: none
+}
 .social-icons {
     display: flex;
     gap: 12px;
