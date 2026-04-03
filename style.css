@@ -2592,3 +2592,70 @@ body {
     display: table;
     clear: both;
 }
+/* ===== КОРЗИНА - ФИНАЛЬНЫЙ РАБОЧИЙ ВАРИАНТ ===== */
+
+.cart-header {
+    margin: 40px 0 30px;
+}
+
+.cart-header h1 {
+    font-size: 36px;
+    color: #8B2000;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.breadcrumbs {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+}
+
+.breadcrumbs a {
+    color: #E24A2C;
+    text-decoration: none;
+}
+
+.cart-content {
+    display: block;
+    position: relative;
+    min-height: 500px;
+    margin-bottom: 50px;
+}
+
+.cart-left {
+    width: 65%;
+    float: left;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cart-right {
+    width: 30%;
+    float: right;
+    position: sticky;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cart-content::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media (max-width: 768px) {
+    .cart-left,
+    .cart-right {
+        width: 100%;
+        float: none;
+    }
+    
+    .cart-right {
+        position: static;
+        margin-top: 30px;
+    }
+}
