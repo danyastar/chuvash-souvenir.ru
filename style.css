@@ -1661,3 +1661,14 @@ body {
     }
 }
 
+.contact-form-section {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.contact-form .form-group input,
+.contact-form .form-group select,
+.contact-form .form-group textarea {
+    max-width: 380px;
+    width: 100%;
+}
