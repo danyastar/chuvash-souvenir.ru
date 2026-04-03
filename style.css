@@ -2659,3 +2659,34 @@ body {
         margin-top: 30px;
     }
 }
+/* ===== КОРЗИНА - ПРИНУДИТЕЛЬНОЕ ИСПРАВЛЕНИЕ ===== */
+.cart-content {
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.cart-left {
+    width: 65% !important;
+    float: none !important;
+}
+
+.cart-right {
+    width: 30% !important;
+    float: none !important;
+    position: sticky !important;
+    top: 20px;
+}
+
+@media (max-width: 768px) {
+    .cart-left,
+    .cart-right {
+        width: 100% !important;
+    }
+    
+    .cart-right {
+        position: static !important;
+        margin-top: 30px;
+    }
+}
