@@ -2075,37 +2075,3 @@ body {
 }
 
 
-/* ===== КОРЗИНА - НОВЫЙ РАБОЧИЙ БЛОК ===== */
-.cart-content-new {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 30px;
-    margin-bottom: 50px;
-}
-
-.cart-left-new {
-    width: 65%;
-}
-
-.cart-right-new {
-    width: 30%;
-    position: sticky;
-    top: 20px;
-}
-
-@media (max-width: 768px) {
-    .cart-content-new {
-        flex-direction: column;
-    }
-    
-    .cart-left-new,
-    .cart-right-new {
-        width: 100%;
-    }
-    
-    .cart-right-new {
-        position: static;
-        margin-top: 30px;
-    }
-}
