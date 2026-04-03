@@ -585,7 +585,8 @@ body {
     font-size: 14px;
 }
 .footer a {
-    text-decoration: none
+    text-decoration: none;
+    color: white;
 }
 .social-icons {
     display: flex;
