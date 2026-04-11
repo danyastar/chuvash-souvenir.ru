@@ -18,6 +18,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Каталог - Чувашский сувенир</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Дополнительные стили для картинок в каталоге */
+        .card-image {
+            height: 200px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5f5f5;
+        }
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .card:hover .card-image img {
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
     <div class="main-content">
@@ -83,7 +103,9 @@
 
                 <div class="catalog-grid">
                     <div class="card">
-                        <div class="card-image" style="background: linear-gradient(45deg, #FBE8C7, #FFF6E1)"></div>
+                        <div class="card-image">
+                            <img src="images/test.jpg" alt="Вышитая рубаха">
+                        </div>
                         <div class="card-content">
                             <h3>Вышитая рубаха</h3>
                             <p>Традиционная чувашская рубаха с ручной вышивкой</p>
@@ -93,7 +115,9 @@
                     </div>
 
                     <div class="card">
-                        <div class="card-image" style="background: linear-gradient(45deg, #FFF6E1, #FFE8C7)"></div>
+                        <div class="card-image">
+                            <img src="images/test.jpg" alt="Кукла-оберег">
+                        </div>
                         <div class="card-content">
                             <h3>Кукла-оберег</h3>
                             <p>Ручная работа из натуральных материалов</p>
@@ -103,7 +127,9 @@
                     </div>
 
                     <div class="card">
-                        <div class="card-image" style="background: linear-gradient(45deg, #FFE8C7, #FFD8A8)"></div>
+                        <div class="card-image">
+                            <img src="images/test.jpg" alt="Деревянная посуда">
+                        </div>
                         <div class="card-content">
                             <h3>Деревянная посуда</h3>
                             <p>Набор посуды с традиционными орнаментами</p>
@@ -113,7 +139,9 @@
                     </div>
 
                     <div class="card">
-                        <div class="card-image" style="background: linear-gradient(45deg, #E8F5E8, #C8E6C9)"></div>
+                        <div class="card-image">
+                            <img src="images/test.jpg" alt="Чувашский платок">
+                        </div>
                         <div class="card-content">
                             <h3>Чувашский платок</h3>
                             <p>Шерстяной платок с традиционным орнаментом</p>
@@ -123,7 +151,9 @@
                     </div>
 
                     <div class="card">
-                        <div class="card-image" style="background: linear-gradient(45deg, #FCE4EC, #F8BBD0)"></div>
+                        <div class="card-image">
+                            <img src="images/test.jpg" alt="Вышитая сумка">
+                        </div>
                         <div class="card-content">
                             <h3>Вышитая сумка</h3>
                             <p>Сумка с чувашской вышивкой</p>
@@ -133,7 +163,9 @@
                     </div>
 
                     <div class="card">
-                        <div class="card-image" style="background: linear-gradient(45deg, #FFF3E0, #FFE0B2)"></div>
+                        <div class="card-image">
+                            <img src="images/test.jpg" alt="Головной убор">
+                        </div>
                         <div class="card-content">
                             <h3>Головной убор</h3>
                             <p>Традиционный женский головной убор</p>
@@ -183,8 +215,9 @@
         
         document.querySelectorAll('.add-to-cart').forEach(button => {
             button.addEventListener('click', function() {
-                const productName = this.closest('.card').querySelector('h3').textContent;
-                const productPrice = this.closest('.card').querySelector('.price').textContent;
+                const card = this.closest('.card');
+                const productName = card.querySelector('h3').textContent;
+                const productPrice = card.querySelector('.price').textContent;
                 
                 addToCart(productName, productPrice);
             });
@@ -209,5 +242,4 @@
     }
     </script>
 </body>
-
 </html>
