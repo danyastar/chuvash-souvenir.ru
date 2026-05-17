@@ -27,7 +27,6 @@
         .quantity-control { display: flex; align-items: center; gap: 5px; }
         .quantity-control button { width: 30px; height: 30px; border: 1px solid #E0A400; background: white; border-radius: 6px; cursor: pointer; font-size: 18px; }
         .quantity-control span { min-width: 30px; text-align: center; }
-        .btn-fav-small { background: none; border: none; font-size: 20px; cursor: pointer; }
         .delete-btn { background: none; border: none; font-size: 20px; cursor: pointer; opacity: 0.6; }
         .delete-btn:hover { opacity: 1; }
         
@@ -87,9 +86,7 @@
         </footer>
     </div>
 
-    <script type="module">
-        import { addToFavorites, removeFromFavorites, isFavorite, getFavoriteIds, onFavoritesUpdate } from './favorites.js';
-        
+    <script>
         let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
         let deliveryCost = 300;
         
@@ -125,7 +122,6 @@
                                 <span>${item.quantity}</span>
                                 <button class="qty-plus" data-index="${index}">+</button>
                             </div>
-                            <button class="btn-fav-small fav-btn" data-id="${item.id}" data-name="${item.name}">🤍</button>
                             <button class="delete-btn" data-index="${index}">🗑️</button>
                         </div>
                     </div>
@@ -163,7 +159,6 @@
                 </div>
             `;
             
-            // Привязываем обработчики
             document.querySelectorAll('.qty-minus').forEach(btn => {
                 btn.addEventListener('click', () => changeQuantity(parseInt(btn.dataset.index), -1));
             });
@@ -174,7 +169,6 @@
                 btn.addEventListener('click', () => removeItem(parseInt(btn.dataset.index)));
             });
             
-            // Обработчик изменения доставки
             const deliverySelect = document.getElementById('deliverySelect');
             if (deliverySelect) {
                 deliverySelect.value = deliveryCost;
@@ -184,7 +178,6 @@
                 });
             }
             
-            // Обработчик оформления заказа
             document.getElementById('checkoutBtn')?.addEventListener('click', () => {
                 if (cartItems.length === 0) {
                     alert('Корзина пуста');
@@ -193,9 +186,6 @@
                 localStorage.setItem('cartItems', JSON.stringify(cartItems));
                 window.location.href = 'checkout.html';
             });
-            
-            // Обновляем сердечки избранного
-            updateFavoriteButtons();
         }
         
         function updateDeliveryAndTotal() {
@@ -225,57 +215,11 @@
             updateCartCounter();
         }
         
-        async function updateFavoriteButtons() {
-            const favoriteIds = getFavoriteIds();
-            document.querySelectorAll('.fav-btn').forEach(btn => {
-                const id = btn.dataset.id;
-                if (favoriteIds.includes(id)) {
-                    btn.classList.add('active');
-                    btn.innerHTML = '❤️';
-                } else {
-                    btn.classList.remove('active');
-                    btn.innerHTML = '🤍';
-                }
-                // Обработчик клика
-                btn.removeEventListener('click', handleFavClick);
-                btn.addEventListener('click', handleFavClick);
-            });
-        }
-        
-        async function handleFavClick(e) {
-            e.stopPropagation();
-            const btn = e.currentTarget;
-            const id = btn.dataset.id;
-            const name = btn.dataset.name;
-            const wasActive = btn.classList.contains('active');
-            
-            // Мгновенно меняем UI
-            if (wasActive) {
-                btn.classList.remove('active');
-                btn.innerHTML = '🤍';
-            } else {
-                btn.classList.add('active');
-                btn.innerHTML = '❤️';
-            }
-            
-            // Фоновый запрос к Firebase
-            if (wasActive) {
-                await removeFromFavorites(id);
-            } else {
-                await addToFavorites(id, name);
-            }
-        }
-        
         function updateCartCounter() {
             const total = cartItems.reduce((s, i) => s + i.quantity, 0);
             const el = document.querySelector('.cart-count');
             if (el) { el.textContent = total; el.style.display = total > 0 ? 'flex' : 'none'; }
         }
-        
-        // Синхронизация избранного
-        onFavoritesUpdate(() => {
-            updateFavoriteButtons();
-        });
         
         renderCart();
         updateCartCounter();
