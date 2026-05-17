@@ -1,47 +1,86 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=106842036', 'ym');
-
-    ym(106842036, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/106842036" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
     <meta charset="UTF-8">
-    <title>Название товара — Чувашский сувенир</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Товар - Чувашский сувенир</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Firebase SDK -->
-<script type="module">
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-  import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, where } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
-  
-  const firebaseConfig = {
-    apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
-    authDomain: "chuvash-souvenir.firebaseapp.com",
-    projectId: "chuvash-souvenir",
-    storageBucket: "chuvash-souvenir.firebasestorage.app",
-    messagingSenderId: "754730678926",
-    appId: "1:754730678926:web:5e45e557c0d298072027df"
-  };
-  
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  const auth = getAuth(app);
-  
-  window.db = db;
-  window.auth = auth;
-  window.addDoc = addDoc;
-  window.collection = collection;
-  window.getDocs = getDocs;
-</script>
+    <style>
+        html, body { height: 100%; margin: 0; }
+        .main-content { display: flex; flex-direction: column; min-height: 100vh; }
+        .main-content .container { flex: 1; }
+        .product-container {
+            display: flex;
+            gap: 50px;
+            margin: 40px 0;
+        }
+        .product-image {
+            flex: 1;
+            text-align: center;
+        }
+        .product-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .product-info {
+            flex: 1;
+        }
+        .product-info h1 {
+            font-size: 32px;
+            color: #8B2000;
+            margin-bottom: 15px;
+        }
+        .product-price {
+            font-size: 28px;
+            font-weight: bold;
+            color: #E24A2C;
+            margin-bottom: 20px;
+        }
+        .product-desc {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        .product-buy {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .product-buy input {
+            width: 70px;
+            padding: 10px;
+            border: 2px solid #E0A400;
+            border-radius: 8px;
+            font-size: 16px;
+            text-align: center;
+        }
+        .btn {
+            background: linear-gradient(135deg, #E24A2C, #E66830);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            transform: scale(1.02);
+        }
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 18px;
+            color: #666;
+        }
+        @media (max-width: 768px) {
+            .product-container {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="main-content">
@@ -54,21 +93,18 @@
                             <img src="images/logo.png" alt="Чувашский сувенир">
                         </a>
                     </div>
-
                     <nav class="nav">
                         <a href="index.html" class="nav-link">Главная</a>
                         <a href="catalog.html" class="nav-link">Каталог</a>
                         <a href="about.html" class="nav-link">О мастерах</a>
                         <a href="contacts.html" class="nav-link">Контакты</a>
                     </nav>
-
                     <div class="header-actions">
                         <div class="search-box">
                             <input type="text" placeholder="Поиск товаров..." class="search-input">
                             <button class="search-btn">🔍</button>
                         </div>
                         <div class="header-icons">
-                            
                             <a href="account.html" class="icon-link" title="Личный кабинет">
                                 <span class="icon">👤</span>
                             </a>
@@ -83,68 +119,108 @@
             <div class="ornament-header-bottom"></div>
         </header>
 
-<div class="main-wrapper">
-
-    <section class="product container">
-    <div class="product-content">
-
-        <div class="product-image">
-            <img id="mainImg" src="images/test.jpg" alt="Товар">
-
-            <div class="product-thumbs">
-                <img src="images/test.jpg" class="thumb active" alt="">
-                <img src="images/test.jpg" class="thumb" alt="">
-                <img src="images/test.jpg" class="thumb" alt="">
+        <div class="container">
+            <div id="productContainer" class="product-container">
+                <div class="loading">Загрузка товара...</div>
             </div>
         </div>
 
-        <div class="product-info">
-            <div class="product-title-row">
-                <h1>Вышитая рубаха</h1>
-                <button class="fav-btn">❤</button>
+        <footer class="footer">
+            <div class="ornament-bottom"></div>
+            <div class="container footer-grid">
+                <div><h3>Контакты</h3><p>+7 (999) 444-44-44<br>test@gmail.com</p></div>
+                <div><h3>Разделы</h3><p><a href="index.html">Главная</a><br><a href="catalog.html">Каталог</a><br><a href="about.html">О мастерах</a></p></div>
+                <div><h3>Мы в соц-сетях</h3><div class="social-icons"><a href="#" class="social-icon">VK</a><a href="#" class="social-icon">TG</a></div></div>
             </div>
-
-            <p class="product-price">2 500 ₽</p>
-
-            <p class="product-desc">
-                Традиционная чувашская рубаха с орнаментом, созданная вручную с использованием древних символов.
-            </p>
-
-            <ul class="product-chars">
-                <li><b>Материал:</b> хлопок</li>
-                <li><b>Размеры:</b> S–XL</li>
-                <li><b>Производство:</b> Чувашия</li>
-                <li><b>Особенность:</b> ручная вышивка</li>
-            </ul>
-
-            <div class="product-buy">
-                <input type="number" min="1" value="1" id="count">
-                <button class="btn addCart">Добавить в корзину</button>
-            </div>
-        </div>
-
+        </footer>
     </div>
-</section>
-</div>
 
-<footer class="footer">
-    <div class="ornament-bottom"></div>
-    <div class="container footer-grid">
-        <div>
-            <h3>Контакты</h3>
-            <p>+7 (999) 444-44-44<br>info@chsuvenir.ru</p>
-        </div>
-        <div>
-            <h3>Навигация</h3>
-            <p>Главная<br>Каталог<br>О нас</p>
-        </div>
-        <div>
-            <h3>Соц-сети</h3>
-            <p>🟦 VK &nbsp; 🌀 TG</p>
-        </div>
-    </div>
-</footer>
-
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
+            authDomain: "chuvash-souvenir.firebaseapp.com",
+            projectId: "chuvash-souvenir",
+            storageBucket: "chuvash-souvenir.firebasestorage.app",
+            messagingSenderId: "754730678926",
+            appId: "1:754730678926:web:5e45e557c0d298072027df"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        
+        // Получаем id товара из URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+        
+        if (!productId) {
+            document.getElementById('productContainer').innerHTML = '<div class="loading">Товар не найден</div>';
+        } else {
+            loadProduct(productId);
+        }
+        
+        async function loadProduct(id) {
+            const container = document.getElementById('productContainer');
+            try {
+                const docRef = doc(db, 'products', id);
+                const docSnap = await getDoc(docRef);
+                
+                if (!docSnap.exists()) {
+                    container.innerHTML = '<div class="loading">Товар не найден</div>';
+                    return;
+                }
+                
+                const product = docSnap.data();
+                container.innerHTML = `
+                    <div class="product-image">
+                        <img src="images/test.jpg" alt="${product.name}">
+                    </div>
+                    <div class="product-info">
+                        <h1>${product.name}</h1>
+                        <div class="product-price">${product.price} ₽</div>
+                        <p class="product-desc">${product.description}</p>
+                        <div class="product-buy">
+                            <input type="number" id="quantity" value="1" min="1" max="10">
+                            <button id="addToCartBtn" class="btn">В корзину</button>
+                        </div>
+                    </div>
+                `;
+                
+                document.getElementById('addToCartBtn').addEventListener('click', () => {
+                    const quantity = parseInt(document.getElementById('quantity').value);
+                    let cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+                    const existing = cart.find(item => item.name === product.name);
+                    if (existing) {
+                        existing.quantity = Math.min(existing.quantity + quantity, 10);
+                    } else {
+                        cart.push({
+                            id: productId,
+                            name: product.name,
+                            price: product.price,
+                            quantity: quantity,
+                            description: product.description
+                        });
+                    }
+                    localStorage.setItem('cartItems', JSON.stringify(cart));
+                    updateCartCounter();
+                    alert(`"${product.name}" добавлен в корзину`);
+                });
+                
+            } catch (error) {
+                container.innerHTML = '<div class="loading">Ошибка загрузки товара</div>';
+                console.error(error);
+            }
+        }
+        
+        function updateCartCounter() {
+            const cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const total = cart.reduce((sum, i) => sum + i.quantity, 0);
+            const el = document.querySelector('.cart-count');
+            if (el) { el.textContent = total; el.style.display = total > 0 ? 'flex' : 'none'; }
+        }
+        updateCartCounter();
+    </script>
 </body>
-
 </html>
