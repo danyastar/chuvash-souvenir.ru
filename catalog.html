@@ -144,6 +144,11 @@
                 grid.innerHTML = '<div class="loading">Товары не найдены</div>';
                 document.getElementById('pagination').innerHTML = '';
                 return;
+            <div class="card-buttons">
+                <button class="btn-fav" data-id="${product.id}" data-name="${product.name}">❤️</button>
+                <a href="product.html?id=${product.id}" class="btn">Подробнее</a>
+                <button class="btn add-to-cart" data-name="${product.name}" data-price="${product.price}">В корзину</button>
+</div>
             }
             
             const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
