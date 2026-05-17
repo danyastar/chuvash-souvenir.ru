@@ -6,104 +6,52 @@
     <title>Личный кабинет - Чувашский сувенир</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .account-container {
-            display: flex;
-            gap: 40px;
-            margin: 40px auto;
-            max-width: 1000px;
-        }
-        .account-sidebar {
-            width: 280px;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .user-avatar {
-            font-size: 60px;
-            margin-bottom: 15px;
-        }
-        .account-sidebar h3 {
-            margin: 0 0 5px;
-            color: #8B2000;
-        }
-        .account-sidebar p {
-            color: #666;
-            margin-bottom: 20px;
-        }
-        .account-main {
-            flex: 1;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .account-main h2 {
-            margin-top: 0;
-            color: #8B2000;
-            border-bottom: 2px solid #E0A400;
-            padding-bottom: 10px;
-        }
-        .order-card {
-            border: 1px solid #eee;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 15px;
-        }
-        .order-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-        .order-status {
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-        }
-        .order-status.new {
-            background: #FFF3E0;
-            color: #EF6C00;
-        }
-        .order-items {
-            margin-bottom: 10px;
-            font-size: 14px;
-            color: #555;
-        }
-        .order-total {
-            font-weight: bold;
-            text-align: right;
-        }
-        .btn-outline {
-            background: white;
-            border: 2px solid #E24A2C;
-            color: #E24A2C;
-            padding: 8px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-        }
-        .btn-outline:hover {
-            background: #E24A2C;
-            color: white;
-        }
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        .main-content .container {
-            flex: 1;
-        }
+        html, body { height: 100%; margin: 0; }
+        .main-content { display: flex; flex-direction: column; min-height: 100vh; }
+        .main-content .container { flex: 1; }
         
-        @media (max-width: 768px) {
-            .account-container {
-                flex-direction: column;
-            }
-            .account-sidebar {
-                width: auto;
-            }
-        }
+        .account-container { display: flex; gap: 40px; margin: 40px 0; flex-wrap: wrap; }
+        .account-sidebar { width: 280px; background: white; border-radius: 15px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .user-avatar { font-size: 60px; text-align: center; margin-bottom: 15px; }
+        .account-sidebar h3 { text-align: center; margin: 0 0 5px; color: #8B2000; }
+        .account-sidebar p { text-align: center; color: #666; margin-bottom: 20px; }
+        .account-nav { display: flex; flex-direction: column; gap: 10px; }
+        .nav-btn { display: flex; align-items: center; gap: 12px; padding: 12px 15px; background: none; border: none; border-radius: 10px; cursor: pointer; transition: 0.3s; width: 100%; text-align: left; font-size: 16px; }
+        .nav-btn:hover { background: #FFF6E1; }
+        .nav-btn.active { background: #FFF6E1; color: #E24A2C; border-left: 3px solid #E24A2C; }
+        .nav-badge { background: #E24A2C; color: white; border-radius: 12px; padding: 2px 8px; font-size: 12px; margin-left: auto; }
+        .logout-btn { margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px; color: #E24A2C; }
+        
+        .account-main { flex: 1; background: white; border-radius: 15px; padding: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .tab-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #E0A400; padding-bottom: 10px; }
+        .tab-header h2 { margin: 0; color: #8B2000; }
+        
+        .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .info-item label { color: #666; font-size: 14px; display: block; margin-bottom: 5px; }
+        .info-item p { margin: 0; font-weight: 500; color: #5A1F00; }
+        
+        .order-card { border: 1px solid #eee; border-radius: 10px; padding: 15px; margin-bottom: 15px; }
+        .order-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .order-status { padding: 2px 8px; border-radius: 12px; font-size: 12px; background: #FFF3E0; color: #EF6C00; }
+        .order-items { font-size: 14px; color: #555; margin-bottom: 10px; }
+        .order-total { font-weight: bold; text-align: right; }
+        
+        .favorites-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+        .favorite-item { background: #FFF6E1; border-radius: 12px; padding: 15px; text-align: center; border: 1px solid #E0A400; transition: 0.3s; }
+        .favorite-item:hover { transform: translateY(-3px); }
+        .favorite-item img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
+        .favorite-item h4 { margin: 10px 0 5px; color: #8B2000; }
+        .favorite-item p { color: #E24A2C; font-weight: bold; margin: 5px 0; }
+        .favorite-item .btn { display: inline-block; background: linear-gradient(135deg, #E24A2C, #E66830); color: white; padding: 8px 16px; border-radius: 25px; text-decoration: none; font-size: 14px; margin-top: 10px; }
+        .empty-favorites { text-align: center; padding: 40px; color: #666; }
+        
+        .edit-form { display: none; margin-top: 20px; padding: 20px; background: #FFF6E1; border-radius: 12px; }
+        .edit-form input { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 8px; }
+        .edit-form button { margin-right: 10px; }
+        
+        @media (max-width: 768px) { .account-container { flex-direction: column; } .account-sidebar { width: auto; } .info-grid { grid-template-columns: 1fr; } .favorites-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -112,11 +60,7 @@
             <div class="ornament-top"></div>
             <div class="container">
                 <div class="header-content">
-                    <div class="logo">
-                        <a href="index.html">
-                            <img src="images/logo.png" alt="Чувашский сувенир">
-                        </a>
-                    </div>
+                    <div class="logo"><a href="index.html"><img src="images/logo.png" alt="Чувашский сувенир"></a></div>
                     <nav class="nav">
                         <a href="index.html" class="nav-link">Главная</a>
                         <a href="catalog.html" class="nav-link">Каталог</a>
@@ -124,18 +68,11 @@
                         <a href="contacts.html" class="nav-link">Контакты</a>
                     </nav>
                     <div class="header-actions">
-                        <div class="search-box">
-                            <input type="text" placeholder="Поиск товаров..." class="search-input">
-                            <button class="search-btn">🔍</button>
-                        </div>
+                        <div class="search-box"><input type="text" placeholder="Поиск товаров..." class="search-input"><button class="search-btn">🔍</button></div>
                         <div class="header-icons">
-                            <a href="account.html" class="icon-link" title="Личный кабинет">
-                                <span class="icon">👤</span>
-                            </a>
-                            <a href="cart.html" class="icon-link cart-link" title="Корзина">
-                                <span class="icon">🛒</span>
-                                <span class="cart-count">0</span>
-                            </a>
+                            <a href="favorites.html" class="icon-link" title="Избранное">❤️</a>
+                            <a href="account.html" class="icon-link" title="Личный кабинет"><span class="icon">👤</span></a>
+                            <a href="cart.html" class="icon-link cart-link" title="Корзина"><span class="icon">🛒</span><span class="cart-count">0</span></a>
                         </div>
                     </div>
                 </div>
@@ -144,16 +81,48 @@
         </header>
 
         <div class="container">
-            <div class="account-container">
+            <div class="account-container" id="accountContainer">
                 <div class="account-sidebar">
                     <div class="user-avatar">👤</div>
                     <h3 id="userName">Загрузка...</h3>
                     <p id="userEmail">-</p>
-                    <button id="logoutBtn" class="btn-outline">Выйти</button>
+                    <div class="account-nav">
+                        <button class="nav-btn active" data-tab="profile">👤 Личные данные</button>
+                        <button class="nav-btn" data-tab="orders">📦 История заказов</button>
+                        <button class="nav-btn" data-tab="favorites">❤️ Избранное <span id="favCount" class="nav-badge">0</span></button>
+                        <button class="nav-btn logout-btn">🚪 Выйти</button>
+                    </div>
                 </div>
                 <div class="account-main">
-                    <h2>История заказов</h2>
-                    <div id="ordersList" class="orders-list">Загрузка...</div>
+                    <div class="tab-content active" id="profile">
+                        <div class="tab-header">
+                            <h2>Личные данные</h2>
+                            <button class="btn-outline-small" id="editProfileBtn">Редактировать</button>
+                        </div>
+                        <div class="info-grid" id="profileInfo">
+                            <div class="info-item"><label>Имя</label><p id="displayName">-</p></div>
+                            <div class="info-item"><label>Email</label><p id="displayEmail">-</p></div>
+                        </div>
+                        <div id="editProfileForm" class="edit-form">
+                            <input type="text" id="editName" placeholder="Имя">
+                            <button id="saveProfileBtn" class="btn">Сохранить</button>
+                            <button id="cancelEditBtn" class="btn-outline-small">Отмена</button>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="orders">
+                        <div class="tab-header">
+                            <h2>История заказов</h2>
+                        </div>
+                        <div id="ordersList">Загрузка...</div>
+                    </div>
+                    
+                    <div class="tab-content" id="favorites">
+                        <div class="tab-header">
+                            <h2>Избранные товары</h2>
+                        </div>
+                        <div id="favoritesGrid" class="favorites-grid"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -161,29 +130,17 @@
         <footer class="footer">
             <div class="ornament-bottom"></div>
             <div class="container footer-grid">
-                <div>
-                    <h3>Контакты</h3>
-                    <p>+7 (999) 444-44-44<br>test@gmail.com</p>
-                </div>
-                <div>
-                    <h3>Разделы</h3>
-                    <p><a href="index.html">Главная</a><br><a href="catalog.html">Каталог</a><br><a href="about.html">О мастерах</a></p>
-                </div>
-                <div>
-                    <h3>Мы в соц-сетях</h3>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon">VK</a>
-                        <a href="#" class="social-icon">TG</a>
-                    </div>
-                </div>
+                <div><h3>Контакты</h3><p>+7 (999) 444-44-44<br>test@gmail.com</p></div>
+                <div><h3>Разделы</h3><p><a href="index.html">Главная</a><br><a href="catalog.html">Каталог</a><br><a href="about.html">О мастерах</a></p></div>
+                <div><h3>Мы в соц-сетях</h3><div class="social-icons"><a href="#" class="social-icon">VK</a><a href="#" class="social-icon">TG</a></div></div>
             </div>
         </footer>
     </div>
 
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-        import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
-        import { getFirestore, collection, query, where, getDocs } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+        import { getAuth, onAuthStateChanged, signOut, updateProfile } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+        import { getFirestore, doc, getDoc, collection, query, where, getDocs, updateDoc } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
         
         const firebaseConfig = {
             apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
@@ -198,52 +155,121 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
         
+        let currentUser = null;
+        
         onAuthStateChanged(auth, async (user) => {
             if (!user) {
                 window.location.href = 'login.html';
                 return;
             }
-            
+            currentUser = user;
+            document.getElementById('displayName').textContent = user.displayName || user.email.split('@')[0];
+            document.getElementById('displayEmail').textContent = user.email;
             document.getElementById('userName').textContent = user.displayName || user.email.split('@')[0];
             document.getElementById('userEmail').textContent = user.email;
+            document.getElementById('editName').value = user.displayName || '';
             
-            const q = query(collection(db, 'orders'), where('customer.email', '==', user.email));
-            const querySnapshot = await getDocs(q);
+            await loadOrders();
+            await loadFavorites();
+        });
+        
+        async function loadOrders() {
+            const q = query(collection(db, 'orders'), where('customer.email', '==', currentUser?.email));
+            const snapshot = await getDocs(q);
             const ordersList = document.getElementById('ordersList');
-            
-            if (querySnapshot.empty) {
+            if (snapshot.empty) {
                 ordersList.innerHTML = '<p>У вас пока нет заказов</p>';
                 return;
             }
-            
             ordersList.innerHTML = '';
-            querySnapshot.forEach((doc) => {
+            snapshot.forEach((doc) => {
                 const order = doc.data();
                 const orderDate = order.createdAt?.toDate?.() || new Date();
-                const orderDiv = document.createElement('div');
-                orderDiv.className = 'order-card';
-                orderDiv.innerHTML = `
-                    <div class="order-header">
-                        <span class="order-date">${orderDate.toLocaleDateString('ru-RU')}</span>
-                        <span class="order-status new">Новый</span>
+                ordersList.innerHTML += `
+                    <div class="order-card">
+                        <div class="order-header">
+                            <span>${orderDate.toLocaleDateString('ru-RU')}</span>
+                            <span class="order-status">${order.status === 'new' ? 'Новый' : 'Выполнен'}</span>
+                        </div>
+                        <div class="order-items">${order.items.map(i => `${i.name} x${i.quantity} — ${i.price * i.quantity} ₽`).join('<br>')}</div>
+                        <div class="order-total">Итого: ${order.total} ₽</div>
                     </div>
-                    <div class="order-items">
-                        ${order.items.map(item => `<div>${item.name} x${item.quantity} — ${item.price * item.quantity} ₽</div>`).join('')}
-                    </div>
-                    <div class="order-total">Итого: ${order.total} ₽</div>
                 `;
-                ordersList.appendChild(orderDiv);
+            });
+        }
+        
+        async function loadFavorites() {
+            if (!currentUser) return;
+            const favoritesRef = collection(db, 'users', currentUser.uid, 'favorites');
+            const snapshot = await getDocs(favoritesRef);
+            const favoriteIds = snapshot.docs.map(doc => doc.id);
+            document.getElementById('favCount').textContent = favoriteIds.length;
+            
+            const grid = document.getElementById('favoritesGrid');
+            if (favoriteIds.length === 0) {
+                grid.innerHTML = '<div class="empty-favorites">У вас пока нет избранных товаров</div>';
+                return;
+            }
+            grid.innerHTML = '';
+            for (const id of favoriteIds) {
+                const productRef = doc(db, 'products', id);
+                const productSnap = await getDoc(productRef);
+                if (productSnap.exists()) {
+                    const product = productSnap.data();
+                    grid.innerHTML += `
+                        <div class="favorite-item">
+                            <img src="images/test.jpg" alt="${product.name}">
+                            <h4>${product.name}</h4>
+                            <p>${product.price} ₽</p>
+                            <a href="product.html?id=${id}" class="btn">Подробнее</a>
+                        </div>
+                    `;
+                }
+            }
+        }
+        
+        // Переключение вкладок
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            if (btn.classList.contains('logout-btn')) return;
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.tab).classList.add('active');
             });
         });
         
-        document.getElementById('logoutBtn').addEventListener('click', async () => {
+        // Редактирование профиля
+        let editMode = false;
+        document.getElementById('editProfileBtn').addEventListener('click', () => {
+            editMode = !editMode;
+            document.getElementById('editProfileForm').style.display = editMode ? 'block' : 'none';
+        });
+        document.getElementById('cancelEditBtn').addEventListener('click', () => {
+            editMode = false;
+            document.getElementById('editProfileForm').style.display = 'none';
+        });
+        document.getElementById('saveProfileBtn').addEventListener('click', async () => {
+            const newName = document.getElementById('editName').value;
+            if (newName && currentUser) {
+                await updateProfile(currentUser, { displayName: newName });
+                document.getElementById('displayName').textContent = newName;
+                document.getElementById('userName').textContent = newName;
+                editMode = false;
+                document.getElementById('editProfileForm').style.display = 'none';
+                alert('Имя обновлено');
+            }
+        });
+        
+        // Выход
+        document.querySelector('.logout-btn').addEventListener('click', async () => {
             await signOut(auth);
             window.location.href = 'index.html';
         });
         
         function updateCartCounter() {
-            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-            const total = cartItems.reduce((sum, i) => sum + i.quantity, 0);
+            const cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const total = cart.reduce((s, i) => s + i.quantity, 0);
             const el = document.querySelector('.cart-count');
             if (el) { el.textContent = total; el.style.display = total > 0 ? 'flex' : 'none'; }
         }
