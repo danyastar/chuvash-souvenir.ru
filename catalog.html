@@ -265,25 +265,30 @@
                 applyFilters();
             }
         });
-        document.querySelector('.search-btn').addEventListener('click', () => {
-            const searchVal = document.getElementById('globalSearch').value;
-            document.getElementById('searchInput').value = searchVal;
-            applyFilters();
-        });
+       document.querySelectorAll('.btn-fav').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        const id = btn.dataset.id;
+        const name = btn.dataset.name;
         
-        onFavoritesUpdate(() => {
-            const favoriteIds = getFavoriteIds();
-            document.querySelectorAll('.btn-fav').forEach(btn => {
-                const id = btn.dataset.id;
-                if (favoriteIds.includes(id)) {
-                    btn.classList.add('active');
-                    btn.innerHTML = '❤️';
-                } else {
-                    btn.classList.remove('active');
-                    btn.innerHTML = '🤍';
-                }
-            });
-        });
+        // Мгновенно меняем UI (оптимистичное обновление)
+        const wasActive = btn.classList.contains('active');
+        if (wasActive) {
+            btn.classList.remove('active');
+            btn.innerHTML = '🤍';
+        } else {
+            btn.classList.add('active');
+            btn.innerHTML = '❤️';
+        }
+        
+        // Фоновый запрос к Firebase
+        if (wasActive) {
+            await removeFromFavorites(id);
+        } else {
+            await addToFavorites(id, name);
+        }
+    });
+});
         
         loadProducts();
         updateCartCounter();
