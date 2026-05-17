@@ -42,6 +42,8 @@
             overflow: hidden;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
         }
         .card:hover {
             transform: translateY(-5px);
@@ -61,6 +63,9 @@
         .card-content {
             padding: 20px;
             text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
         .card-content h3 {
             margin: 0 0 10px;
@@ -70,6 +75,7 @@
             color: #666;
             font-size: 14px;
             margin-bottom: 10px;
+            flex: 1;
         }
         .price {
             font-size: 20px;
@@ -77,20 +83,51 @@
             color: #E24A2C;
             margin-bottom: 15px;
         }
-        .card-content .btn {
-            display: inline-block;
+        .card-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .card-buttons .btn {
+            flex: 1;
+            text-align: center;
             background: linear-gradient(135deg, #E24A2C, #E66830);
             color: white;
-            padding: 8px 16px;
+            padding: 8px 0;
             border-radius: 25px;
             text-decoration: none;
             font-size: 14px;
             border: none;
             cursor: pointer;
-            margin: 5px;
+            display: inline-block;
+            min-width: 100px;
         }
-        .card-content .btn:hover {
+        .card-buttons .btn:hover {
             transform: scale(1.02);
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .pagination button {
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid #E0A400;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .pagination button.active {
+            background: #E24A2C;
+            border-color: #E24A2C;
+            color: white;
+        }
+        .pagination button:hover:not(.active) {
+            background: #FFF6E1;
         }
         .loading {
             text-align: center;
@@ -101,6 +138,9 @@
         @media (max-width: 768px) {
             .catalog-grid {
                 grid-template-columns: 1fr;
+            }
+            .card-buttons .btn {
+                min-width: 80px;
             }
         }
     </style>
@@ -166,6 +206,8 @@
                 <div class="catalog-grid" id="catalogGrid">
                     <div class="loading">Загрузка товаров...</div>
                 </div>
+
+                <div class="pagination" id="pagination"></div>
             </div>
         </div>
 
@@ -196,6 +238,8 @@
         const db = getFirestore(app);
         
         let allProducts = [];
+        let currentPage = 1;
+        const itemsPerPage = 6;
         
         async function loadProducts() {
             const grid = document.getElementById('catalogGrid');
@@ -206,7 +250,7 @@
                 querySnapshot.forEach((doc) => {
                     allProducts.push({ id: doc.id, ...doc.data() });
                 });
-                renderProducts(allProducts);
+                applyFiltersAndRender();
             } catch (error) {
                 grid.innerHTML = '<div class="loading">Ошибка загрузки</div>';
             }
@@ -216,10 +260,17 @@
             const grid = document.getElementById('catalogGrid');
             if (!products.length) {
                 grid.innerHTML = '<div class="loading">Товары не найдены</div>';
+                document.getElementById('pagination').innerHTML = '';
                 return;
             }
+            
+            // Пагинация
+            const totalPages = Math.ceil(products.length / itemsPerPage);
+            const start = (currentPage - 1) * itemsPerPage;
+            const paginatedProducts = products.slice(start, start + itemsPerPage);
+            
             grid.innerHTML = '';
-            products.forEach(product => {
+            paginatedProducts.forEach(product => {
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `
@@ -230,13 +281,17 @@
                         <h3>${product.name}</h3>
                         <p>${product.description}</p>
                         <div class="price">${product.price} ₽</div>
-                        <a href="product.html?id=${product.id}" class="btn">Подробнее</a>
-                        <button class="btn" data-name="${product.name}" data-price="${product.price}">В корзину</button>
+                        <div class="card-buttons">
+                            <a href="product.html?id=${product.id}" class="btn">Подробнее</a>
+                            <button class="btn" data-name="${product.name}" data-price="${product.price}">В корзину</button>
+                        </div>
                     </div>
                 `;
                 grid.appendChild(card);
             });
-            document.querySelectorAll('.card-content .btn[data-name]').forEach(btn => {
+            
+            // Кнопки "В корзину"
+            document.querySelectorAll('.card-buttons .btn[data-name]').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const name = btn.dataset.name;
                     const price = parseInt(btn.dataset.price);
@@ -249,6 +304,28 @@
                     alert(`"${name}" добавлен в корзину`);
                 });
             });
+            
+            // Пагинация
+            renderPagination(totalPages);
+        }
+        
+        function renderPagination(totalPages) {
+            const paginationDiv = document.getElementById('pagination');
+            if (totalPages <= 1) {
+                paginationDiv.innerHTML = '';
+                return;
+            }
+            let html = '';
+            for (let i = 1; i <= totalPages; i++) {
+                html += `<button class="${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+            }
+            paginationDiv.innerHTML = html;
+            paginationDiv.querySelectorAll('button').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    currentPage = parseInt(btn.dataset.page);
+                    applyFiltersAndRender();
+                });
+            });
         }
         
         function updateCartCounter() {
@@ -258,21 +335,36 @@
             if (el) { el.textContent = total; el.style.display = total > 0 ? 'flex' : 'none'; }
         }
         
-        function applyFilters() {
-            const category = document.getElementById('categoryFilter').value;
-            const min = parseInt(document.getElementById('priceMin').value) || 0;
-            const max = parseInt(document.getElementById('priceMax').value) || Infinity;
-            const sort = document.getElementById('sortBy').value;
-            let filtered = allProducts.filter(p => (category === 'all' || p.category === category) && p.price >= min && p.price <= max);
-            if (sort === 'price_asc') filtered.sort((a, b) => a.price - b.price);
-            if (sort === 'price_desc') filtered.sort((a, b) => b.price - a.price);
+        let currentFilters = { category: 'all', min: 0, max: Infinity, sort: 'default' };
+        
+        function applyFiltersAndRender() {
+            let filtered = allProducts.filter(p => {
+                const categoryMatch = currentFilters.category === 'all' || p.category === currentFilters.category;
+                const priceMatch = p.price >= currentFilters.min && p.price <= currentFilters.max;
+                return categoryMatch && priceMatch;
+            });
+            if (currentFilters.sort === 'price_asc') filtered.sort((a, b) => a.price - b.price);
+            if (currentFilters.sort === 'price_desc') filtered.sort((a, b) => b.price - a.price);
+            currentPage = 1;
             renderProducts(filtered);
         }
         
-        document.getElementById('categoryFilter').addEventListener('change', applyFilters);
-        document.getElementById('priceMin').addEventListener('input', applyFilters);
-        document.getElementById('priceMax').addEventListener('input', applyFilters);
-        document.getElementById('sortBy').addEventListener('change', applyFilters);
+        document.getElementById('categoryFilter').addEventListener('change', (e) => {
+            currentFilters.category = e.target.value;
+            applyFiltersAndRender();
+        });
+        document.getElementById('priceMin').addEventListener('input', (e) => {
+            currentFilters.min = parseInt(e.target.value) || 0;
+            applyFiltersAndRender();
+        });
+        document.getElementById('priceMax').addEventListener('input', (e) => {
+            currentFilters.max = parseInt(e.target.value) || Infinity;
+            applyFiltersAndRender();
+        });
+        document.getElementById('sortBy').addEventListener('change', (e) => {
+            currentFilters.sort = e.target.value;
+            applyFiltersAndRender();
+        });
         
         loadProducts();
         updateCartCounter();
