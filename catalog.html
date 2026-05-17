@@ -207,22 +207,6 @@
                 });
             });
             
-            document.querySelectorAll('.btn-fav').forEach(btn => {
-                btn.addEventListener('click', async (e) => {
-                    e.stopPropagation();
-                    const id = btn.dataset.id;
-                    const name = btn.dataset.name;
-                    if (btn.classList.contains('active')) {
-                        await removeFromFavorites(id);
-                        btn.classList.remove('active');
-                        btn.innerHTML = '🤍';
-                    } else {
-                        await addToFavorites(id, name);
-                        btn.classList.add('active');
-                        btn.innerHTML = '❤️';
-                    }
-                });
-            });
             
             renderPagination(totalPages);
         }
