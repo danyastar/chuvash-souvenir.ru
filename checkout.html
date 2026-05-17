@@ -157,7 +157,7 @@
                 await addDoc(collection(db, 'orders'), order);
                 localStorage.removeItem('cartItems');
                 alert('Заказ оформлен!');
-                window.location.href = 'order-success.html';
+                window.location.href = 'order-confirmation.html';
             } catch (error) {
                 alert('Ошибка при оформлении заказа');
                 console.error(error);
