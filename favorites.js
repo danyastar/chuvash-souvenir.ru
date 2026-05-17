@@ -1,25 +1,44 @@
 // favorites.js
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
 import { getFirestore, doc, getDoc, setDoc, deleteDoc, collection, getDocs } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
 import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
 
-const db = getFirestore();
-const auth = getAuth();
+const firebaseConfig = {
+    apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
+    authDomain: "chuvash-souvenir.firebaseapp.com",
+    projectId: "chuvash-souvenir",
+    storageBucket: "chuvash-souvenir.firebasestorage.app",
+    messagingSenderId: "754730678926",
+    appId: "1:754730678926:web:5e45e557c0d298072027df"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
 
 let currentUser = null;
 let localFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+let updateCallbacks = [];
 
 // Слушаем изменения входа/выхода
 onAuthStateChanged(auth, async (user) => {
     currentUser = user;
     if (user) {
-        // При входе — синхронизируем локальные избранные с Firebase
         await syncLocalToFirebase();
         await loadFirebaseFavorites();
     } else {
-        // При выходе — сохраняем избранное в localStorage
         localStorage.setItem('favorites', JSON.stringify(localFavorites));
     }
+    notifyUpdate();
 });
+
+function notifyUpdate() {
+    updateCallbacks.forEach(cb => cb());
+}
+
+export function onFavoritesUpdate(callback) {
+    updateCallbacks.push(callback);
+}
 
 // Добавить в избранное
 export async function addToFavorites(productId, productName) {
@@ -37,7 +56,7 @@ export async function addToFavorites(productId, productName) {
             localStorage.setItem('favorites', JSON.stringify(localFavorites));
         }
     }
-    updateFavoriteButtons();
+    notifyUpdate();
 }
 
 // Удалить из избранного
@@ -50,7 +69,7 @@ export async function removeFromFavorites(productId) {
         localFavorites = localFavorites.filter(id => id !== productId);
         localStorage.setItem('favorites', JSON.stringify(localFavorites));
     }
-    updateFavoriteButtons();
+    notifyUpdate();
 }
 
 // Проверить, в избранном ли товар
@@ -70,7 +89,6 @@ async function loadFirebaseFavorites() {
     const favoritesRef = collection(db, 'users', currentUser.uid, 'favorites');
     const snapshot = await getDocs(favoritesRef);
     localFavorites = snapshot.docs.map(doc => doc.id);
-    updateFavoriteButtons();
 }
 
 // Синхронизировать локальные избранные с Firebase (при входе)
@@ -82,21 +100,6 @@ async function syncLocalToFirebase() {
     }
     localFavorites = [];
     localStorage.removeItem('favorites');
-    await loadFirebaseFavorites();
-}
-
-// Обновить все кнопки «В избранное» на странице
-function updateFavoriteButtons() {
-    document.querySelectorAll('.btn-fav').forEach(btn => {
-        const productId = btn.dataset.id;
-        if (localFavorites.includes(productId)) {
-            btn.classList.add('active');
-            btn.innerHTML = '❤️';
-        } else {
-            btn.classList.remove('active');
-            btn.innerHTML = '🤍';
-        }
-    });
 }
 
 // Получить список избранных товаров (для страницы "Избранное")
@@ -108,4 +111,9 @@ export async function getFavoriteProducts() {
     } else {
         return localFavorites.map(id => ({ id }));
     }
+}
+
+// Получить текущий статус избранного (синхронно для кнопок)
+export function getFavoriteIds() {
+    return [...localFavorites];
 }
