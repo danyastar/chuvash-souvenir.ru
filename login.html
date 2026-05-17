@@ -56,7 +56,7 @@
                             <label>Пароль</label>
                             <input type="password" id="loginPassword" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Войти</button>
+                        <button type="submit" class="btn">Войти</button>
                         <p class="auth-link">Нет аккаунта? <a href="register.html">Зарегистрироваться</a></p>
                     </form>
                 </div>
@@ -111,5 +111,16 @@
         }
         updateCartCounter();
     </script>
+
+    <style>
+        .auth-wrapper { display: flex; justify-content: center; align-items: center; min-height: 60vh; }
+        .auth-box { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+        .auth-box h2 { text-align: center; margin-bottom: 25px; color: #8B2000; }
+        .auth-box .form-group { margin-bottom: 15px; }
+        .auth-box .form-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; }
+        .auth-box .btn { width: 100%; padding: 12px; background: #E24A2C; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; }
+        .auth-link { text-align: center; margin-top: 15px; }
+        .auth-link a { color: #E24A2C; text-decoration: none; }
+    </style>
 </body>
 </html>
