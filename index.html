@@ -1,85 +1,40 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=106842036', 'ym');
-
-    ym(106842036, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/106842036" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
-
     <meta charset="UTF-8">
-    <meta name="robots" content="index, follow">
-    <meta name="description" content="Интернет-магазин изделий ручной работы. Уникальные авторские товары от мастеров.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Чувашский сувенир - Главная</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Дополнительные стили для картинок, чтобы ничего не ломалось */
-        .card-image {
-            height: 200px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        html, body { height: 100%; margin: 0; }
+        .main-content { display: flex; flex-direction: column; min-height: 100vh; }
+        .main-content .container { flex: 1; }
+        
+        .popular-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
         }
-        .card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        .card:hover .card-image img {
-            transform: scale(1.05);
-        }
-        .about-art img {
-            max-width: 220px;
-            height: auto;
+        .card {
+            background: white;
             border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
         }
-        .social-icon {
-            color: white;
-            text-decoration: none;
-            margin-right: 15px;
-            font-size: 16px;
-        }
-        .social-icon:hover {
-            text-decoration: underline;
-        }
+        .card:hover { transform: translateY(-5px); }
+        .card-image { height: 200px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; }
+        .card-image img { width: 100%; height: 100%; object-fit: cover; }
+        .card-content { padding: 20px; text-align: center; }
+        .card-content h3 { margin: 0 0 10px; color: #8B2000; }
+        .card-content p { color: #666; font-size: 14px; margin-bottom: 10px; }
+        .price { font-size: 18px; font-weight: bold; color: #E24A2C; margin-bottom: 15px; }
+        .card-buttons { display: flex; gap: 10px; justify-content: center; }
+        .card-buttons .btn { flex: 1; background: linear-gradient(135deg, #E24A2C, #E66830); color: white; padding: 8px 0; border-radius: 25px; text-decoration: none; font-size: 14px; text-align: center; cursor: pointer; border: none; }
+        .loading { text-align: center; padding: 50px; font-size: 18px; color: #666; }
+        @media (max-width: 768px) { .popular-grid { grid-template-columns: 1fr; } }
     </style>
-    <!-- Firebase SDK -->
-<script type="module">
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-  import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, where } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
-  
-  const firebaseConfig = {
-    apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
-    authDomain: "chuvash-souvenir.firebaseapp.com",
-    projectId: "chuvash-souvenir",
-    storageBucket: "chuvash-souvenir.firebasestorage.app",
-    messagingSenderId: "754730678926",
-    appId: "1:754730678926:web:5e45e557c0d298072027df"
-  };
-  
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  const auth = getAuth(app);
-  
-  window.db = db;
-  window.auth = auth;
-  window.addDoc = addDoc;
-  window.collection = collection;
-  window.getDocs = getDocs;
-</script>
 </head>
 <body>
     <div class="main-content">
@@ -87,32 +42,18 @@
             <div class="ornament-top"></div>
             <div class="container">
                 <div class="header-content">
-                    <div class="logo">
-                        <a href="index.html">
-                            <img src="images/logo.png" alt="Чувашский сувенир">
-                        </a>
-                    </div>
-
+                    <div class="logo"><a href="index.html"><img src="images/logo.png" alt="Чувашский сувенир"></a></div>
                     <nav class="nav">
-                        <a href="index.html" class="nav-link">Главная</a>
+                        <a href="index.html" class="nav-link active">Главная</a>
                         <a href="catalog.html" class="nav-link">Каталог</a>
                         <a href="about.html" class="nav-link">О мастерах</a>
                         <a href="contacts.html" class="nav-link">Контакты</a>
                     </nav>
-
                     <div class="header-actions">
-                        <div class="search-box">
-                            <input type="text" placeholder="Поиск товаров..." class="search-input">
-                            <button class="search-btn">🔍</button>
-                        </div>
+                        <div class="search-box"><input type="text" placeholder="Поиск товаров..." class="search-input"><button class="search-btn">🔍</button></div>
                         <div class="header-icons">
-                            <a href="account.html" class="icon-link" title="Личный кабинет">
-                                <span class="icon">👤</span>
-                            </a>
-                            <a href="cart.html" class="icon-link cart-link" title="Корзина">
-                                <span class="icon">🛒</span>
-                                <span class="cart-count">0</span>
-                            </a>
+                            <a href="account.html" class="icon-link" title="Личный кабинет"><span class="icon">👤</span></a>
+                            <a href="cart.html" class="icon-link cart-link" title="Корзина"><span class="icon">🛒</span><span class="cart-count">0</span></a>
                         </div>
                     </div>
                 </div>
@@ -136,47 +77,8 @@
 
         <section class="popular container">
             <h2>Популярные товары</h2>
-            <div class="popular-grid">
-                
-                <!-- Товар 1: Вышитая рубаха -->
-                <div class="card">
-                    <div class="card-image">
-                        <img src="images/test.jpg" alt="Вышитая рубаха">
-                    </div>
-                    <div class="card-content">
-                        <h3>Вышитая рубаха</h3>
-                        <p>Традиционная чувашская вышивка</p>
-                        <span class="price">2 500 ₽</span>
-                        <a href="product.html" class="btn">Подробнее</a>
-                    </div>
-                </div>
-                
-                <!-- Товар 2: Кукла-оберег -->
-                <div class="card">
-                    <div class="card-image">
-                        <img src="images/test.jpg" alt="Кукла-оберег">
-                    </div>
-                    <div class="card-content">
-                        <h3>Кукла-оберег</h3>
-                        <p>Ручная работа</p>
-                        <span class="price">1 800 ₽</span>
-                        <a href="product.html" class="btn">Подробнее</a>
-                    </div>
-                </div>
-                
-                <!-- Товар 3: Деревянная посуда -->
-                <div class="card">
-                    <div class="card-image">
-                        <img src="images/test.jpg" alt="Деревянная посуда">
-                    </div>
-                    <div class="card-content">
-                        <h3>Деревянная посуда</h3>
-                        <p>Расписные изделия с орнаментами</p>
-                        <span class="price">3 200 ₽</span>
-                        <a href="product.html" class="btn">Подробнее</a>
-                    </div>
-                </div>
-                
+            <div class="popular-grid" id="popularGrid">
+                <div class="loading">Загрузка...</div>
             </div>
         </section>
 
@@ -186,12 +88,7 @@
             <div class="about-content">
                 <div class="about-text">
                     <h2>О нас</h2>
-                    <p>
-                        «Чувашский сувенир» — это не просто интернет-магазин, а живой мост между богатым
-                        культурным наследием Чувашии и современным миром. Мы создали уникальное пространство,
-                        где каждая вещь рассказывает свою историю. Каждый орнамент хранит многовековую мудрость,
-                        а каждое изделие — это частица души чувашского народа.
-                    </p>
+                    <p>«Чувашский сувенир» — это не просто интернет-магазин, а живой мост между богатым культурным наследием Чувашии и современным миром.</p>
                     <a href="#" class="btn btn-outline">Узнать больше</a>
                 </div>
                 <div class="about-art">
@@ -203,150 +100,97 @@
         <footer class="footer">
             <div class="ornament-bottom"></div>
             <div class="container footer-grid">
-                <div>
-                    <h3>Контакты</h3>
-                    <p>
-                        +7 (999) 444-44-44<br>
-                        test@gmail.com
-                    </p>
-                </div>
-                <div>
-                    <h3>Разделы</h3>
-                    <p>
-                        <a href="index.html">Главная</a><br>
-                        <a href="catalog.html">Каталог</a><br>
-                        <a href="about.html">О мастерах</a>
-                    </p>
-                </div>
-                <div>
-                    <h3>Мы в соц-сетях</h3>
-                    <div>
-                        <a href="#" class="social-icon">VK</a>
-                        <a href="#" class="social-icon">TG</a>
-                    </div>
-                </div>
+                <div><h3>Контакты</h3><p>+7 (999) 444-44-44<br>test@gmail.com</p></div>
+                <div><h3>Разделы</h3><p><a href="index.html">Главная</a><br><a href="catalog.html">Каталог</a><br><a href="about.html">О мастерах</a></p></div>
+                <div><h3>Мы в соц-сетях</h3><div class="social-icons"><a href="#" class="social-icon">VK</a><a href="#" class="social-icon">TG</a></div></div>
             </div>
         </footer>
     </div>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const addToCartButtons = document.querySelectorAll('.card .btn');
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
         
-        addToCartButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                if (this.textContent === 'Подробнее') return;
-                
-                e.preventDefault();
-                const card = this.closest('.card');
-                const productName = card.querySelector('h3').textContent;
-                const productPrice = parseInt(card.querySelector('.price').textContent.replace(/\D/g, ''));
-                
-                addToCart(productName, productPrice);
-            });
-        });
-    });
-
-    function addToCart(name, price) {
-        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        const firebaseConfig = {
+            apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
+            authDomain: "chuvash-souvenir.firebaseapp.com",
+            projectId: "chuvash-souvenir",
+            storageBucket: "chuvash-souvenir.firebasestorage.app",
+            messagingSenderId: "754730678926",
+            appId: "1:754730678926:web:5e45e557c0d298072027df"
+        };
         
-        const existingItem = cartItems.find(item => item.name === name);
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
         
-        if (existingItem) {
-            if (existingItem.quantity < 10) {
-                existingItem.quantity++;
-            } else {
-                alert('Максимальное количество товара в корзине - 10');
+        async function loadPopularProducts() {
+            const grid = document.getElementById('popularGrid');
+            grid.innerHTML = '<div class="loading">Загрузка...</div>';
+            try {
+                const querySnapshot = await getDocs(collection(db, 'products'));
+                const products = [];
+                querySnapshot.forEach((doc) => {
+                    products.push({ id: doc.id, ...doc.data() });
+                });
+                // Показываем первые 3 товара (можно "популярные" по рейтингу)
+                const popular = products.slice(0, 3);
+                renderProducts(popular);
+            } catch (error) {
+                grid.innerHTML = '<div class="loading">Ошибка загрузки</div>';
+            }
+        }
+        
+        function renderProducts(products) {
+            const grid = document.getElementById('popularGrid');
+            if (!products.length) {
+                grid.innerHTML = '<div class="loading">Товары не найдены</div>';
                 return;
             }
-        } else {
-            cartItems.push({
-                id: Date.now(),
-                name: name,
-                description: "Традиционный чувашский сувенир",
-                price: price,
-                quantity: 1,
-                image: "linear-gradient(45deg, #FBE8C7, #FFF6E1)",
-                inStock: true
+            grid.innerHTML = '';
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="card-image">
+                        <img src="images/test.jpg" alt="${product.name}">
+                    </div>
+                    <div class="card-content">
+                        <h3>${product.name}</h3>
+                        <p>${product.description}</p>
+                        <div class="price">${product.price} ₽</div>
+                        <div class="card-buttons">
+                            <a href="product.html?id=${product.id}" class="btn">Подробнее</a>
+                            <button class="btn add-to-cart" data-name="${product.name}" data-price="${product.price}">В корзину</button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            
+            document.querySelectorAll('.add-to-cart').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const name = btn.dataset.name;
+                    const price = parseInt(btn.dataset.price);
+                    let cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+                    const existing = cart.find(i => i.name === name);
+                    if (existing) existing.quantity = Math.min(existing.quantity + 1, 10);
+                    else cart.push({ id: Date.now(), name, price, quantity: 1 });
+                    localStorage.setItem('cartItems', JSON.stringify(cart));
+                    updateCartCounter();
+                    alert(`"${name}" добавлен в корзину`);
+                });
             });
         }
         
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));
-        showMessage(`"${name}" добавлен в корзину`, 'success');
-    }
-
-    function showMessage(message, type) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${type}`;
-        messageDiv.textContent = message;
-        messageDiv.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            border-radius: 10px;
-            color: white;
-            font-weight: 600;
-            z-index: 10000;
-            animation: slideIn 0.3s ease;
-            max-width: 300px;
-        `;
-        
-        messageDiv.style.background = type === 'success' ? '#4CAF50' : '#E24A2C';
-        document.body.appendChild(messageDiv);
-        
-        setTimeout(() => messageDiv.remove(), 3000);
-    }
-    </script>
-    <script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-    import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
-    
-    const firebaseConfig = {
-        apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
-        authDomain: "chuvash-souvenir.firebaseapp.com",
-        projectId: "chuvash-souvenir",
-        storageBucket: "chuvash-souvenir.firebasestorage.app",
-        messagingSenderId: "754730678926",
-        appId: "1:754730678926:web:5e45e557c0d298072027df"
-    };
-    
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    
-    // Находим кнопку входа в шапке (иконка пользователя)
-    const accountLink = document.querySelector('.icon-link[title="Личный кабинет"]');
-    
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            // Пользователь вошёл
-            accountLink.href = 'account.html';
-            accountLink.title = 'Личный кабинет';
-            // Можно добавить приветствие на страницу
-            const heroText = document.querySelector('.hero-text');
-            if (heroText && !document.querySelector('.user-greeting')) {
-                const greeting = document.createElement('p');
-                greeting.className = 'user-greeting';
-                greeting.style.marginTop = '20px';
-                greeting.style.fontWeight = 'bold';
-                greeting.style.color = '#E24A2C';
-                greeting.textContent = `Добро пожаловать, ${user.displayName || user.email.split('@')[0]}!`;
-                heroText.appendChild(greeting);
-            }
-        } else {
-            // Пользователь не вошёл
-            accountLink.href = 'login.html';
-            accountLink.title = 'Войти';
+        function updateCartCounter() {
+            const cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const total = cart.reduce((s, i) => s + i.quantity, 0);
+            const el = document.querySelector('.cart-count');
+            if (el) { el.textContent = total; el.style.display = total > 0 ? 'flex' : 'none'; }
         }
-    });
-    
-    function updateCartCounter() {
-        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-        const total = cartItems.reduce((sum, i) => sum + i.quantity, 0);
-        const el = document.querySelector('.cart-count');
-        if (el) { el.textContent = total; el.style.display = total > 0 ? 'flex' : 'none'; }
-    }
-    updateCartCounter();
-</script>
+        
+        loadPopularProducts();
+        updateCartCounter();
+    </script>
 </body>
 </html>
