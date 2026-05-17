@@ -6,7 +6,21 @@
     <title>Каталог - Чувашский сувенир</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Дополнительные стили только для каталога */
+        /* Глобальный контейнер чтобы подвал был внизу */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .main-content .container {
+            flex: 1;
+        }
+        
+        /* Стили каталога */
         .catalog-page {
             padding: 40px 0;
         }
@@ -99,7 +113,6 @@
             font-size: 14px;
             border: none;
             cursor: pointer;
-            display: inline-block;
             min-width: 100px;
         }
         .card-buttons .btn:hover {
@@ -109,7 +122,7 @@
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin-top: 20px;
+            margin: 20px 0 40px;
             flex-wrap: wrap;
         }
         .pagination button {
@@ -264,7 +277,6 @@
                 return;
             }
             
-            // Пагинация
             const totalPages = Math.ceil(products.length / itemsPerPage);
             const start = (currentPage - 1) * itemsPerPage;
             const paginatedProducts = products.slice(start, start + itemsPerPage);
@@ -283,7 +295,7 @@
                         <div class="price">${product.price} ₽</div>
                         <div class="card-buttons">
                             <a href="product.html?id=${product.id}" class="btn">Подробнее</a>
-                            <button class="btn" data-name="${product.name}" data-price="${product.price}">В корзину</button>
+                            <button class="btn add-to-cart-btn" data-name="${product.name}" data-price="${product.price}">В корзину</button>
                         </div>
                     </div>
                 `;
@@ -291,22 +303,28 @@
             });
             
             // Кнопки "В корзину"
-            document.querySelectorAll('.card-buttons .btn[data-name]').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const name = btn.dataset.name;
-                    const price = parseInt(btn.dataset.price);
-                    let cart = JSON.parse(localStorage.getItem('cartItems')) || [];
-                    const existing = cart.find(i => i.name === name);
-                    if (existing) existing.quantity = Math.min(existing.quantity + 1, 10);
-                    else cart.push({ id: Date.now(), name, price, quantity: 1 });
-                    localStorage.setItem('cartItems', JSON.stringify(cart));
-                    updateCartCounter();
-                    alert(`"${name}" добавлен в корзину`);
-                });
+            document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+                btn.removeEventListener('click', handleAddToCart);
+                btn.addEventListener('click', handleAddToCart);
             });
             
-            // Пагинация
             renderPagination(totalPages);
+        }
+        
+        function handleAddToCart(e) {
+            const btn = e.currentTarget;
+            const name = btn.dataset.name;
+            const price = parseInt(btn.dataset.price);
+            let cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const existing = cart.find(i => i.name === name);
+            if (existing) {
+                existing.quantity = Math.min(existing.quantity + 1, 10);
+            } else {
+                cart.push({ id: Date.now(), name, price, quantity: 1 });
+            }
+            localStorage.setItem('cartItems', JSON.stringify(cart));
+            updateCartCounter();
+            alert(`"${name}" добавлен в корзину`);
         }
         
         function renderPagination(totalPages) {
@@ -324,6 +342,7 @@
                 btn.addEventListener('click', () => {
                     currentPage = parseInt(btn.dataset.page);
                     applyFiltersAndRender();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
             });
         }
