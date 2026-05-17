@@ -1,47 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=106842036', 'ym');
-
-    ym(106842036, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/106842036" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
     <meta charset="UTF-8">
-    <title>Вход — ЧуСувенир</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход - Чувашский сувенир</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Firebase SDK -->
-<script type="module">
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-  import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, where } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
-  
-  const firebaseConfig = {
-    apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
-    authDomain: "chuvash-souvenir.firebaseapp.com",
-    projectId: "chuvash-souvenir",
-    storageBucket: "chuvash-souvenir.firebasestorage.app",
-    messagingSenderId: "754730678926",
-    appId: "1:754730678926:web:5e45e557c0d298072027df"
-  };
-  
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  const auth = getAuth(app);
-  
-  window.db = db;
-  window.auth = auth;
-  window.addDoc = addDoc;
-  window.collection = collection;
-  window.getDocs = getDocs;
-</script>
 </head>
 <body>
     <div class="main-content">
@@ -54,14 +17,12 @@
                             <img src="images/logo.png" alt="Чувашский сувенир">
                         </a>
                     </div>
-
                     <nav class="nav">
                         <a href="index.html" class="nav-link">Главная</a>
                         <a href="catalog.html" class="nav-link">Каталог</a>
                         <a href="about.html" class="nav-link">О мастерах</a>
                         <a href="contacts.html" class="nav-link">Контакты</a>
                     </nav>
-
                     <div class="header-actions">
                         <div class="search-box">
                             <input type="text" placeholder="Поиск товаров..." class="search-input">
@@ -82,32 +43,73 @@
             <div class="ornament-header-bottom"></div>
         </header>
 
-<div class="main-wrapper">
-    <div class="login-wrapper">
-        <div class="login-box">
-            <h2>Вход в аккаунт</h2>
-            <form>
-                <label>Email</label>
-                <input type="email" placeholder="Введите email" required>
-
-                <label>Пароль</label>
-                <input type="password" placeholder="Введите пароль" required>
-
-                <button class="btn" type="submit">Войти</button>
-
-                <p class="login-sub">
-                    Нет аккаунта? <a href="#">Регистрация</a>
-                </p>
-            </form>
+        <div class="container">
+            <div class="auth-wrapper">
+                <div class="auth-box">
+                    <h2>Вход</h2>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="loginEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Пароль</label>
+                            <input type="password" id="loginPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Войти</button>
+                        <p class="auth-link">Нет аккаунта? <a href="register.html">Зарегистрироваться</a></p>
+                    </form>
+                </div>
+            </div>
         </div>
+
+        <footer class="footer">
+            <div class="ornament-bottom"></div>
+            <div class="container footer-grid">
+                <div><h3>Контакты</h3><p>+7 (999) 444-44-44<br>test@gmail.com</p></div>
+                <div><h3>Разделы</h3><p><a href="index.html">Главная</a><br><a href="catalog.html">Каталог</a><br><a href="about.html">О мастерах</a></p></div>
+                <div><h3>Мы в соц-сетях</h3><div class="social-icons"><a href="#" class="social-icon">VK</a><a href="#" class="social-icon">TG</a></div></div>
+            </div>
+        </footer>
     </div>
-</div>
 
-
-
-    </div>
-</div>
-
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
+            authDomain: "chuvash-souvenir.firebaseapp.com",
+            projectId: "chuvash-souvenir",
+            storageBucket: "chuvash-souvenir.firebasestorage.app",
+            messagingSenderId: "754730678926",
+            appId: "1:754730678926:web:5e45e557c0d298072027df"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                alert('Вход выполнен!');
+                window.location.href = 'account.html';
+            } catch (error) {
+                alert('Ошибка: ' + error.message);
+            }
+        });
+        
+        function updateCartCounter() {
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const total = cartItems.reduce((sum, i) => sum + i.quantity, 0);
+            const el = document.querySelector('.cart-count');
+            if (el) { el.textContent = total; el.style.display = total > 0 ? 'flex' : 'none'; }
+        }
+        updateCartCounter();
+    </script>
 </body>
-
 </html>
