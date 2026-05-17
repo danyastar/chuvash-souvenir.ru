@@ -12,7 +12,7 @@
         .catalog-page { padding: 40px 0; }
         .catalog-page h2 { text-align: center; font-size: 32px; color: #8B2000; margin-bottom: 30px; }
         .filters { display: flex; gap: 15px; margin-bottom: 30px; justify-content: center; flex-wrap: wrap; }
-        .filters select, .filters input { padding: 10px 15px; border: 2px solid #E0A400; border-radius: 8px; background: white; font-size: 14px; }
+        .filters select, .filters input { padding: 10px 15px; border: 2px solid #E0A400; border-radius: 8px; background: white; font-size: 14px; min-width: 120px; }
         .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; margin-bottom: 40px; }
         .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s; display: flex; flex-direction: column; position: relative; }
         .card:hover { transform: translateY(-5px); }
@@ -31,6 +31,7 @@
         .pagination button { padding: 8px 16px; background: white; border: 2px solid #E0A400; border-radius: 8px; cursor: pointer; font-weight: bold; }
         .pagination button.active { background: #E24A2C; border-color: #E24A2C; color: white; }
         .loading { text-align: center; padding: 50px; font-size: 18px; color: #666; }
+        .error-msg { text-align: center; padding: 50px; font-size: 18px; color: #E24A2C; }
         @media (max-width: 768px) { .catalog-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
@@ -48,7 +49,7 @@
                         <a href="contacts.html" class="nav-link">Контакты</a>
                     </nav>
                     <div class="header-actions">
-                        <div class="search-box"><input type="text" placeholder="Поиск товаров..." class="search-input"><button class="search-btn">🔍</button></div>
+                        <div class="search-box"><input type="text" placeholder="Поиск товаров..." class="search-input" id="globalSearch"><button class="search-btn">🔍</button></div>
                         <div class="header-icons">
                             <a href="favorites.html" class="icon-link" title="Избранное">❤️</a>
                             <a href="account.html" class="icon-link" title="Личный кабинет"><span class="icon">👤</span></a>
@@ -64,10 +65,21 @@
             <div class="catalog-page">
                 <h2>Каталог товаров</h2>
                 <div class="filters">
-                    <select id="categoryFilter"><option value="all">Все категории</option><option value="clothing">Одежда</option><option value="dolls">Куклы</option><option value="dishes">Посуда</option><option value="accessories">Аксессуары</option></select>
+                    <input type="text" id="searchInput" placeholder="🔍 Поиск по названию...">
+                    <select id="categoryFilter">
+                        <option value="all">Все категории</option>
+                        <option value="clothing">Одежда</option>
+                        <option value="dolls">Куклы</option>
+                        <option value="dishes">Посуда</option>
+                        <option value="accessories">Аксессуары</option>
+                    </select>
                     <input type="number" id="priceMin" placeholder="Цена от">
                     <input type="number" id="priceMax" placeholder="Цена до">
-                    <select id="sortBy"><option value="default">По умолчанию</option><option value="price_asc">Дешевые</option><option value="price_desc">Дорогие</option></select>
+                    <select id="sortBy">
+                        <option value="default">По умолчанию</option>
+                        <option value="price_asc">Дешевые</option>
+                        <option value="price_desc">Дорогие</option>
+                    </select>
                 </div>
                 <div class="catalog-grid" id="catalogGrid"><div class="loading">Загрузка товаров...</div></div>
                 <div class="pagination" id="pagination"></div>
@@ -115,22 +127,29 @@
                 querySnapshot.forEach((doc) => {
                     allProducts.push({ id: doc.id, ...doc.data() });
                 });
-                applyFilters();
+                if (allProducts.length === 0) {
+                    grid.innerHTML = '<div class="loading">Товары не найдены в базе данных</div>';
+                } else {
+                    applyFilters();
+                }
             } catch (error) {
-                grid.innerHTML = '<div class="loading">Ошибка загрузки</div>';
+                console.error('Ошибка загрузки:', error);
+                grid.innerHTML = '<div class="error-msg">❌ Ошибка подключения к базе данных. Проверьте Firebase.</div>';
             }
         }
         
         function applyFilters() {
+            const search = document.getElementById('searchInput')?.value.toLowerCase() || '';
             const category = document.getElementById('categoryFilter').value;
             const min = parseInt(document.getElementById('priceMin').value) || 0;
             const max = parseInt(document.getElementById('priceMax').value) || Infinity;
             const sort = document.getElementById('sortBy').value;
             
             filteredProducts = allProducts.filter(p => {
+                const searchMatch = p.name.toLowerCase().includes(search);
                 const catMatch = category === 'all' || p.category === category;
                 const priceMatch = p.price >= min && p.price <= max;
-                return catMatch && priceMatch;
+                return searchMatch && catMatch && priceMatch;
             });
             
             if (sort === 'price_asc') filteredProducts.sort((a, b) => a.price - b.price);
@@ -143,7 +162,7 @@
         function renderProducts() {
             const grid = document.getElementById('catalogGrid');
             if (!filteredProducts.length) {
-                grid.innerHTML = '<div class="loading">Товары не найдены</div>';
+                grid.innerHTML = '<div class="loading">😕 Товары не найдены по вашему запросу</div>';
                 document.getElementById('pagination').innerHTML = '';
                 return;
             }
@@ -232,10 +251,25 @@
             if (el) { el.textContent = total; el.style.display = total > 0 ? 'flex' : 'none'; }
         }
         
+        // Слушатели событий фильтров
+        document.getElementById('searchInput').addEventListener('input', () => applyFilters());
         document.getElementById('categoryFilter').addEventListener('change', () => applyFilters());
         document.getElementById('priceMin').addEventListener('input', () => applyFilters());
         document.getElementById('priceMax').addEventListener('input', () => applyFilters());
         document.getElementById('sortBy').addEventListener('change', () => applyFilters());
+        
+        // Глобальный поиск в шапке
+        document.getElementById('globalSearch').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                document.getElementById('searchInput').value = e.target.value;
+                applyFilters();
+            }
+        });
+        document.querySelector('.search-btn').addEventListener('click', () => {
+            const searchVal = document.getElementById('globalSearch').value;
+            document.getElementById('searchInput').value = searchVal;
+            applyFilters();
+        });
         
         onFavoritesUpdate(() => {
             const favoriteIds = getFavoriteIds();
