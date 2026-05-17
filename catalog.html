@@ -1,68 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=106842036', 'ym');
-
-    ym(106842036, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/106842036" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Каталог - Чувашский сувенир</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Дополнительные стили для картинок в каталоге */
-        .card-image {
-            height: 200px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f5f5f5;
-        }
-        .card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        .card:hover .card-image img {
-            transform: scale(1.05);
-        }
-    </style>
-    <!-- Firebase SDK -->
-<script type="module">
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-  import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, where } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
-  
-  const firebaseConfig = {
-    apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
-    authDomain: "chuvash-souvenir.firebaseapp.com",
-    projectId: "chuvash-souvenir",
-    storageBucket: "chuvash-souvenir.firebasestorage.app",
-    messagingSenderId: "754730678926",
-    appId: "1:754730678926:web:5e45e557c0d298072027df"
-  };
-  
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  const auth = getAuth(app);
-  
-  window.db = db;
-  window.auth = auth;
-  window.addDoc = addDoc;
-  window.collection = collection;
-  window.getDocs = getDocs;
-</script>
 </head>
 <body>
     <div class="main-content">
@@ -75,18 +17,16 @@
                             <img src="images/logo.png" alt="Чувашский сувенир">
                         </a>
                     </div>
-
                     <nav class="nav">
                         <a href="index.html" class="nav-link">Главная</a>
                         <a href="catalog.html" class="nav-link active">Каталог</a>
                         <a href="about.html" class="nav-link">О мастерах</a>
                         <a href="contacts.html" class="nav-link">Контакты</a>
                     </nav>
-
                     <div class="header-actions">
                         <div class="search-box">
-                            <input type="text" placeholder="Поиск товаров..." class="search-input" id="searchInput">
-                            <button class="search-btn" id="searchBtn">🔍</button>
+                            <input type="text" placeholder="Поиск товаров..." class="search-input">
+                            <button class="search-btn">🔍</button>
                         </div>
                         <div class="header-icons">
                             <a href="account.html" class="icon-link" title="Личный кабинет">
@@ -113,12 +53,10 @@
                         <option value="clothing">Одежда</option>
                         <option value="dolls">Куклы</option>
                         <option value="dishes">Посуда</option>
+                        <option value="accessories">Аксессуары</option>
                     </select>
-                    
                     <input type="number" id="priceMin" placeholder="Цена от">
-                    
                     <input type="number" id="priceMax" placeholder="Цена до">
-                    
                     <select id="sortBy">
                         <option value="default">По умолчанию</option>
                         <option value="price_asc">Дешевые</option>
@@ -126,85 +64,11 @@
                     </select>
                 </div>
 
-                <div class="catalog-grid">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="images/test.jpg" alt="Вышитая рубаха">
-                        </div>
-                        <div class="card-content">
-                            <h3>Вышитая рубаха</h3>
-                            <p>Традиционная чувашская рубаха с ручной вышивкой</p>
-                            <div class="price">2500 ₽</div>
-                            <button class="btn add-to-cart">В корзину</button>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="images/test.jpg" alt="Кукла-оберег">
-                        </div>
-                        <div class="card-content">
-                            <h3>Кукла-оберег</h3>
-                            <p>Ручная работа из натуральных материалов</p>
-                            <div class="price">1800 ₽</div>
-                            <button class="btn add-to-cart">В корзину</button>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="images/test.jpg" alt="Деревянная посуда">
-                        </div>
-                        <div class="card-content">
-                            <h3>Деревянная посуда</h3>
-                            <p>Набор посуды с традиционными орнаментами</p>
-                            <div class="price">3200 ₽</div>
-                            <button class="btn add-to-cart">В корзину</button>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="images/test.jpg" alt="Чувашский платок">
-                        </div>
-                        <div class="card-content">
-                            <h3>Чувашский платок</h3>
-                            <p>Шерстяной платок с орнаментом</p>
-                            <div class="price">1500 ₽</div>
-                            <button class="btn add-to-cart">В корзину</button>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="images/test.jpg" alt="Вышитая сумка">
-                        </div>
-                        <div class="card-content">
-                            <h3>Вышитая сумка</h3>
-                            <p>Сумка с чувашской вышивкой</p>
-                            <div class="price">2200 ₽</div>
-                            <button class="btn add-to-cart">В корзину</button>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="images/test.jpg" alt="Головной убор">
-                        </div>
-                        <div class="card-content">
-                            <h3>Головной убор</h3>
-                            <p>Традиционный женский головной убор</p>
-                            <div class="price">2800 ₽</div>
-                            <button class="btn add-to-cart">В корзину</button>
-                        </div>
-                    </div>
+                <div class="catalog-grid" id="catalogGrid">
+                    <div class="loading">Загрузка товаров...</div>
                 </div>
 
-                <div class="pagination">
-                    <button class="active">1</button>
-                    <button>2</button>
-                    <button>3</button>
-                </div>
+                <div class="pagination" id="pagination"></div>
             </div>
         </div>
 
@@ -217,54 +81,155 @@
                 </div>
                 <div>
                     <h3>Разделы</h3>
-                    <p>
-                        <a href="index.html">Главная</a><br>
-                        <a href="catalog.html">Каталог</a><br>
-                        <a href="about.html">О мастерах</a>
-                    </p>
+                    <p><a href="index.html">Главная</a><br><a href="catalog.html">Каталог</a><br><a href="about.html">О мастерах</a></p>
                 </div>
                 <div>
                     <h3>Мы в соц-сетях</h3>
                     <div class="social-icons">
-                        <span>VK</span>
-                        <span>TG</span>
+                        <a href="#" class="social-icon">VK</a>
+                        <a href="#" class="social-icon">TG</a>
                     </div>
                 </div>
             </div>
         </footer>
     </div>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        updateCartCounter();
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
         
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', function() {
-                const card = this.closest('.card');
-                const productName = card.querySelector('h3').textContent;
-                const productPrice = card.querySelector('.price').textContent;
-                
-                addToCart(productName, productPrice);
-            });
-        });
-    });
-
-    function addToCart(name, price) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        cart.push({ name, price });
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartCounter();
-        alert(`Товар "${name}" добавлен в корзину!`);
-    }
-
-    function updateCartCounter() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const cartCount = document.querySelector('.cart-count');
-        if (cartCount) {
-            cartCount.textContent = cart.length;
-            cartCount.style.display = cart.length > 0 ? 'flex' : 'none';
+        const firebaseConfig = {
+            apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
+            authDomain: "chuvash-souvenir.firebaseapp.com",
+            projectId: "chuvash-souvenir",
+            storageBucket: "chuvash-souvenir.firebasestorage.app",
+            messagingSenderId: "754730678926",
+            appId: "1:754730678926:web:5e45e557c0d298072027df"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        
+        let allProducts = [];
+        
+        async function loadProducts() {
+            const grid = document.getElementById('catalogGrid');
+            grid.innerHTML = '<div class="loading">Загрузка товаров...</div>';
+            
+            try {
+                const querySnapshot = await getDocs(collection(db, 'products'));
+                allProducts = [];
+                querySnapshot.forEach((doc) => {
+                    allProducts.push({ id: doc.id, ...doc.data() });
+                });
+                renderProducts(allProducts);
+            } catch (error) {
+                grid.innerHTML = '<div class="loading">Ошибка загрузки товаров</div>';
+                console.error('Ошибка:', error);
+            }
         }
-    }
+        
+        function renderProducts(products) {
+            const grid = document.getElementById('catalogGrid');
+            
+            if (!products || products.length === 0) {
+                grid.innerHTML = '<div class="loading">Товары не найдены</div>';
+                return;
+            }
+            
+            grid.innerHTML = '';
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="card-image">
+                        <img src="images/test.jpg" alt="${product.name}">
+                    </div>
+                    <div class="card-content">
+                        <h3>${product.name}</h3>
+                        <p>${product.description}</p>
+                        <div class="price">${product.price} ₽</div>
+                        <a href="product.html?id=${product.id}" class="btn">Подробнее</a>
+                        <button class="btn add-to-cart" data-name="${product.name}" data-price="${product.price}">В корзину</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            
+            // Привязываем кнопки "В корзину"
+            document.querySelectorAll('.add-to-cart').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const name = this.getAttribute('data-name');
+                    const price = parseInt(this.getAttribute('data-price'));
+                    addToCart(name, price);
+                });
+            });
+        }
+        
+        function addToCart(name, price) {
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const existingItem = cartItems.find(item => item.name === name);
+            if (existingItem) {
+                if (existingItem.quantity < 10) {
+                    existingItem.quantity++;
+                } else {
+                    alert('Максимальное количество - 10');
+                    return;
+                }
+            } else {
+                cartItems.push({
+                    id: Date.now(),
+                    name: name,
+                    description: "Традиционный чувашский сувенир",
+                    price: price,
+                    quantity: 1,
+                    inStock: true
+                });
+            }
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            updateCartCounter();
+            alert(`"${name}" добавлен в корзину`);
+        }
+        
+        function updateCartCounter() {
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const total = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+            const cartCount = document.querySelector('.cart-count');
+            if (cartCount) {
+                cartCount.textContent = total;
+                cartCount.style.display = total > 0 ? 'flex' : 'none';
+            }
+        }
+        
+        // Фильтрация и сортировка
+        document.getElementById('categoryFilter')?.addEventListener('change', () => applyFilters());
+        document.getElementById('priceMin')?.addEventListener('input', () => applyFilters());
+        document.getElementById('priceMax')?.addEventListener('input', () => applyFilters());
+        document.getElementById('sortBy')?.addEventListener('change', () => applyFilters());
+        
+        function applyFilters() {
+            const category = document.getElementById('categoryFilter').value;
+            const min = parseInt(document.getElementById('priceMin').value) || 0;
+            const max = parseInt(document.getElementById('priceMax').value) || Infinity;
+            let sortBy = document.getElementById('sortBy').value;
+            
+            let filtered = allProducts.filter(p => {
+                const categoryMatch = category === 'all' || p.category === category;
+                const priceMatch = p.price >= min && p.price <= max;
+                return categoryMatch && priceMatch;
+            });
+            
+            if (sortBy === 'price_asc') {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (sortBy === 'price_desc') {
+                filtered.sort((a, b) => b.price - a.price);
+            }
+            
+            renderProducts(filtered);
+        }
+        
+        loadProducts();
+        updateCartCounter();
     </script>
 </body>
 </html>
