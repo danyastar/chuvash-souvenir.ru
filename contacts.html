@@ -47,7 +47,7 @@
         .contact-info a { color: #E24A2C; text-decoration: none; }
         .contact-info a:hover { text-decoration: underline; }
         
-        /* Карта */
+        /* Карта со скриншотом */
         .map-section {
             background: white;
             border-radius: 15px;
@@ -55,35 +55,37 @@
             margin-bottom: 50px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             border: 1px solid #E0A400;
+            text-align: center;
         }
-        .map-section h3 { color: #8B2000; margin-bottom: 20px; font-size: 22px; }
-        .map-container {
-            background: #e8f0e8;
+        .map-section h3 { color: #8B2000; margin-bottom: 20px; font-size: 22px; text-align: left; }
+        .map-image {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            display: block;
             border-radius: 12px;
-            overflow: hidden;
-            text-align: center;
-            padding: 20px;
+            border: 2px solid #E0A400;
         }
-        .map-placeholder {
-            background: #d4e0d4;
-            border-radius: 10px;
-            padding: 40px;
-            text-align: center;
+        .map-links {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
         }
-        .map-placeholder p { margin: 10px 0; color: #5A1F00; }
         .map-btn {
-            display: inline-block;
             background: #E24A2C;
             color: white;
             padding: 10px 20px;
             border-radius: 25px;
             text-decoration: none;
-            margin-top: 15px;
             transition: background 0.3s;
+            display: inline-block;
         }
-        .map-btn:hover { background: #c0392b; }
+        .map-btn.google { background: #4285F4; }
+        .map-btn:hover { opacity: 0.9; }
         
-        /* Форма обратной связи */
+        /* Форма обратной связи — сужена и по центру */
         .form-section {
             background: white;
             border-radius: 15px;
@@ -91,8 +93,12 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             border: 1px solid #E0A400;
             margin-bottom: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
-        .form-section h3 { color: #8B2000; margin-bottom: 20px; font-size: 22px; }
+        .form-section h3 { color: #8B2000; margin-bottom: 10px; font-size: 22px; text-align: center; }
+        .form-section > p { text-align: center; color: #666; margin-bottom: 25px; }
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 5px; font-weight: 600; color: #5A1F00; }
         .form-group input, .form-group select, .form-group textarea {
@@ -101,15 +107,17 @@
             border: 2px solid #E0A400;
             border-radius: 8px;
             font-size: 14px;
+            box-sizing: border-box;
         }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             outline: none;
             border-color: #E24A2C;
         }
+        .form-actions { text-align: center; margin-top: 20px; }
         .form-actions button {
             background: linear-gradient(135deg, #E24A2C, #E66830);
             color: white;
-            padding: 12px 30px;
+            padding: 12px 40px;
             border: none;
             border-radius: 25px;
             cursor: pointer;
@@ -148,6 +156,7 @@
             .contacts-grid { grid-template-columns: 1fr; }
             .contact-card { padding: 20px; }
             .page-title { font-size: 28px; }
+            .form-section { margin: 0 15px 50px; }
         }
     </style>
 </head>
@@ -230,26 +239,19 @@
                     </div>
                 </div>
 
-                <!-- Карта -->
+                <!-- Карта (скриншот + ссылки) -->
                 <div class="map-section">
-                    <h3>Мы находимся здесь</h3>
-                    <div class="map-container">
-                        <div class="map-placeholder">
-                            <p>📍 г. Чебоксары, ул. Карла Маркса, 45</p>
-                            <p>ТЦ "Пассаж", 2 этаж</p>
-                            <a href="https://yandex.ru/maps/?pt=47.251153,56.144037&z=17&l=map" target="_blank" class="map-btn">
-                                Открыть в Яндекс.Картах
-                            </a>
-                            <a href="https://www.google.com/maps?q=56.144037,47.251153" target="_blank" class="map-btn" style="background: #4285F4; margin-left: 10px;">
-                                Открыть в Google Maps
-                            </a>
-                        </div>
+                    <h3>📍 Мы находимся здесь</h3>
+                    <img src="https://via.placeholder.com/800x400?text=Карта+г.Чебоксары,+ул.Карла+Маркса+45" alt="Карта" class="map-image">
+                    <div class="map-links">
+                        <a href="https://yandex.ru/maps/?pt=47.251153,56.144037&z=17&l=map" target="_blank" class="map-btn">🗺️ Открыть в Яндекс.Картах</a>
+                        <a href="https://www.google.com/maps?q=56.144037,47.251153" target="_blank" class="map-btn google">🗺️ Открыть в Google Maps</a>
                     </div>
                 </div>
 
-                <!-- Форма обратной связи -->
+                <!-- Форма обратной связи - сужена -->
                 <div class="form-section">
-                    <h3>Остались вопросы?</h3>
+                    <h3>📝 Остались вопросы?</h3>
                     <p>Напишите нам, и мы обязательно ответим</p>
                     <form id="contactForm">
                         <div class="form-group"><label>Ваше имя *</label><input type="text" id="name" required></div>
@@ -272,7 +274,7 @@
 
                 <!-- Часто задаваемые вопросы -->
                 <div class="faq-section">
-                    <h3>Часто задаваемые вопросы</h3>
+                    <h3>❓ Часто задаваемые вопросы</h3>
                     <div class="faq-list">
                         <div class="faq-item">
                             <div class="faq-question"><span>Как сделать заказ?</span><button class="faq-toggle">+</button></div>
