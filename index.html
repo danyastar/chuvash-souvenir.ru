@@ -6,69 +6,61 @@
     <title>Чувашский сувенир - Главная</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        /* Стили только для главной страницы */
         html, body { height: 100%; margin: 0; }
         .main-content { display: flex; flex-direction: column; min-height: 100vh; }
         .main-content .container { flex: 1; }
         
-        .catalog-promo {
-            text-align: center;
-            padding: 60px 20px;
-            background: #FFF6E1;
-            border-radius: 20px;
-            margin: 40px 0;
-            border: 2px solid #E0A400;
+        /* Сетка популярных товаров */
+        .popular-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
         }
-        .catalog-promo h2 {
-            font-size: 32px;
-            color: #8B2000;
-            margin-bottom: 20px;
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
         }
-        .catalog-promo p {
-            font-size: 18px;
-            color: #666;
-            margin-bottom: 30px;
-        }
-        .catalog-promo .btn {
-            background: linear-gradient(135deg, #E24A2C, #E66830);
-            color: white;
-            padding: 12px 32px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 600;
-            display: inline-block;
-        }
-        .catalog-promo .btn:hover {
-            transform: scale(1.02);
+        .card:hover { transform: translateY(-5px); }
+        .card-image { height: 200px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; }
+        .card-image img { width: 100%; height: 100%; object-fit: cover; }
+        .card-content { padding: 20px; text-align: center; }
+        .card-content h3 { margin: 0 0 10px; color: #8B2000; }
+        .card-content p { color: #666; font-size: 14px; margin-bottom: 10px; }
+        .price { font-size: 18px; font-weight: bold; color: #E24A2C; margin-bottom: 15px; }
+        .card-buttons { display: flex; gap: 10px; justify-content: center; }
+        .card-buttons .btn { background: linear-gradient(135deg, #E24A2C, #E66830); color: white; padding: 8px 16px; border-radius: 25px; text-decoration: none; font-size: 14px; }
+        .popular h2 { text-align: center; font-size: 32px; color: #8B2000; margin-bottom: 30px; }
+        .popular h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #E0A400;
+            margin: 10px auto 0;
         }
         
-        .features {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin: 60px 0;
-        }
-        .feature {
-            text-align: center;
-            padding: 20px;
-        }
-        .feature-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
-        .feature h3 {
-            color: #8B2000;
-            margin-bottom: 10px;
-        }
-        .feature p {
-            color: #666;
-        }
         @media (max-width: 768px) {
-            .features {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
+            .popular-grid { grid-template-columns: 1fr; gap: 20px; }
+            .hero-text h1 { font-size: 28px; }
+            .about-content { flex-direction: column; text-align: center; }
+            .about-text h2::after { left: 50%; transform: translateX(-50%); }
+            .features { grid-template-columns: 1fr; gap: 20px; }
         }
+        @media (max-width: 480px) {
+            .popular-grid { grid-template-columns: 1fr; }
+            .hero-text h1 { font-size: 24px; }
+        }
+        
+        .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin: 60px 0; }
+        .feature { text-align: center; padding: 20px; }
+        .feature-icon { font-size: 48px; margin-bottom: 15px; }
+        .feature h3 { color: #8B2000; margin-bottom: 10px; }
+        .feature p { color: #666; }
     </style>
 </head>
 <body>
@@ -77,11 +69,7 @@
             <div class="ornament-top"></div>
             <div class="container">
                 <div class="header-content">
-                    <div class="logo">
-                        <a href="index.html">
-                            <img src="images/logo.png" alt="Чувашский сувенир">
-                        </a>
-                    </div>
+                    <div class="logo"><a href="index.html"><img src="images/logo.png" alt="Чувашский сувенир"></a></div>
                     <nav class="nav">
                         <a href="index.html" class="nav-link active">Главная</a>
                         <a href="catalog.html" class="nav-link">Каталог</a>
@@ -89,18 +77,10 @@
                         <a href="contacts.html" class="nav-link">Контакты</a>
                     </nav>
                     <div class="header-actions">
-                        <div class="search-box">
-                            <input type="text" placeholder="Поиск товаров..." class="search-input">
-                            <button class="search-btn">🔍</button>
-                        </div>
+                        <div class="search-box"><input type="text" placeholder="Поиск..." class="search-input"><button class="search-btn">🔍</button></div>
                         <div class="header-icons">
-                            <a href="#" id="accountLink" class="icon-link" title="Личный кабинет">
-                                <span class="icon">👤</span>
-                            </a>
-                            <a href="cart.html" class="icon-link cart-link" title="Корзина">
-                                <span class="icon">🛒</span>
-                                <span class="cart-count">0</span>
-                            </a>
+                            <a href="#" id="accountLink" class="icon-link" title="Личный кабинет"><span class="icon">👤</span></a>
+                            <a href="cart.html" class="icon-link cart-link" title="Корзина"><span class="icon">🛒</span><span class="cart-count">0</span></a>
                         </div>
                     </div>
                 </div>
@@ -123,12 +103,64 @@
         <div class="ornament-middle"></div>
 
         <section class="popular container">
-            <div class="catalog-promo">
-                <h2>Тысячи аутентичных сувениров</h2>
-                <p>Вышивка, керамика, деревянные изделия и многое другое</p>
-                <a href="catalog.html" class="btn">Смотреть каталог</a>
+            <h2>Популярные товары</h2>
+            <div class="popular-grid">
+                <div class="card">
+                    <div class="card-image"><img src="images/product1.jpg" alt="Вышитая рубаха"></div>
+                    <div class="card-content">
+                        <h3>Вышитая рубаха</h3>
+                        <p>Традиционная чувашская вышивка</p>
+                        <div class="price">2 500 ₽</div>
+                        <div class="card-buttons">
+                            <a href="product.html" class="btn">Подробнее</a>
+                            <button class="btn add-to-cart" data-name="Вышитая рубаха" data-price="2500">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image"><img src="images/product2.jpg" alt="Кукла-оберег"></div>
+                    <div class="card-content">
+                        <h3>Кукла-оберег</h3>
+                        <p>Ручная работа</p>
+                        <div class="price">1 800 ₽</div>
+                        <div class="card-buttons">
+                            <a href="product.html" class="btn">Подробнее</a>
+                            <button class="btn add-to-cart" data-name="Кукла-оберег" data-price="1800">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image"><img src="images/product3.jpg" alt="Деревянная посуда"></div>
+                    <div class="card-content">
+                        <h3>Деревянная посуда</h3>
+                        <p>Расписные изделия с орнаментами</p>
+                        <div class="price">3 200 ₽</div>
+                        <div class="card-buttons">
+                            <a href="product.html" class="btn">Подробнее</a>
+                            <button class="btn add-to-cart" data-name="Деревянная посуда" data-price="3200">В корзину</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
+
+        <div class="features container">
+            <div class="feature">
+                <div class="feature-icon">🎁</div>
+                <h3>Аутентичные сувениры</h3>
+                <p>Только ручная работа от чувашских мастеров</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🚚</div>
+                <h3>Доставка по всей России</h3>
+                <p>Быстрая и надёжная доставка</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔒</div>
+                <h3>Безопасная оплата</h3>
+                <p>Защита ваших данных</p>
+            </div>
+        </div>
 
         <div class="ornament-between"></div>
 
@@ -136,53 +168,51 @@
             <div class="about-content">
                 <div class="about-text">
                     <h2>О нас</h2>
-                    <p>
-                        «Чувашский сувенир» — это не просто интернет-магазин, а живой мост между богатым
-                        культурным наследием Чувашии и современным миром. Мы создали уникальное пространство,
-                        где каждая вещь рассказывает свою историю. Каждый орнамент хранит многовековую мудрость,
-                        а каждое изделие — это частица души чувашского народа.
-                    </p>
+                    <p>«Чувашский сувенир» — это не просто интернет-магазин, а живой мост между богатым культурным наследием Чувашии и современным миром. Каждый орнамент хранит многовековую мудрость, а каждое изделие — это частица души чувашского народа.</p>
                     <a href="#" class="btn btn-outline">Узнать больше</a>
                 </div>
-                <div class="about-art">
-                    <img src="images/ornament.png" alt="Чувашский орнамент">
-                </div>
+                <div class="about-art"><img src="images/ornament.png" alt="Чувашский орнамент"></div>
             </div>
         </section>
 
         <footer class="footer">
             <div class="ornament-bottom"></div>
             <div class="container footer-grid">
-                <div>
-                    <h3>Контакты</h3>
-                    <p>
-                        +7 (999) 444-44-44<br>
-                        test@gmail.com
-                    </p>
-                </div>
-                <div>
-                    <h3>Разделы</h3>
-                    <p>
-                        <a href="index.html">Главная</a><br>
-                        <a href="catalog.html">Каталог</a><br>
-                        <a href="about.html">О мастерах</a>
-                    </p>
-                </div>
-                <div>
-                    <h3>Мы в соц-сетях</h3>
-                    <div>
-                        <a href="#" class="social-icon">VK</a>
-                        <a href="#" class="social-icon">TG</a>
-                    </div>
-                </div>
+                <div><h3>Контакты</h3><p>+7 (999) 444-44-44<br>test@gmail.com</p></div>
+                <div><h3>Разделы</h3><p><a href="index.html">Главная</a><br><a href="catalog.html">Каталог</a><br><a href="about.html">О мастерах</a></p></div>
+                <div><h3>Мы в соц-сетях</h3><div><a href="#" class="social-icon">VK</a><a href="#" class="social-icon">TG</a></div></div>
             </div>
         </footer>
     </div>
 
-    <script type="module">
-        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+    <script>
+        function updateCartCounter() {
+            let cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+            let total = cart.reduce((s, i) => s + i.quantity, 0);
+            let el = document.querySelector('.cart-count');
+            if (el) { el.textContent = total; el.style.display = total > 0 ? 'flex' : 'none'; }
+        }
         
+        document.querySelectorAll('.add-to-cart').forEach(btn => {
+            btn.addEventListener('click', () => {
+                let name = btn.dataset.name;
+                let price = parseInt(btn.dataset.price);
+                let cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+                let existing = cart.find(i => i.name === name);
+                if (existing) existing.quantity = Math.min(existing.quantity + 1, 10);
+                else cart.push({ id: Date.now(), name, price, quantity: 1 });
+                localStorage.setItem('cartItems', JSON.stringify(cart));
+                updateCartCounter();
+                alert(`"${name}" добавлен в корзину`);
+            });
+        });
+        
+        updateCartCounter();
+    </script>
+    
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
         const firebaseConfig = {
             apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
             authDomain: "chuvash-souvenir.firebaseapp.com",
@@ -191,30 +221,12 @@
             messagingSenderId: "754730678926",
             appId: "1:754730678926:web:5e45e557c0d298072027df"
         };
-        
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-        
+        const accountLink = document.getElementById('accountLink');
         onAuthStateChanged(auth, (user) => {
-            const accountLink = document.getElementById('accountLink');
-            if (user) {
-                accountLink.href = 'account.html';
-            } else {
-                accountLink.href = 'login.html';
-            }
+            accountLink.href = user ? 'account.html' : 'login.html';
         });
-        
-        function updateCartCounter() {
-            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-            const total = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-            const cartCount = document.querySelector('.cart-count');
-            if (cartCount) {
-                cartCount.textContent = total;
-                cartCount.style.display = total > 0 ? 'flex' : 'none';
-            }
-        }
-        
-        updateCartCounter();
     </script>
 </body>
 </html>
