@@ -42,32 +42,8 @@
         .card-buttons { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
         .card-buttons .btn { background: linear-gradient(135deg, #E24A2C, #E66830); color: white; padding: 8px 16px; border-radius: 25px; text-decoration: none; font-size: 14px; cursor: pointer; border: none; }
         
-        /* Блок преимуществ */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin: 60px auto;
-            max-width: 1000px;
-        }
-        .feature {
-            text-align: center;
-            padding: 30px 20px;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            border: 1px solid #E0A400;
-            transition: transform 0.3s;
-        }
-        .feature:hover { transform: translateY(-5px); }
-        .feature-icon { font-size: 48px; margin-bottom: 15px; }
-        .feature h3 { color: #8B2000; margin-bottom: 10px; font-size: 20px; }
-        .feature p { color: #666; font-size: 14px; line-height: 1.5; }
-        
-        /* Адаптив */
         @media (max-width: 768px) {
             .popular-grid { grid-template-columns: 1fr; gap: 20px; }
-            .features { grid-template-columns: 1fr; gap: 20px; margin: 40px auto; }
             .hero-text h1 { font-size: 28px; }
             .about-content { flex-direction: column; text-align: center; }
             .about-text h2::after { left: 50%; transform: translateX(-50%); }
@@ -75,7 +51,6 @@
         @media (max-width: 480px) {
             .popular-grid { grid-template-columns: 1fr; }
             .hero-text h1 { font-size: 24px; }
-            .feature { padding: 20px; }
         }
         
         .about { padding: 50px 0; }
@@ -130,6 +105,7 @@
         <section class="popular container">
             <h2>Популярные товары</h2>
             <div class="popular-grid">
+                <!-- Товар 1: Вышитая рубаха (id=1dXPPIPPKH2WPusFE6Z4) -->
                 <div class="card">
                     <div class="card-image"><img src="images/product1.jpg" alt="Вышитая рубаха"></div>
                     <div class="card-content">
@@ -137,11 +113,12 @@
                         <p>Традиционная чувашская вышивка</p>
                         <div class="price">2 500 ₽</div>
                         <div class="card-buttons">
-                            <a href="product.html" class="btn">Подробнее</a>
+                            <a href="product.html?id=1dXPPIPPKH2WPusFE6Z4" class="btn">Подробнее</a>
                             <button class="btn add-to-cart" data-name="Вышитая рубаха" data-price="2500">В корзину</button>
                         </div>
                     </div>
                 </div>
+                <!-- Товар 2: Кукла-оберег -->
                 <div class="card">
                     <div class="card-image"><img src="images/product2.jpg" alt="Кукла-оберег"></div>
                     <div class="card-content">
@@ -149,11 +126,12 @@
                         <p>Ручная работа</p>
                         <div class="price">1 800 ₽</div>
                         <div class="card-buttons">
-                            <a href="product.html" class="btn">Подробнее</a>
+                            <a href="product.html?id=2" class="btn">Подробнее</a>
                             <button class="btn add-to-cart" data-name="Кукла-оберег" data-price="1800">В корзину</button>
                         </div>
                     </div>
                 </div>
+                <!-- Товар 3: Деревянная посуда -->
                 <div class="card">
                     <div class="card-image"><img src="images/product3.jpg" alt="Деревянная посуда"></div>
                     <div class="card-content">
@@ -161,32 +139,13 @@
                         <p>Расписные изделия с орнаментами</p>
                         <div class="price">3 200 ₽</div>
                         <div class="card-buttons">
-                            <a href="product.html" class="btn">Подробнее</a>
+                            <a href="product.html?id=3" class="btn">Подробнее</a>
                             <button class="btn add-to-cart" data-name="Деревянная посуда" data-price="3200">В корзину</button>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
-        <!-- Блок преимуществ в красивых рамках -->
-        <div class="features container">
-            <div class="feature">
-                <div class="feature-icon">🎁</div>
-                <h3>Аутентичные сувениры</h3>
-                <p>Только ручная работа от чувашских мастеров</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🚚</div>
-                <h3>Доставка по всей России</h3>
-                <p>Быстрая и надёжная доставка</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🔒</div>
-                <h3>Безопасная оплата</h3>
-                <p>Защита ваших данных</p>
-            </div>
-        </div>
 
         <div class="ornament-between"></div>
 
@@ -195,7 +154,7 @@
                 <div class="about-text">
                     <h2>О нас</h2>
                     <p>«Чувашский сувенир» — это не просто интернет-магазин, а живой мост между богатым культурным наследием Чувашии и современным миром. Каждый орнамент хранит многовековую мудрость, а каждое изделие — это частица души чувашского народа.</p>
-                    <a href="#" class="btn-outline">Узнать больше</a>
+                    <a href="contacts.html" class="btn-outline">Узнать больше</a>
                 </div>
                 <div class="about-art"><img src="images/ornament.png" alt="Чувашский орнамент"></div>
             </div>
