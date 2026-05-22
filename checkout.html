@@ -28,6 +28,7 @@
         .summary-row { display: flex; justify-content: space-between; margin: 12px 0; }
         .summary-row.total { font-weight: bold; font-size: 18px; color: #8B2000; border-top: 1px solid #eee; padding-top: 12px; margin-top: 12px; }
         .checkout-btn { width: 100%; padding: 15px; background: linear-gradient(135deg, #E24A2C, #E66830); color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 16px; margin-top: 15px; }
+        .error-msg { color: #E24A2C; font-size: 14px; margin-top: 5px; }
         @media (max-width: 768px) { .checkout-content { flex-direction: column; } .form-row { flex-direction: column; } }
     </style>
 </head>
@@ -147,13 +148,21 @@
                     <a href="favorites.html" class="icon-link" title="Избранное">❤️</a>
                     <a href="account.html" class="icon-link" title="Личный кабинет"><span class="icon">👤</span></a>
                 `;
+                // Загружаем корзину только когда пользователь авторизован
+                loadCartAndRender();
             } else {
                 authSection.innerHTML = `<a href="login.html" class="icon-link" title="Войти"><span class="icon">👤</span></a>`;
             }
         });
         
-        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        let cartItems = [];
         let deliveryCost = 300;
+        
+        function loadCartAndRender() {
+            cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            renderOrder();
+            updateCartCounter();
+        }
         
         function formatPhone(value) {
             let numbers = value.replace(/\D/g, '');
@@ -218,22 +227,40 @@
                 return;
             }
             
+            const subtotal = cartItems.reduce((s, i) => s + i.price * i.quantity, 0);
+            const total = subtotal + deliveryCost;
+            
             const orderData = {
-                customer: { name: firstName + ' ' + lastName, email, phone, address },
-                items: cartItems,
-                total: document.getElementById('totalAmount').textContent,
+                customer: {
+                    name: firstName + ' ' + lastName,
+                    email: email,
+                    phone: phone,
+                    address: address
+                },
+                items: cartItems.map(item => ({
+                    name: item.name,
+                    price: item.price,
+                    quantity: item.quantity
+                })),
+                total: total + ' ₽',
+                subtotal: subtotal + ' ₽',
+                deliveryCost: deliveryCost + ' ₽',
                 deliveryMethod: document.getElementById('deliverySelect').options[document.getElementById('deliverySelect').selectedIndex].text,
                 paymentMethod: document.getElementById('paymentSelect').value,
                 status: 'new',
                 createdAt: new Date()
             };
             
+            console.log('Отправляем заказ:', orderData);
+            
             try {
-                await addDoc(collection(db, 'orders'), orderData);
+                const docRef = await addDoc(collection(db, 'orders'), orderData);
+                console.log('Заказ сохранён с ID:', docRef.id);
                 localStorage.removeItem('cartItems');
                 alert('Заказ оформлен!');
                 window.location.href = 'order-confirmation.html';
             } catch (error) {
+                console.error('Ошибка при сохранении заказа:', error);
                 alert('Ошибка при оформлении заказа: ' + error.message);
             }
         });
@@ -244,8 +271,18 @@
             if (el) { el.textContent = total; el.style.display = total > 0 ? 'flex' : 'none'; }
         }
         
-        renderOrder();
-        updateCartCounter();
+        // Вызов render при загрузке страницы (если пользователь уже авторизован)
+        if (currentUser) {
+            loadCartAndRender();
+        } else {
+            // Ждём авторизацию
+            const unsubscribe = onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    loadCartAndRender();
+                    unsubscribe();
+                }
+            });
+        }
     </script>
 </body>
 </html>
