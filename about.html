@@ -363,6 +363,44 @@
         });
     });
     </script>
+    <script type="module">
+    import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+    
+    const firebaseConfig = {
+        apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
+        authDomain: "chuvash-souvenir.firebaseapp.com",
+        projectId: "chuvash-souvenir",
+        storageBucket: "chuvash-souvenir.firebasestorage.app",
+        messagingSenderId: "754730678926",
+        appId: "1:754730678926:web:5e45e557c0d298072027df"
+    };
+    
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    
+    const accountLink = document.querySelector('.icon-link[title="Личный кабинет"]');
+    if (accountLink) {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                accountLink.href = 'account.html';
+            } else {
+                accountLink.href = 'login.html';
+            }
+        });
+    }
+    
+    function updateCartCounter() {
+        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        const total = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+        const cartCount = document.querySelector('.cart-count');
+        if (cartCount) {
+            cartCount.textContent = total;
+            cartCount.style.display = total > 0 ? 'flex' : 'none';
+        }
+    }
+    updateCartCounter();
+</script>
 
     <style>
     .masters-page {
