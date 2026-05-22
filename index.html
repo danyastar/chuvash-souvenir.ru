@@ -10,65 +10,33 @@
         .main-content { display: flex; flex-direction: column; min-height: 100vh; }
         .main-content .container { flex: 1; }
         
-        .catalog-promo {
-            text-align: center;
-            padding: 60px 20px;
-            background: #FFF6E1;
-            border-radius: 20px;
-            margin: 40px 0;
-            border: 2px solid #E0A400;
-        }
-        .catalog-promo h2 {
-            font-size: 32px;
-            color: #8B2000;
-            margin-bottom: 20px;
-        }
-        .catalog-promo p {
-            font-size: 18px;
-            color: #666;
-            margin-bottom: 30px;
-        }
-        .catalog-promo .btn {
-            background: linear-gradient(135deg, #E24A2C, #E66830);
-            color: white;
-            padding: 12px 32px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 600;
-            display: inline-block;
-        }
-        .catalog-promo .btn:hover {
-            transform: scale(1.02);
-        }
-        
-        .features {
+        .popular-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 30px;
-            margin: 60px 0;
+            margin-top: 30px;
         }
-        .feature {
-            text-align: center;
-            padding: 20px;
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
         }
-        .feature-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
-        .feature h3 {
-            color: #8B2000;
-            margin-bottom: 10px;
-        }
-        .feature p {
-            color: #666;
-        }
-        @media (max-width: 768px) {
-            .features {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-        }
+        .card:hover { transform: translateY(-5px); }
+        .card-image { height: 200px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; }
+        .card-image img { width: 100%; height: 100%; object-fit: cover; }
+        .card-content { padding: 20px; text-align: center; }
+        .card-content h3 { margin: 0 0 10px; color: #8B2000; }
+        .card-content p { color: #666; font-size: 14px; margin-bottom: 10px; }
+        .price { font-size: 18px; font-weight: bold; color: #E24A2C; margin-bottom: 15px; }
+        .card-buttons { display: flex; gap: 10px; justify-content: center; }
+        .card-buttons .btn { background: linear-gradient(135deg, #E24A2C, #E66830); color: white; padding: 8px 16px; border-radius: 25px; text-decoration: none; font-size: 14px; cursor: pointer; border: none; }
+        .btn-fav { background: none; border: none; font-size: 20px; cursor: pointer; color: #999; transition: 0.3s; }
+        .btn-fav.active { color: #E24A2C; }
+        .btn-fav.hidden { display: none; }
+        .loading { text-align: center; padding: 50px; font-size: 18px; color: #666; }
+        @media (max-width: 768px) { .popular-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -94,9 +62,13 @@
                             <button class="search-btn">🔍</button>
                         </div>
                         <div class="header-icons">
-                            <a href="favorites.html" class="icon-link" title="Избранное">❤️</a>
-                            <a href="account.html" class="icon-link" title="Личный кабинет"><span class="icon">👤</span></a>
-                            <a href="cart.html" class="icon-link cart-link" title="Корзина"><span class="icon">🛒</span><span class="cart-count">0</span></a>
+                            <a href="#" id="accountLink" class="icon-link" title="Личный кабинет">
+                                <span class="icon">👤</span>
+                            </a>
+                            <a href="cart.html" class="icon-link cart-link" title="Корзина">
+                                <span class="icon">🛒</span>
+                                <span class="cart-count">0</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -119,10 +91,9 @@
         <div class="ornament-middle"></div>
 
         <section class="popular container">
-            <div class="catalog-promo">
-                <h2>Тысячи аутентичных сувениров</h2>
-                <p>Вышивка, керамика, деревянные изделия и многое другое</p>
-                <a href="catalog.html" class="btn">Смотреть каталог</a>
+            <h2>Популярные товары</h2>
+            <div class="popular-grid" id="popularGrid">
+                <div class="loading">Загрузка товаров...</div>
             </div>
         </section>
 
@@ -175,17 +146,102 @@
         </footer>
     </div>
 
-    <script>
-        function updateCartCounter() {
-            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-            const total = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-            const cartCount = document.querySelector('.cart-count');
-            if (cartCount) {
-                cartCount.textContent = total;
-                cartCount.style.display = total > 0 ? 'flex' : 'none';
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
+            authDomain: "chuvash-souvenir.firebaseapp.com",
+            projectId: "chuvash-souvenir",
+            storageBucket: "chuvash-souvenir.firebasestorage.app",
+            messagingSenderId: "754730678926",
+            appId: "1:754730678926:web:5e45e557c0d298072027df"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        
+        let currentUser = null;
+        
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+            const accountLink = document.getElementById('accountLink');
+            if (user) {
+                accountLink.href = 'account.html';
+            } else {
+                accountLink.href = 'login.html';
+            }
+        });
+        
+        async function loadPopularProducts() {
+            const grid = document.getElementById('popularGrid');
+            grid.innerHTML = '<div class="loading">Загрузка товаров...</div>';
+            try {
+                const querySnapshot = await getDocs(collection(db, 'products'));
+                const products = [];
+                querySnapshot.forEach((doc) => {
+                    products.push({ id: doc.id, ...doc.data() });
+                });
+                const popular = products.slice(0, 3);
+                renderProducts(popular);
+            } catch (error) {
+                grid.innerHTML = '<div class="loading">Ошибка загрузки товаров</div>';
             }
         }
         
+        function renderProducts(products) {
+            const grid = document.getElementById('popularGrid');
+            if (!products.length) {
+                grid.innerHTML = '<div class="loading">Товары не найдены</div>';
+                return;
+            }
+            grid.innerHTML = '';
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="card-image">
+                        <img src="images/test.jpg" alt="${product.name}">
+                    </div>
+                    <div class="card-content">
+                        <h3>${product.name}</h3>
+                        <p>${product.description}</p>
+                        <div class="price">${product.price} ₽</div>
+                        <div class="card-buttons">
+                            <a href="product.html?id=${product.id}" class="btn">Подробнее</a>
+                            <button class="btn add-to-cart" data-name="${product.name}" data-price="${product.price}">В корзину</button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            
+            document.querySelectorAll('.add-to-cart').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const name = btn.dataset.name;
+                    const price = parseInt(btn.dataset.price);
+                    let cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+                    const existing = cart.find(i => i.name === name);
+                    if (existing) existing.quantity = Math.min(existing.quantity + 1, 10);
+                    else cart.push({ id: Date.now(), name, price, quantity: 1 });
+                    localStorage.setItem('cartItems', JSON.stringify(cart));
+                    updateCartCounter();
+                    alert(`"${name}" добавлен в корзину`);
+                });
+            });
+        }
+        
+        function updateCartCounter() {
+            const cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const total = cart.reduce((s, i) => s + i.quantity, 0);
+            const el = document.querySelector('.cart-count');
+            if (el) { el.textContent = total; el.style.display = total > 0 ? 'flex' : 'none'; }
+        }
+        
+        loadPopularProducts();
         updateCartCounter();
     </script>
 </body>
