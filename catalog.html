@@ -25,6 +25,9 @@
             flex-direction: column;
             min-height: 100vh;
         }
+        .main-content .container {
+            flex: 1;
+        }
         .container {
             width: 90%;
             max-width: 1100px;
@@ -169,6 +172,7 @@
         /* ===== КАТАЛОГ ===== */
         .catalog-page {
             padding: 40px 0;
+            min-height: 400px;
         }
         .catalog-page h2 {
             text-align: center;
@@ -203,6 +207,7 @@
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 30px;
             margin-bottom: 40px;
+            min-height: 300px;
         }
         .card {
             background: white;
@@ -467,9 +472,13 @@
             }
 
             /* --- КАТАЛОГ --- */
+            .catalog-page {
+                padding: 20px 0;
+            }
             .catalog-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
+                min-height: 200px;
             }
             .filters {
                 flex-direction: column;
@@ -546,9 +555,6 @@
             }
 
             /* --- КАТАЛОГ --- */
-            .catalog-page {
-                padding: 20px 0;
-            }
             .catalog-page h2 {
                 font-size: 22px;
                 margin-bottom: 20px;
@@ -566,6 +572,7 @@
             }
             .catalog-grid {
                 gap: 15px;
+                min-height: 150px;
             }
             .card-image {
                 height: 180px;
@@ -681,7 +688,9 @@
                         <option value="price_desc">Дорогие</option>
                     </select>
                 </div>
-                <div class="catalog-grid" id="catalogGrid"><div class="loading">Загрузка товаров...</div></div>
+                <div class="catalog-grid" id="catalogGrid">
+                    <div class="loading">Загрузка товаров...</div>
+                </div>
                 <div class="pagination" id="pagination"></div>
             </div>
         </div>
@@ -742,7 +751,6 @@
         let currentPage = 1;
         const itemsPerPage = 6;
 
-        // Функции избранного
         function getFavoriteIds() {
             try {
                 return JSON.parse(localStorage.getItem('favorites')) || [];
@@ -894,8 +902,10 @@
             const cart = JSON.parse(localStorage.getItem('cartItems')) || [];
             const total = cart.reduce((s, i) => s + i.quantity, 0);
             const el = document.querySelector('.cart-count');
-            if (el) { el.textContent = total;
-                el.style.display = total > 0 ? 'flex' : 'none'; }
+            if (el) {
+                el.textContent = total;
+                el.style.display = total > 0 ? 'flex' : 'none';
+            }
         }
 
         document.getElementById('searchInput').addEventListener('input', () => applyFilters());
