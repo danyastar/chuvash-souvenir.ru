@@ -32,7 +32,7 @@
             padding: 0 15px;
         }
 
-        /* ===== ОРНАМЕНТЫ (ДЕСКТОП) ===== */
+        /* ===== ОРНАМЕНТЫ ===== */
         .ornament-top {
             background-image: url("images/patternorna.png");
             background-size: contain;
@@ -86,7 +86,7 @@
             margin-top: -20px;
         }
 
-        /* ===== ХЕДЕР ===== */
+        /* ===== ХЕДЕР (КАК НА ГЛАВНОЙ) ===== */
         .header {
             background: #FFF4E5;
             position: relative;
@@ -185,7 +185,7 @@
             justify-content: center;
         }
 
-        /* ===== ГЕРОЙ (ДЕСКТОП) ===== */
+        /* ===== ГЕРОЙ ===== */
         .hero {
             padding: 30px 0;
             margin-top: -40px;
@@ -247,7 +247,7 @@
             display: block;
         }
 
-        /* ===== ПОПУЛЯРНЫЕ ТОВАРЫ (ДЕСКТОП) ===== */
+        /* ===== ПОПУЛЯРНЫЕ ТОВАРЫ ===== */
         .popular {
             padding: 40px 0;
             margin-top: -50px;
@@ -351,17 +351,6 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(226, 74, 44, 0.35);
         }
-        .card-buttons .btn-outline {
-            background: transparent;
-            color: #E24A2C;
-            border: 2px solid #E24A2C;
-            box-shadow: none;
-        }
-        .card-buttons .btn-outline:hover {
-            background: #E24A2C;
-            color: white;
-            transform: translateY(-2px);
-        }
 
         /* ===== О НАС ===== */
         .about {
@@ -426,6 +415,7 @@
             margin-top: 50px;
             padding: 40px 0 25px;
             position: relative;
+            flex-shrink: 0;
         }
         .footer-grid {
             display: grid;
@@ -543,29 +533,23 @@
                 font-size: 16px;
             }
 
-            /* --- ОРНАМЕНТ ТОП --- */
+            /* --- ОРНАМЕНТЫ --- */
             .ornament-top {
                 background-size: 150% auto;
                 height: 320px;
                 top: -250px;
                 margin-bottom: -260px;
             }
-
-            /* --- ОРНАМЕНТ HEADER-BOTTOM --- */
             .ornament-header-bottom {
                 background-size: 150% auto;
                 height: 15px;
                 margin-top: -20px;
             }
-
-            /* --- ОРНАМЕНТ МИДЛ --- */
             .ornament-middle {
                 background-size: 150% auto;
                 height: 300px;
                 margin: -30px 0 -80px 0;
             }
-
-            /* --- ОСТАЛЬНЫЕ ОРНАМЕНТЫ --- */
             .ornament-between {
                 background-size: 150% auto;
                 height: 40px;
@@ -576,7 +560,7 @@
                 margin-top: -25px;
             }
 
-            /* --- ГЕРОЙ: ТЕКСТ НА 10px НИЖЕ, КАРТИНКА ОПУЩЕНА --- */
+            /* --- ГЕРОЙ --- */
             .hero {
                 padding: 30px 0;
                 margin-top: -40px;
@@ -606,8 +590,12 @@
                 padding: 40px 0;
                 margin-top: -50px;
             }
+            .popular-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
 
-            /* --- ОСТАЛЬНОЕ --- */
+            /* --- О НАС --- */
             .about-content {
                 flex-direction: column;
                 text-align: center;
@@ -617,10 +605,8 @@
                 left: 50%;
                 transform: translateX(-50%);
             }
-            .popular-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
+
+            /* --- ПОДВАЛ --- */
             .footer-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 30px;
@@ -659,29 +645,23 @@
                 font-size: 14px;
             }
 
-            /* --- ОРНАМЕНТ ТОП --- */
+            /* --- ОРНАМЕНТЫ --- */
             .ornament-top {
                 background-size: 200% auto;
                 height: 380px;
                 top: -300px;
                 margin-bottom: -310px;
             }
-
-            /* --- ОРНАМЕНТ HEADER-BOTTOM --- */
             .ornament-header-bottom {
                 background-size: 200% auto;
                 height: 15px;
                 margin-top: -20px;
             }
-
-            /* --- ОРНАМЕНТ МИДЛ --- */
             .ornament-middle {
                 background-size: 200% auto;
                 height: 350px;
                 margin: -40px 0 -70px 0;
             }
-
-            /* --- ОСТАЛЬНЫЕ ОРНАМЕНТЫ --- */
             .ornament-between {
                 background-size: 200% auto;
                 height: 50px;
@@ -692,7 +672,7 @@
                 margin-top: -30px;
             }
 
-            /* --- ГЕРОЙ: ТЕКСТ НА 10px НИЖЕ, КАРТИНКА ОПУЩЕНА --- */
+            /* --- ГЕРОЙ --- */
             .hero {
                 padding: 30px 0;
                 margin-top: -40px;
@@ -721,15 +701,17 @@
                 padding: 40px 0;
                 margin-top: -50px;
             }
-
-            /* --- ОСТАЛЬНОЕ --- */
             .popular-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
+
+            /* --- О НАС --- */
             .about-art img {
                 max-width: 160px;
             }
+
+            /* --- ПОДВАЛ --- */
             .footer-grid {
                 grid-template-columns: 1fr;
                 gap: 25px;
@@ -799,7 +781,11 @@
             <div class="ornament-top"></div>
             <div class="container">
                 <div class="header-content">
-                    <div class="logo"><a href="index.html"><img src="images/logo.png" alt="Чувашский сувенир"></a></div>
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="images/logo.png" alt="Чувашский сувенир">
+                        </a>
+                    </div>
                     <nav class="nav">
                         <a href="index.html" class="nav-link active">Главная</a>
                         <a href="catalog.html" class="nav-link">Каталог</a>
@@ -842,7 +828,6 @@
                         <p>Традиционная чувашская вышивка</p>
                         <div class="price">2 500 ₽</div>
                         <div class="card-buttons">
-                            <a href="product.html?id=1" class="btn btn-outline">Подробнее</a>
                             <button class="btn btn-primary add-to-cart" data-name="Вышитая рубаха" data-price="2500">В корзину</button>
                         </div>
                     </div>
@@ -854,7 +839,6 @@
                         <p>Ручная работа</p>
                         <div class="price">1 800 ₽</div>
                         <div class="card-buttons">
-                            <a href="product.html?id=2" class="btn btn-outline">Подробнее</a>
                             <button class="btn btn-primary add-to-cart" data-name="Кукла-оберег" data-price="1800">В корзину</button>
                         </div>
                     </div>
@@ -866,7 +850,6 @@
                         <p>Расписные изделия с орнаментами</p>
                         <div class="price">3 200 ₽</div>
                         <div class="card-buttons">
-                            <a href="product.html?id=3" class="btn btn-outline">Подробнее</a>
                             <button class="btn btn-primary add-to-cart" data-name="Деревянная посуда" data-price="3200">В корзину</button>
                         </div>
                     </div>
@@ -919,7 +902,7 @@
                 el.style.display = total > 0 ? 'flex' : 'none';
             }
         }
-        
+
         document.querySelectorAll('.add-to-cart').forEach(btn => {
             btn.addEventListener('click', () => {
                 let name = btn.dataset.name;
@@ -935,7 +918,7 @@
         });
         updateCartCounter();
     </script>
-    
+
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
         import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
