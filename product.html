@@ -169,68 +169,26 @@
             justify-content: center;
         }
 
-        /* ===== СТРАНИЦА ТОВАРА ===== */
+        /* ===== СТРАНИЦА ТОВАРА (ПРОСТАЯ) ===== */
         .product-container {
             display: flex;
             gap: 50px;
             margin: 40px 0;
             align-items: flex-start;
-            flex-wrap: wrap;
         }
-
-        /* ---- ГАЛЕРЕЯ ---- */
-        .product-gallery {
+        .product-image {
             flex: 1;
-            min-width: 300px;
+            text-align: center;
         }
-        .main-image {
+        .product-image img {
             width: 100%;
-            height: 400px;
-            background: #f5f5f5;
+            max-width: 400px;
             border-radius: 15px;
-            overflow: hidden;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .main-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .thumbnails {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .thumbnails .thumb {
-            width: 80px;
-            height: 80px;
-            border-radius: 10px;
-            overflow: hidden;
-            cursor: pointer;
-            border: 3px solid transparent;
-            transition: all 0.3s;
             background: #f5f5f5;
         }
-        .thumbnails .thumb:hover {
-            transform: scale(1.05);
-        }
-        .thumbnails .thumb.active {
-            border-color: #E24A2C;
-        }
-        .thumbnails .thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* ---- ИНФОРМАЦИЯ ---- */
         .product-info {
             flex: 1;
-            min-width: 300px;
         }
         .product-info .title-row {
             display: flex;
@@ -255,22 +213,6 @@
             color: #555;
             line-height: 1.6;
             margin-bottom: 25px;
-        }
-        .product-stock {
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-        .product-stock.in-stock {
-            background: #E8F5E9;
-            color: #2E7D32;
-        }
-        .product-stock.out-of-stock {
-            background: #FFEBEE;
-            color: #C62828;
         }
         .product-buy {
             display: flex;
@@ -320,129 +262,6 @@
         }
         .btn-fav.active {
             color: #E24A2C;
-        }
-
-        /* ---- ОТЗЫВЫ ---- */
-        .reviews-section {
-            width: 100%;
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 2px solid #E0A400;
-        }
-        .reviews-section h3 {
-            color: #8B2000;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        .reviews-summary {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-        .avg-rating {
-            font-size: 48px;
-            font-weight: bold;
-            color: #8B2000;
-        }
-        .avg-rating span {
-            font-size: 18px;
-            color: #666;
-            font-weight: normal;
-        }
-        .stars-display {
-            font-size: 28px;
-            color: #E0A400;
-        }
-        .review-form {
-            background: #FFF6E1;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            border: 1px solid #E0A400;
-        }
-        .review-form h4 {
-            color: #8B2000;
-            margin-bottom: 15px;
-        }
-        .review-form .rating-select {
-            display: flex;
-            gap: 5px;
-            margin-bottom: 15px;
-        }
-        .review-form .rating-select button {
-            font-size: 30px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #ddd;
-            transition: 0.2s;
-        }
-        .review-form .rating-select button.active {
-            color: #E0A400;
-        }
-        .review-form input,
-        .review-form textarea {
-            width: 100%;
-            padding: 10px 12px;
-            border: 2px solid #E0A400;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            font-size: 14px;
-            font-family: inherit;
-            background: white;
-        }
-        .review-form input:focus,
-        .review-form textarea:focus {
-            border-color: #E24A2C;
-            outline: none;
-        }
-        .review-form textarea {
-            min-height: 80px;
-            resize: vertical;
-        }
-        .review-form .btn {
-            padding: 8px 20px;
-            font-size: 14px;
-        }
-
-        .review-item {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #f0f0f0;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-        .review-item .review-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 8px;
-        }
-        .review-item .review-author {
-            font-weight: 600;
-            color: #5A1F00;
-        }
-        .review-item .review-date {
-            font-size: 12px;
-            color: #999;
-        }
-        .review-item .review-stars {
-            color: #E0A400;
-            font-size: 18px;
-        }
-        .review-item .review-text {
-            color: #555;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-        .no-reviews {
-            color: #999;
-            text-align: center;
-            padding: 20px;
         }
 
         .loading {
@@ -591,28 +410,14 @@
                 gap: 30px;
                 margin: 20px 0;
             }
-            .product-gallery {
-                min-width: unset;
-            }
-            .main-image {
-                height: 300px;
-            }
-            .thumbnails .thumb {
-                width: 60px;
-                height: 60px;
-            }
-            .product-info {
-                min-width: unset;
+            .product-image img {
+                max-width: 100%;
             }
             .product-info h1 {
                 font-size: 26px;
             }
             .product-price {
                 font-size: 24px;
-            }
-            .reviews-summary {
-                flex-direction: column;
-                text-align: center;
             }
             .footer-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -667,13 +472,6 @@
                 margin-top: -30px;
             }
 
-            .main-image {
-                height: 220px;
-            }
-            .thumbnails .thumb {
-                width: 50px;
-                height: 50px;
-            }
             .product-info h1 {
                 font-size: 22px;
             }
@@ -692,9 +490,6 @@
             .btn {
                 width: 100%;
                 text-align: center;
-            }
-            .review-form .rating-select button {
-                font-size: 24px;
             }
             .footer-grid {
                 grid-template-columns: 1fr;
@@ -796,7 +591,7 @@
 
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-        import { getFirestore, doc, getDoc, collection, query, where, getDocs, addDoc, orderBy, Timestamp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+        import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
         import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
 
         const firebaseConfig = {
@@ -812,30 +607,24 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        let currentUser = null;
         let currentProduct = null;
-        let selectedRating = 0;
         let productId = new URLSearchParams(window.location.search).get('id');
 
         const accountLink = document.getElementById('accountLink');
 
         onAuthStateChanged(auth, (user) => {
-            currentUser = user;
             if (user) {
                 accountLink.href = 'account.html';
             } else {
                 accountLink.href = 'login.html';
             }
-            if (productId) {
-                loadProduct(productId);
-            }
         });
 
         if (!productId) {
             document.getElementById('productContainer').innerHTML = '<div class="loading">Товар не найден</div>';
+        } else {
+            loadProduct(productId);
         }
-
-        // ========== ЗАГРУЗКА ТОВАРА ==========
 
         async function loadProduct(id) {
             const container = document.getElementById('productContainer');
@@ -848,250 +637,73 @@
                 }
                 currentProduct = { id: docSnap.id, ...docSnap.data() };
 
-                // Загружаем отзывы
-                const reviews = await loadReviews(id);
+                // Получаем избранное
+                const isFav = getFavoriteStatus(id);
 
-                container.innerHTML = renderProduct(currentProduct, reviews);
-                setupGallery();
-                setupRatingStars();
-                setupReviewForm(id);
-                setupFavButton();
+                container.innerHTML = `
+                    <div class="product-image">
+                        <img src="images/test.jpg" alt="${currentProduct.name}">
+                    </div>
+                    <div class="product-info">
+                        <div class="title-row">
+                            <h1>${currentProduct.name}</h1>
+                            <button class="btn-fav ${isFav ? 'active' : ''}" id="favBtn">${isFav ? '❤️' : '🤍'}</button>
+                        </div>
+                        <div class="product-price">${currentProduct.price} ₽</div>
+                        <p class="product-desc">${currentProduct.description || 'Традиционный чувашский сувенир'}</p>
+                        <div class="product-buy">
+                            <input type="number" id="quantity" value="1" min="1" max="10">
+                            <button id="addToCartBtn" class="btn">В корзину</button>
+                        </div>
+                    </div>
+                `;
 
-                // Обновляем счетчик корзины
+                // Кнопка избранного
+                const favBtn = document.getElementById('favBtn');
+                if (favBtn) {
+                    favBtn.addEventListener('click', () => {
+                        const isActive = favBtn.classList.contains('active');
+                        let favs = JSON.parse(localStorage.getItem('favorites')) || [];
+                        if (isActive) {
+                            favs = favs.filter(fid => fid !== productId);
+                            favBtn.classList.remove('active');
+                            favBtn.innerHTML = '🤍';
+                        } else {
+                            favs.push(productId);
+                            favBtn.classList.add('active');
+                            favBtn.innerHTML = '❤️';
+                        }
+                        localStorage.setItem('favorites', JSON.stringify(favs));
+                    });
+                }
+
+                // Кнопка корзины
+                document.getElementById('addToCartBtn').addEventListener('click', () => {
+                    const quantity = parseInt(document.getElementById('quantity').value) || 1;
+                    let cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+                    const existing = cart.find(item => item.name === currentProduct.name);
+                    if (existing) {
+                        existing.quantity = Math.min(existing.quantity + quantity, 10);
+                    } else {
+                        cart.push({
+                            id: productId,
+                            name: currentProduct.name,
+                            price: currentProduct.price,
+                            quantity: quantity,
+                            description: currentProduct.description
+                        });
+                    }
+                    localStorage.setItem('cartItems', JSON.stringify(cart));
+                    updateCartCounter();
+                    alert(`"${currentProduct.name}" добавлен в корзину`);
+                });
+
                 updateCartCounter();
-
             } catch (error) {
                 console.error('Ошибка загрузки товара:', error);
                 container.innerHTML = '<div class="loading">Ошибка загрузки товара</div>';
             }
         }
-
-        // ========== ОТРИСОВКА ТОВАРА ==========
-
-        function renderProduct(product, reviews) {
-            const isFav = getFavoriteStatus(product.id);
-            const stockStatus = product.stock > 0 ? 'in-stock' : 'out-of-stock';
-            const stockText = product.stock > 0 ? `В наличии: ${product.stock} шт.` : 'Нет в наличии';
-
-            // Галерея изображений
-            const images = product.images || ['images/test.jpg'];
-            let thumbsHtml = images.map((img, i) => `
-                <div class="thumb ${i === 0 ? 'active' : ''}" data-index="${i}">
-                    <img src="${img}" alt="Фото ${i+1}">
-                </div>
-            `).join('');
-
-            // Отзывы
-            let reviewsHtml = '';
-            let avgRating = 0;
-            if (reviews.length > 0) {
-                const total = reviews.reduce((sum, r) => sum + r.rating, 0);
-                avgRating = (total / reviews.length).toFixed(1);
-                reviewsHtml = reviews.map(r => `
-                    <div class="review-item">
-                        <div class="review-header">
-                            <span class="review-author">${r.userName || 'Аноним'}</span>
-                            <span class="review-date">${r.createdAt ? new Date(r.createdAt.seconds * 1000).toLocaleDateString('ru-RU') : ''}</span>
-                        </div>
-                        <div class="review-stars">${'⭐'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</div>
-                        <div class="review-text">${r.text}</div>
-                    </div>
-                `).join('');
-            } else {
-                reviewsHtml = '<div class="no-reviews">Пока нет отзывов. Будьте первым!</div>';
-            }
-
-            return `
-                <div class="product-gallery">
-                    <div class="main-image">
-                        <img id="mainImage" src="${images[0]}" alt="${product.name}">
-                    </div>
-                    <div class="thumbnails">
-                        ${thumbsHtml}
-                    </div>
-                </div>
-                <div class="product-info">
-                    <div class="title-row">
-                        <h1>${product.name}</h1>
-                        <button class="btn-fav ${isFav ? 'active' : ''}" id="favBtn">${isFav ? '❤️' : '🤍'}</button>
-                    </div>
-                    <div class="product-price">${product.price} ₽</div>
-                    <div class="product-stock ${stockStatus}">${stockText}</div>
-                    <p class="product-desc">${product.description || 'Традиционный чувашский сувенир'}</p>
-                    <div class="product-buy">
-                        <input type="number" id="quantity" value="1" min="1" max="${product.stock || 10}">
-                        <button id="addToCartBtn" class="btn">В корзину</button>
-                    </div>
-
-                    <div class="reviews-section">
-                        <h3>Отзывы покупателей</h3>
-                        <div class="reviews-summary">
-                            <div class="avg-rating">${avgRating || '0'} <span>/ 5</span></div>
-                            <div class="stars-display">${'⭐'.repeat(Math.round(avgRating))}${'☆'.repeat(5 - Math.round(avgRating))}</div>
-                            <div>${reviews.length} отзывов</div>
-                        </div>
-
-                        ${currentUser ? `
-                        <div class="review-form">
-                            <h4>Оставить отзыв</h4>
-                            <div class="rating-select" id="ratingSelect">
-                                ${[1,2,3,4,5].map(i => `<button data-rating="${i}">☆</button>`).join('')}
-                            </div>
-                            <input type="text" id="reviewName" placeholder="Ваше имя" value="${currentUser.displayName || ''}">
-                            <textarea id="reviewText" placeholder="Поделитесь впечатлениями о товаре..."></textarea>
-                            <button class="btn" id="submitReviewBtn">Отправить отзыв</button>
-                        </div>
-                        ` : `
-                        <p style="color:#666; margin-bottom:15px;">
-                            <a href="login.html" style="color:#E24A2C;">Войдите</a>, чтобы оставить отзыв
-                        </p>
-                        `}
-
-                        <div id="reviewsList">
-                            ${reviewsHtml}
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        // ========== ГАЛЕРЕЯ ==========
-
-        function setupGallery() {
-            const thumbs = document.querySelectorAll('.thumb');
-            const mainImg = document.getElementById('mainImage');
-
-            thumbs.forEach(thumb => {
-                thumb.addEventListener('click', () => {
-                    thumbs.forEach(t => t.classList.remove('active'));
-                    thumb.classList.add('active');
-                    const img = thumb.querySelector('img');
-                    if (img) mainImg.src = img.src;
-                });
-            });
-        }
-
-        // ========== РЕЙТИНГ (ЗВЕЗДЫ) ==========
-
-        function setupRatingStars() {
-            const stars = document.querySelectorAll('#ratingSelect button');
-            selectedRating = 0;
-
-            stars.forEach(star => {
-                star.addEventListener('click', () => {
-                    selectedRating = parseInt(star.dataset.rating);
-                    stars.forEach(s => {
-                        s.textContent = parseInt(s.dataset.rating) <= selectedRating ? '⭐' : '☆';
-                        s.classList.toggle('active', parseInt(s.dataset.rating) <= selectedRating);
-                    });
-                });
-
-                star.addEventListener('mouseenter', () => {
-                    const val = parseInt(star.dataset.rating);
-                    stars.forEach(s => {
-                        s.textContent = parseInt(s.dataset.rating) <= val ? '⭐' : '☆';
-                    });
-                });
-
-                star.addEventListener('mouseleave', () => {
-                    stars.forEach(s => {
-                        s.textContent = parseInt(s.dataset.rating) <= selectedRating ? '⭐' : '☆';
-                    });
-                });
-            });
-        }
-
-        // ========== ОТЗЫВЫ ==========
-
-        async function loadReviews(productId) {
-            try {
-                const q = query(
-                    collection(db, 'reviews'),
-                    where('productId', '==', productId),
-                    orderBy('createdAt', 'desc')
-                );
-                const snapshot = await getDocs(q);
-                return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-            } catch (error) {
-                console.error('Ошибка загрузки отзывов:', error);
-                return [];
-            }
-        }
-
-        function setupReviewForm(productId) {
-            const submitBtn = document.getElementById('submitReviewBtn');
-            if (!submitBtn) return;
-
-            submitBtn.addEventListener('click', async () => {
-                if (!currentUser) {
-                    alert('Войдите в аккаунт, чтобы оставить отзыв');
-                    return;
-                }
-
-                const name = document.getElementById('reviewName').value.trim();
-                const text = document.getElementById('reviewText').value.trim();
-
-                if (!text) {
-                    alert('Напишите текст отзыва');
-                    return;
-                }
-                if (selectedRating === 0) {
-                    alert('Поставьте оценку');
-                    return;
-                }
-
-                try {
-                    await addDoc(collection(db, 'reviews'), {
-                        productId: productId,
-                        userId: currentUser.uid,
-                        userName: name || currentUser.displayName || 'Аноним',
-                        userEmail: currentUser.email,
-                        rating: selectedRating,
-                        text: text,
-                        createdAt: Timestamp.now()
-                    });
-
-                    alert('Спасибо за отзыв!');
-                    // Перезагружаем отзывы
-                    const reviews = await loadReviews(productId);
-                    const reviewsList = document.getElementById('reviewsList');
-                    if (reviews.length > 0) {
-                        reviewsList.innerHTML = reviews.map(r => `
-                            <div class="review-item">
-                                <div class="review-header">
-                                    <span class="review-author">${r.userName || 'Аноним'}</span>
-                                    <span class="review-date">${r.createdAt ? new Date(r.createdAt.seconds * 1000).toLocaleDateString('ru-RU') : ''}</span>
-                                </div>
-                                <div class="review-stars">${'⭐'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</div>
-                                <div class="review-text">${r.text}</div>
-                            </div>
-                        `).join('');
-                    } else {
-                        reviewsList.innerHTML = '<div class="no-reviews">Пока нет отзывов. Будьте первым!</div>';
-                    }
-
-                    // Обновляем рейтинг
-                    const total = reviews.reduce((sum, r) => sum + r.rating, 0);
-                    const avg = (total / reviews.length).toFixed(1);
-                    const avgEl = document.querySelector('.avg-rating');
-                    if (avgEl) avgEl.innerHTML = `${avg} <span>/ 5</span>`;
-
-                    // Очищаем форму
-                    document.getElementById('reviewText').value = '';
-                    selectedRating = 0;
-                    document.querySelectorAll('#ratingSelect button').forEach(s => {
-                        s.textContent = '☆';
-                        s.classList.remove('active');
-                    });
-
-                } catch (error) {
-                    console.error('Ошибка отправки отзыва:', error);
-                    alert('Ошибка при отправке отзыва');
-                }
-            });
-        }
-
-        // ========== ИЗБРАННОЕ ==========
 
         function getFavoriteStatus(productId) {
             try {
@@ -1099,29 +711,6 @@
                 return favs.includes(productId);
             } catch { return false; }
         }
-
-        function setupFavButton() {
-            const btn = document.getElementById('favBtn');
-            if (!btn) return;
-
-            btn.addEventListener('click', () => {
-                const isFav = btn.classList.contains('active');
-                let favs = JSON.parse(localStorage.getItem('favorites')) || [];
-
-                if (isFav) {
-                    favs = favs.filter(id => id !== productId);
-                    btn.classList.remove('active');
-                    btn.innerHTML = '🤍';
-                } else {
-                    favs.push(productId);
-                    btn.classList.add('active');
-                    btn.innerHTML = '❤️';
-                }
-                localStorage.setItem('favorites', JSON.stringify(favs));
-            });
-        }
-
-        // ========== КОРЗИНА ==========
 
         function updateCartCounter() {
             const cart = JSON.parse(localStorage.getItem('cartItems')) || [];
@@ -1131,38 +720,6 @@
                 el.textContent = total;
                 el.style.display = total > 0 ? 'flex' : 'none';
             }
-        }
-
-        document.addEventListener('click', (e) => {
-            if (e.target.id === 'addToCartBtn') {
-                const quantity = parseInt(document.getElementById('quantity')?.value) || 1;
-                if (!currentProduct) return;
-
-                let cart = JSON.parse(localStorage.getItem('cartItems')) || [];
-                const existing = cart.find(item => item.name === currentProduct.name);
-                if (existing) {
-                    existing.quantity = Math.min(existing.quantity + quantity, 10);
-                } else {
-                    cart.push({
-                        id: productId,
-                        name: currentProduct.name,
-                        price: currentProduct.price,
-                        quantity: quantity,
-                        description: currentProduct.description
-                    });
-                }
-                localStorage.setItem('cartItems', JSON.stringify(cart));
-                updateCartCounter();
-                alert(`"${currentProduct.name}" добавлен в корзину`);
-            }
-        });
-
-        // ========== ЗАПУСК ==========
-
-        // Если товар уже загружен до авторизации
-        if (productId && !currentUser) {
-            // Загружаем товар без авторизации (отзывы не покажем)
-            loadProduct(productId);
         }
     </script>
 </body>
