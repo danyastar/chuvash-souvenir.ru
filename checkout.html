@@ -25,6 +25,9 @@
             flex-direction: column;
             min-height: 100vh;
         }
+        .main-content .container {
+            flex: 1;
+        }
         .container {
             width: 90%;
             max-width: 1100px;
@@ -67,7 +70,7 @@
             margin-top: -20px;
         }
 
-        /* ===== ХЕДЕР (КАК НА ГЛАВНОЙ) ===== */
+        /* ===== ХЕДЕР ===== */
         .header {
             background: #FFF4E5;
             position: relative;
@@ -81,16 +84,10 @@
             gap: 20px;
             flex-wrap: wrap;
         }
-        .logo {
-            flex-shrink: 0;
-        }
         .logo img {
             height: 80px;
             width: auto;
             transition: transform 0.3s ease;
-        }
-        .logo img:hover {
-            transform: scale(1.05);
         }
         .nav {
             display: flex;
@@ -296,6 +293,53 @@
             padding-top: 12px;
             margin-top: 12px;
         }
+        .summary-row.discount {
+            color: #2E7D32;
+        }
+        .promo-block {
+            margin-top: 15px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        .promo-block .promo-input-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .promo-block input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 2px solid #E0A400;
+            border-radius: 8px;
+            font-size: 14px;
+            min-width: 150px;
+            background: white;
+        }
+        .promo-block input:focus {
+            border-color: #E24A2C;
+            outline: none;
+        }
+        .promo-block .apply-btn {
+            padding: 10px 25px;
+            background: #E0A400;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .promo-block .apply-btn:hover {
+            background: #d19400;
+            transform: translateY(-2px);
+        }
+        .promo-block .promo-message {
+            margin-top: 8px;
+            font-size: 14px;
+        }
+        .promo-block .promo-message.success { color: #2E7D32; }
+        .promo-block .promo-message.error { color: #E24A2C; }
+
         .checkout-btn {
             width: 100%;
             padding: 15px;
@@ -313,11 +357,6 @@
         .checkout-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(226, 74, 44, 0.4);
-        }
-        .error-msg {
-            color: #E24A2C;
-            font-size: 14px;
-            margin-top: 5px;
         }
 
         /* ===== ПОДВАЛ ===== */
@@ -389,21 +428,8 @@
             border-color: #fff;
         }
 
-        /* ====================================================== */
         /* ===== АДАПТИВ ===== */
-        /* ====================================================== */
-
-        @media (max-width: 1024px) {
-            .header-content {
-                gap: 15px;
-            }
-            .nav {
-                gap: 20px;
-            }
-        }
-
         @media (max-width: 768px) {
-            /* --- ХЕДЕР --- */
             .header-content {
                 display: flex;
                 align-items: center;
@@ -412,224 +438,62 @@
                 gap: 10px;
                 flex-wrap: nowrap;
             }
-            .logo {
-                order: 1;
-                flex: 0 0 auto;
-            }
-            .logo img {
-                height: 60px;
-            }
-            .nav {
-                order: 2;
-                width: 100%;
-                justify-content: center;
-                gap: 12px;
-                flex-wrap: wrap;
-                padding: 5px 0;
-            }
-            .header-icons {
-                order: 3;
-                gap: 10px;
-                flex: 0 0 auto;
-                justify-content: flex-end;
-            }
-            .icon-link {
-                width: 40px;
-                height: 40px;
-                font-size: 16px;
-            }
+            .logo { order: 1; flex: 0 0 auto; }
+            .logo img { height: 60px; }
+            .nav { order: 2; width: 100%; justify-content: center; gap: 12px; flex-wrap: wrap; padding: 5px 0; }
+            .header-icons { order: 3; gap: 10px; flex: 0 0 auto; justify-content: flex-end; }
+            .icon-link { width: 40px; height: 40px; font-size: 16px; }
 
-            /* --- ОРНАМЕНТЫ --- */
-            .ornament-top {
-                background-size: 150% auto;
-                height: 320px;
-                top: -250px;
-                margin-bottom: -260px;
-            }
-            .ornament-header-bottom {
-                background-size: 150% auto;
-                height: 15px;
-                margin-top: -20px;
-            }
-            .ornament-bottom {
-                background-size: 150% auto;
-                height: 30px;
-                margin-top: -25px;
-            }
+            .ornament-top { background-size: 150% auto; height: 320px; top: -250px; margin-bottom: -260px; }
+            .ornament-header-bottom { background-size: 150% auto; height: 15px; margin-top: -20px; }
+            .ornament-bottom { background-size: 150% auto; height: 30px; margin-top: -25px; }
 
-            /* --- ОФОРМЛЕНИЕ --- */
-            .checkout-content {
-                flex-direction: column;
-            }
-            .checkout-left {
-                min-width: unset;
-            }
-            .checkout-right {
-                min-width: unset;
-            }
-            .form-row {
-                flex-direction: column;
-            }
-            .checkout-header h1 {
-                font-size: 26px;
-            }
-            .checkout-steps {
-                gap: 15px;
-            }
-            .step {
-                font-size: 13px;
-            }
-            .checkout-section {
-                padding: 20px;
-            }
-            .order-summary {
-                position: static;
-            }
-
-            /* --- ПОДВАЛ --- */
-            .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 30px;
-                text-align: center;
-            }
-            .footer h3::after {
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            .social-icons {
-                justify-content: center;
-            }
+            .checkout-content { flex-direction: column; }
+            .checkout-left { min-width: unset; }
+            .checkout-right { min-width: unset; }
+            .form-row { flex-direction: column; }
+            .checkout-header h1 { font-size: 26px; }
+            .order-summary { position: static; }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; text-align: center; }
+            .footer h3::after { left: 50%; transform: translateX(-50%); }
+            .social-icons { justify-content: center; }
         }
 
         @media (max-width: 480px) {
-            /* --- ХЕДЕР --- */
-            .header-content {
-                padding: 10px 0;
-                gap: 8px;
-            }
-            .logo img {
-                height: 50px;
-            }
-            .nav {
-                gap: 8px 12px;
-            }
-            .nav-link {
-                font-size: 13px;
-            }
-            .header-icons {
-                gap: 8px;
-            }
-            .icon-link {
-                width: 36px;
-                height: 36px;
-                font-size: 14px;
-            }
+            .header-content { padding: 10px 0; gap: 8px; }
+            .logo img { height: 50px; }
+            .nav { gap: 8px 12px; }
+            .nav-link { font-size: 13px; }
+            .header-icons { gap: 8px; }
+            .icon-link { width: 36px; height: 36px; font-size: 14px; }
 
-            /* --- ОРНАМЕНТЫ --- */
-            .ornament-top {
-                background-size: 200% auto;
-                height: 380px;
-                top: -300px;
-                margin-bottom: -310px;
-            }
-            .ornament-header-bottom {
-                background-size: 200% auto;
-                height: 15px;
-                margin-top: -20px;
-            }
-            .ornament-bottom {
-                background-size: 200% auto;
-                height: 35px;
-                margin-top: -30px;
-            }
+            .ornament-top { background-size: 200% auto; height: 380px; top: -300px; margin-bottom: -310px; }
+            .ornament-header-bottom { background-size: 200% auto; height: 15px; margin-top: -20px; }
+            .ornament-bottom { background-size: 200% auto; height: 35px; margin-top: -30px; }
 
-            /* --- ОФОРМЛЕНИЕ --- */
-            .checkout-header {
-                margin: 20px 0;
-            }
-            .checkout-header h1 {
-                font-size: 22px;
-            }
-            .checkout-steps {
-                gap: 10px;
-            }
-            .step {
-                font-size: 12px;
-                gap: 6px;
-            }
-            .step-number {
-                width: 24px;
-                height: 24px;
-                font-size: 12px;
-            }
-            .checkout-section {
-                padding: 15px;
-            }
-            .checkout-section h2 {
-                font-size: 18px;
-            }
+            .checkout-header { margin: 20px 0; }
+            .checkout-header h1 { font-size: 22px; }
+            .checkout-section { padding: 15px; }
+            .checkout-section h2 { font-size: 18px; }
             .form-group input,
-            .form-group select {
-                padding: 8px 10px;
-                font-size: 14px;
-            }
-            .order-summary {
-                padding: 18px;
-            }
-            .order-summary h3 {
-                font-size: 18px;
-            }
-            .summary-row {
-                font-size: 14px;
-            }
-            .summary-row.total {
-                font-size: 16px;
-            }
-            .checkout-btn {
-                font-size: 15px;
-                padding: 12px;
-            }
-
-            /* --- ПОДВАЛ --- */
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-                text-align: center;
-            }
-            .footer h3::after {
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            .social-icons {
-                justify-content: center;
-            }
+            .form-group select { padding: 8px 10px; font-size: 14px; }
+            .order-summary { padding: 18px; }
+            .order-summary h3 { font-size: 18px; }
+            .summary-row { font-size: 14px; }
+            .summary-row.total { font-size: 16px; }
+            .checkout-btn { font-size: 15px; padding: 12px; }
+            .promo-block input { min-width: 100px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 25px; text-align: center; }
+            .footer h3::after { left: 50%; transform: translateX(-50%); }
+            .social-icons { justify-content: center; }
         }
 
         @media (max-width: 360px) {
-            .nav {
-                flex-direction: column;
-                gap: 6px;
-            }
-            .logo img {
-                height: 42px;
-            }
-
-            .ornament-top {
-                background-size: 250% auto;
-                height: 420px;
-                top: -330px;
-                margin-bottom: -340px;
-            }
-            .ornament-header-bottom {
-                background-size: 250% auto;
-                height: 15px;
-                margin-top: -20px;
-            }
-            .ornament-bottom {
-                background-size: 250% auto;
-                height: 40px;
-                margin-top: -35px;
-            }
+            .nav { flex-direction: column; gap: 6px; }
+            .logo img { height: 42px; }
+            .ornament-top { background-size: 250% auto; height: 420px; top: -330px; margin-bottom: -340px; }
+            .ornament-header-bottom { background-size: 250% auto; height: 15px; margin-top: -20px; }
+            .ornament-bottom { background-size: 250% auto; height: 40px; margin-top: -35px; }
         }
     </style>
 </head>
@@ -710,7 +574,20 @@
                         <div id="orderItems"></div>
                         <div class="summary-row"><span>Товары (<span id="totalItems">0</span> шт.)</span><span id="subtotal">0 ₽</span></div>
                         <div class="summary-row"><span>Доставка</span><span id="deliveryAmount">300 ₽</span></div>
+                        <div class="summary-row discount" id="discountRow" style="display:none;">
+                            <span>🎁 Скидка по промокоду</span>
+                            <span id="discountAmount">-0 ₽</span>
+                        </div>
                         <div class="summary-row total"><span>Итого</span><span id="totalAmount">0 ₽</span></div>
+
+                        <div class="promo-block">
+                            <div class="promo-input-group">
+                                <input type="text" id="promoInput" placeholder="Введите промокод">
+                                <button class="apply-btn" id="applyPromoBtn">Применить</button>
+                            </div>
+                            <div id="promoMessage" class="promo-message"></div>
+                        </div>
+
                         <button class="checkout-btn" id="checkoutBtn">Подтвердить заказ</button>
                     </div>
                 </div>
@@ -720,28 +597,16 @@
         <footer class="footer">
             <div class="ornament-bottom"></div>
             <div class="container footer-grid">
-                <div>
-                    <h3>Контакты</h3>
-                    <p>+7 (999) 444-44-44<br>test@gmail.com</p>
-                </div>
-                <div>
-                    <h3>Разделы</h3>
-                    <p><a href="index.html">Главная</a><br><a href="catalog.html">Каталог</a><br><a href="about.html">О мастерах</a></p>
-                </div>
-                <div>
-                    <h3>Мы в соц-сетях</h3>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon">VK</a>
-                        <a href="#" class="social-icon">TG</a>
-                    </div>
-                </div>
+                <div><h3>Контакты</h3><p>+7 (999) 444-44-44<br>test@gmail.com</p></div>
+                <div><h3>Разделы</h3><p><a href="index.html">Главная</a><br><a href="catalog.html">Каталог</a><br><a href="about.html">О мастерах</a></p></div>
+                <div><h3>Мы в соц-сетях</h3><div class="social-icons"><a href="#" class="social-icon">VK</a><a href="#" class="social-icon">TG</a></div></div>
             </div>
         </footer>
     </div>
 
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-        import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+        import { getFirestore, collection, addDoc, getDocs } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
         import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
 
         const firebaseConfig = {
@@ -757,23 +622,22 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        const accountLink = document.getElementById('accountLink');
-        if (accountLink) {
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    accountLink.href = 'account.html';
-                } else {
-                    accountLink.href = 'login.html';
-                }
-            });
-        }
-
+        let currentUser = null;
         let cartItems = [];
         let deliveryCost = 300;
-        let currentUser = null;
+        let appliedPromo = null;
+        let promoDiscount = 0;
+        let promoCode = null;
+
+        const accountLink = document.getElementById('accountLink');
 
         onAuthStateChanged(auth, (user) => {
             currentUser = user;
+            if (user) {
+                accountLink.href = 'account.html';
+            } else {
+                accountLink.href = 'login.html';
+            }
             loadCartAndRender();
         });
 
@@ -783,6 +647,7 @@
             updateCartCounter();
         }
 
+        // ===== ФОРМАТИРОВАНИЕ ТЕЛЕФОНА =====
         function formatPhone(value) {
             let numbers = value.replace(/\D/g, '');
             if (numbers.startsWith('7') || numbers.startsWith('8')) numbers = numbers.substring(1);
@@ -794,6 +659,11 @@
             return formatted;
         }
 
+        document.getElementById('phone').addEventListener('input', function(e) {
+            this.value = formatPhone(this.value);
+        });
+
+        // ===== ОТРИСОВКА ЗАКАЗА =====
         function renderOrder() {
             const container = document.getElementById('orderItems');
             let subtotal = 0;
@@ -802,22 +672,82 @@
                 subtotal += item.price * item.quantity;
                 container.innerHTML += `<div class="summary-row"><span>${item.name} x${item.quantity}</span><span>${item.price * item.quantity} ₽</span></div>`;
             });
-            const total = subtotal + deliveryCost;
             document.getElementById('totalItems').textContent = cartItems.reduce((s, i) => s + i.quantity, 0);
             document.getElementById('subtotal').textContent = subtotal + ' ₽';
             document.getElementById('deliveryAmount').textContent = deliveryCost + ' ₽';
-            document.getElementById('totalAmount').textContent = total + ' ₽';
+            updateTotal(subtotal);
         }
 
+        // ===== ОБНОВЛЕНИЕ ИТОГА С УЧЁТОМ ПРОМОКОДА =====
+        function updateTotal(subtotal) {
+            if (subtotal === undefined) {
+                subtotal = cartItems.reduce((s, i) => s + i.price * i.quantity, 0);
+            }
+            let total = subtotal + deliveryCost;
+            let discountAmount = 0;
+
+            if (appliedPromo && promoDiscount > 0) {
+                discountAmount = subtotal * (promoDiscount / 100);
+                total = subtotal - discountAmount + deliveryCost;
+                document.getElementById('discountRow').style.display = 'flex';
+                document.getElementById('discountAmount').textContent = `-${discountAmount.toFixed(0)} ₽`;
+            } else {
+                document.getElementById('discountRow').style.display = 'none';
+            }
+
+            document.getElementById('totalAmount').textContent = total.toFixed(0) + ' ₽';
+        }
+
+        // ===== ПРИМЕНЕНИЕ ПРОМОКОДА =====
+        document.getElementById('applyPromoBtn').addEventListener('click', async () => {
+            const input = document.getElementById('promoInput');
+            const msg = document.getElementById('promoMessage');
+            const code = input.value.trim().toUpperCase();
+
+            if (!code) {
+                msg.textContent = '⚠️ Введите промокод';
+                msg.className = 'promo-message error';
+                return;
+            }
+
+            try {
+                const snapshot = await getDocs(collection(db, 'promocodes'));
+                const promo = snapshot.docs.find(d => d.data().code === code && d.data().active !== false);
+
+                if (!promo) {
+                    msg.textContent = '❌ Неверный промокод';
+                    msg.className = 'promo-message error';
+                    appliedPromo = null;
+                    promoDiscount = 0;
+                    promoCode = null;
+                    updateTotal();
+                    return;
+                }
+
+                const data = promo.data();
+                appliedPromo = code;
+                promoDiscount = data.discount;
+                promoCode = code;
+
+                msg.textContent = `✅ Промокод "${code}" применён! Скидка ${data.discount}%`;
+                msg.className = 'promo-message success';
+                updateTotal();
+
+            } catch (error) {
+                console.error('Ошибка проверки промокода:', error);
+                msg.textContent = '❌ Ошибка при проверке промокода';
+                msg.className = 'promo-message error';
+            }
+        });
+
+        // ===== ДОСТАВКА =====
         document.getElementById('deliverySelect').addEventListener('change', (e) => {
             deliveryCost = parseInt(e.target.value);
-            renderOrder();
+            document.getElementById('deliveryAmount').textContent = deliveryCost + ' ₽';
+            updateTotal();
         });
 
-        document.getElementById('phone').addEventListener('input', function(e) {
-            this.value = formatPhone(this.value);
-        });
-
+        // ===== ОФОРМЛЕНИЕ ЗАКАЗА =====
         document.getElementById('checkoutBtn').addEventListener('click', async () => {
             if (!currentUser) {
                 alert('Для оформления заказа необходимо войти в аккаунт');
@@ -847,7 +777,13 @@
             }
 
             const subtotal = cartItems.reduce((s, i) => s + i.price * i.quantity, 0);
-            const total = subtotal + deliveryCost;
+            let total = subtotal + deliveryCost;
+            let discountAmount = 0;
+
+            if (appliedPromo && promoDiscount > 0) {
+                discountAmount = subtotal * (promoDiscount / 100);
+                total = subtotal - discountAmount + deliveryCost;
+            }
 
             const orderData = {
                 customer: {
@@ -861,7 +797,7 @@
                     price: item.price,
                     quantity: item.quantity
                 })),
-                total: total + ' ₽',
+                total: total.toFixed(0) + ' ₽',
                 subtotal: subtotal + ' ₽',
                 deliveryCost: deliveryCost + ' ₽',
                 deliveryMethod: document.getElementById('deliverySelect').options[document.getElementById('deliverySelect').selectedIndex].text,
@@ -870,22 +806,33 @@
                 createdAt: new Date()
             };
 
+            // Добавляем информацию о промокоде в заказ
+            if (appliedPromo) {
+                orderData.promoCode = appliedPromo;
+                orderData.promoDiscount = promoDiscount;
+                orderData.discountAmount = discountAmount.toFixed(0) + ' ₽';
+            }
+
             try {
                 const docRef = await addDoc(collection(db, 'orders'), orderData);
+                localStorage.setItem('lastOrder', JSON.stringify(orderData));
                 localStorage.removeItem('cartItems');
-                alert('Заказ оформлен!');
+                alert('✅ Заказ оформлен!');
                 window.location.href = 'order-confirmation.html';
             } catch (error) {
                 console.error('Ошибка при сохранении заказа:', error);
-                alert('Ошибка при оформлении заказа: ' + error.message);
+                alert('❌ Ошибка при оформлении заказа: ' + error.message);
             }
         });
 
+        // ===== ОБНОВЛЕНИЕ КОРЗИНЫ В ШАПКЕ =====
         function updateCartCounter() {
             const total = cartItems.reduce((s, i) => s + i.quantity, 0);
             const el = document.querySelector('.cart-count');
-            if (el) { el.textContent = total;
-                el.style.display = total > 0 ? 'flex' : 'none'; }
+            if (el) {
+                el.textContent = total;
+                el.style.display = total > 0 ? 'flex' : 'none';
+            }
         }
 
         loadCartAndRender();
