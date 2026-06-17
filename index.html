@@ -37,12 +37,12 @@
             background-image: url("images/patternorna.png");
             background-size: contain;
             background-repeat: repeat-x;
-            height: 280px;
+            height: 250px;
             position: relative;
             margin: 0;
             background-position: center bottom;
-            top: -210px;
-            margin-bottom: -220px;
+            top: -180px;
+            margin-bottom: -190px;
             z-index: 1;
         }
         .ornament-header-bottom {
@@ -53,7 +53,7 @@
             position: relative;
             margin: 0;
             background-position: center top;
-            margin-top: -10px;
+            margin-top: -20px;
             z-index: 1;
         }
         .ornament-middle {
@@ -62,7 +62,7 @@
             background-repeat: repeat-x;
             height: 250px;
             position: relative;
-            margin: -20px 0 -30px 0;
+            margin: 0px 0 0px 0;
             background-position: center center;
             z-index: 1;
         }
@@ -91,13 +91,12 @@
             background: #FFF4E5;
             position: relative;
             box-shadow: 0 2px 10px rgba(226, 74, 44, 0.1);
-            padding-bottom: 5px;
         }
         .header-content {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 15px 0 5px 0;
+            padding: 15px 0;
             gap: 20px;
             flex-wrap: wrap;
         }
@@ -186,10 +185,10 @@
             justify-content: center;
         }
 
-        /* ===== ГЕРОЙ ===== */
+        /* ===== ГЕРОЙ (ДЕСКТОП) ===== */
         .hero {
-            padding: 5px 0 0px;
-            margin-top: -30px;
+            padding: 30px 0;
+            margin-top: -40px;
             position: relative;
             z-index: 2;
         }
@@ -236,22 +235,22 @@
             justify-content: center;
             align-items: flex-end;
             position: relative;
-            margin-bottom: -60px;
+            margin-bottom: -50px;
             z-index: 3;
         }
         .hero-girl {
             max-width: 100%;
             height: auto;
-            max-height: 420px;
+            max-height: 400px;
             filter: drop-shadow(0 10px 20px rgba(90, 31, 0, 0.3));
             object-fit: contain;
             display: block;
         }
 
-        /* ===== ПОПУЛЯРНЫЕ ТОВАРЫ ===== */
+        /* ===== ПОПУЛЯРНЫЕ ТОВАРЫ (ДЕСКТОП) ===== */
         .popular {
-            padding: 30px 0 40px;
-            margin-top: -10px;
+            padding: 40px 0;
+            margin-top: -50px;
             position: relative;
             z-index: 1;
         }
@@ -366,7 +365,7 @@
 
         /* ===== О НАС ===== */
         .about {
-            padding: 40px 0 50px;
+            padding: 50px 0;
         }
         .about-content {
             display: flex;
@@ -488,7 +487,10 @@
             border-color: #fff;
         }
 
+        /* ====================================================== */
         /* ===== АДАПТИВ ===== */
+        /* ====================================================== */
+
         @media (max-width: 1024px) {
             .header-content {
                 gap: 15px;
@@ -505,12 +507,12 @@
         }
 
         @media (max-width: 768px) {
-            /* ХЕДЕР */
+            /* --- ХЕДЕР --- */
             .header-content {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                padding: 12px 0 5px 0;
+                padding: 12px 0;
                 gap: 10px;
                 flex-wrap: nowrap;
             }
@@ -541,7 +543,11 @@
                 font-size: 16px;
             }
 
-            /* ГЕРОЙ */
+            /* --- ГЕРОЙ (опускаем ниже) --- */
+            .hero {
+                padding: 10px 0 0px;
+                margin-top: -20px;
+            }
             .hero-content {
                 flex-direction: column;
                 text-align: center;
@@ -554,33 +560,35 @@
             .hero-text h1 {
                 font-size: 32px;
             }
-            .hero {
-                margin-top: -20px;
-                padding: 5px 0 0px;
-            }
             .hero-image-wrapper {
-                margin-bottom: -50px;
+                margin-bottom: -70px;
             }
             .hero-girl {
                 max-height: 320px;
             }
 
-            /* ОРНАМЕНТЫ */
+            /* --- ПОПУЛЯРНЫЕ ТОВАРЫ (поднимаем выше) --- */
+            .popular {
+                padding: 20px 0 40px;
+                margin-top: 10px;
+            }
+
+            /* --- ОРНАМЕНТЫ --- */
             .ornament-top {
                 background-size: 150% auto;
                 height: 300px;
-                top: -230px;
-                margin-bottom: -240px;
+                top: -220px;
+                margin-bottom: -230px;
             }
             .ornament-middle {
                 background-size: 150% auto;
                 height: 300px;
-                margin: -30px 0 -40px 0;
+                margin: -20px 0 -30px 0;
             }
             .ornament-header-bottom {
                 background-size: 150% auto;
                 height: 20px;
-                margin-top: -15px;
+                margin-top: -25px;
             }
             .ornament-between {
                 background-size: 150% auto;
@@ -592,7 +600,7 @@
                 margin-top: -25px;
             }
 
-            /* ОСТАЛЬНОЕ */
+            /* --- ОСТАЛЬНОЕ --- */
             .about-content {
                 flex-direction: column;
                 text-align: center;
@@ -605,10 +613,6 @@
             .popular-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 20px;
-            }
-            .popular {
-                padding: 20px 0 30px;
-                margin-top: 0px;
             }
             .footer-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -625,9 +629,9 @@
         }
 
         @media (max-width: 480px) {
-            /* ХЕДЕР */
+            /* --- ХЕДЕР --- */
             .header-content {
-                padding: 10px 0 5px 0;
+                padding: 10px 0;
                 gap: 8px;
             }
             .logo img {
@@ -648,7 +652,7 @@
                 font-size: 14px;
             }
 
-            /* ГЕРОЙ */
+            /* --- ГЕРОЙ (еще ниже) --- */
             .hero-text h1 {
                 font-size: 24px;
             }
@@ -658,30 +662,37 @@
             }
             .hero {
                 margin-top: -15px;
+                padding: 5px 0 0px;
             }
             .hero-image-wrapper {
-                margin-bottom: -40px;
+                margin-bottom: -80px;
             }
             .hero-girl {
                 max-height: 250px;
             }
 
-            /* ОРНАМЕНТЫ */
+            /* --- ПОПУЛЯРНЫЕ ТОВАРЫ (еще выше) --- */
+            .popular {
+                padding: 15px 0 30px;
+                margin-top: 20px;
+            }
+
+            /* --- ОРНАМЕНТЫ --- */
             .ornament-top {
                 background-size: 200% auto;
                 height: 350px;
-                top: -270px;
-                margin-bottom: -280px;
+                top: -260px;
+                margin-bottom: -270px;
             }
             .ornament-middle {
                 background-size: 200% auto;
                 height: 350px;
-                margin: -40px 0 -50px 0;
+                margin: -30px 0 -40px 0;
             }
             .ornament-header-bottom {
                 background-size: 200% auto;
                 height: 25px;
-                margin-top: -20px;
+                margin-top: -30px;
             }
             .ornament-between {
                 background-size: 200% auto;
@@ -693,14 +704,10 @@
                 margin-top: -30px;
             }
 
-            /* ОСТАЛЬНОЕ */
+            /* --- ОСТАЛЬНОЕ --- */
             .popular-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
-            }
-            .popular {
-                padding: 15px 0 25px;
-                margin-top: 5px;
             }
             .about-art img {
                 max-width: 160px;
@@ -734,24 +741,28 @@
                 max-height: 200px;
             }
             .hero-image-wrapper {
-                margin-bottom: -30px;
+                margin-bottom: -90px;
+            }
+            .popular {
+                margin-top: 30px;
+                padding: 10px 0 25px;
             }
 
             .ornament-top {
                 background-size: 250% auto;
                 height: 400px;
-                top: -310px;
-                margin-bottom: -320px;
+                top: -300px;
+                margin-bottom: -310px;
             }
             .ornament-middle {
                 background-size: 250% auto;
                 height: 400px;
-                margin: -50px 0 -60px 0;
+                margin: -40px 0 -50px 0;
             }
             .ornament-header-bottom {
                 background-size: 250% auto;
                 height: 30px;
-                margin-top: -25px;
+                margin-top: -35px;
             }
             .ornament-between {
                 background-size: 250% auto;
