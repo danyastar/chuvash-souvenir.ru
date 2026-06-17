@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вход - Чувашский сувенир</title>
     <style>
-        /* ===== БАЗОВЫЕ СТИЛИ ===== */
         * {
             margin: 0;
             padding: 0;
@@ -70,7 +69,7 @@
             margin-top: -20px;
         }
 
-        /* ===== ХЕДЕР (КАК НА ГЛАВНОЙ) ===== */
+        /* ===== ХЕДЕР ===== */
         .header {
             background: #FFF4E5;
             position: relative;
@@ -255,7 +254,7 @@
             display: none;
         }
 
-        /* ===== ПОДВАЛ (ПРИЖАТ К НИЗУ) ===== */
+        /* ===== ПОДВАЛ ===== */
         .footer {
             background: #8B2000;
             color: white;
@@ -324,21 +323,7 @@
             border-color: #fff;
         }
 
-        /* ====================================================== */
-        /* ===== АДАПТИВ ===== */
-        /* ====================================================== */
-
-        @media (max-width: 1024px) {
-            .header-content {
-                gap: 15px;
-            }
-            .nav {
-                gap: 20px;
-            }
-        }
-
         @media (max-width: 768px) {
-            /* --- ХЕДЕР --- */
             .header-content {
                 display: flex;
                 align-items: center;
@@ -347,174 +332,50 @@
                 gap: 10px;
                 flex-wrap: nowrap;
             }
-            .logo {
-                order: 1;
-                flex: 0 0 auto;
-            }
-            .logo img {
-                height: 60px;
-            }
-            .nav {
-                order: 2;
-                width: 100%;
-                justify-content: center;
-                gap: 12px;
-                flex-wrap: wrap;
-                padding: 5px 0;
-            }
-            .header-icons {
-                order: 3;
-                gap: 10px;
-                flex: 0 0 auto;
-                justify-content: flex-end;
-            }
-            .icon-link {
-                width: 40px;
-                height: 40px;
-                font-size: 16px;
-            }
+            .logo { order: 1; flex: 0 0 auto; }
+            .logo img { height: 60px; }
+            .nav { order: 2; width: 100%; justify-content: center; gap: 12px; flex-wrap: wrap; padding: 5px 0; }
+            .header-icons { order: 3; gap: 10px; flex: 0 0 auto; justify-content: flex-end; }
+            .icon-link { width: 40px; height: 40px; font-size: 16px; }
 
-            /* --- ОРНАМЕНТЫ --- */
-            .ornament-top {
-                background-size: 150% auto;
-                height: 320px;
-                top: -250px;
-                margin-bottom: -260px;
-            }
-            .ornament-header-bottom {
-                background-size: 150% auto;
-                height: 15px;
-                margin-top: -20px;
-            }
-            .ornament-bottom {
-                background-size: 150% auto;
-                height: 30px;
-                margin-top: -25px;
-            }
+            .ornament-top { background-size: 150% auto; height: 320px; top: -250px; margin-bottom: -260px; }
+            .ornament-header-bottom { background-size: 150% auto; height: 15px; margin-top: -20px; }
+            .ornament-bottom { background-size: 150% auto; height: 30px; margin-top: -25px; }
 
-            /* --- ВХОД --- */
-            .auth-box {
-                padding: 30px 25px;
-                margin: 0 15px;
-            }
-            .auth-box h2 {
-                font-size: 24px;
-            }
-
-            /* --- ПОДВАЛ --- */
-            .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 30px;
-                text-align: center;
-            }
-            .footer h3::after {
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            .social-icons {
-                justify-content: center;
-            }
+            .auth-box { padding: 30px 25px; margin: 0 15px; }
+            .auth-box h2 { font-size: 24px; }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; text-align: center; }
+            .footer h3::after { left: 50%; transform: translateX(-50%); }
+            .social-icons { justify-content: center; }
         }
 
         @media (max-width: 480px) {
-            /* --- ХЕДЕР --- */
-            .header-content {
-                padding: 10px 0;
-                gap: 8px;
-            }
-            .logo img {
-                height: 50px;
-            }
-            .nav {
-                gap: 8px 12px;
-            }
-            .nav-link {
-                font-size: 13px;
-            }
-            .header-icons {
-                gap: 8px;
-            }
-            .icon-link {
-                width: 36px;
-                height: 36px;
-                font-size: 14px;
-            }
+            .header-content { padding: 10px 0; gap: 8px; }
+            .logo img { height: 50px; }
+            .nav { gap: 8px 12px; }
+            .nav-link { font-size: 13px; }
+            .header-icons { gap: 8px; }
+            .icon-link { width: 36px; height: 36px; font-size: 14px; }
 
-            /* --- ОРНАМЕНТЫ --- */
-            .ornament-top {
-                background-size: 200% auto;
-                height: 380px;
-                top: -300px;
-                margin-bottom: -310px;
-            }
-            .ornament-header-bottom {
-                background-size: 200% auto;
-                height: 15px;
-                margin-top: -20px;
-            }
-            .ornament-bottom {
-                background-size: 200% auto;
-                height: 35px;
-                margin-top: -30px;
-            }
+            .ornament-top { background-size: 200% auto; height: 380px; top: -300px; margin-bottom: -310px; }
+            .ornament-header-bottom { background-size: 200% auto; height: 15px; margin-top: -20px; }
+            .ornament-bottom { background-size: 200% auto; height: 35px; margin-top: -30px; }
 
-            /* --- ВХОД --- */
-            .auth-box {
-                padding: 25px 20px;
-                margin: 0 10px;
-            }
-            .auth-box h2 {
-                font-size: 22px;
-            }
-            .auth-box .form-group input {
-                padding: 10px;
-                font-size: 14px;
-            }
-            .auth-box .btn {
-                padding: 12px;
-                font-size: 15px;
-            }
-
-            /* --- ПОДВАЛ --- */
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-                text-align: center;
-            }
-            .footer h3::after {
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            .social-icons {
-                justify-content: center;
-            }
+            .auth-box { padding: 25px 20px; margin: 0 10px; }
+            .auth-box h2 { font-size: 22px; }
+            .auth-box .form-group input { padding: 10px; font-size: 14px; }
+            .auth-box .btn { padding: 12px; font-size: 15px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 25px; text-align: center; }
+            .footer h3::after { left: 50%; transform: translateX(-50%); }
+            .social-icons { justify-content: center; }
         }
 
         @media (max-width: 360px) {
-            .nav {
-                flex-direction: column;
-                gap: 6px;
-            }
-            .logo img {
-                height: 42px;
-            }
-
-            .ornament-top {
-                background-size: 250% auto;
-                height: 420px;
-                top: -330px;
-                margin-bottom: -340px;
-            }
-            .ornament-header-bottom {
-                background-size: 250% auto;
-                height: 15px;
-                margin-top: -20px;
-            }
-            .ornament-bottom {
-                background-size: 250% auto;
-                height: 40px;
-                margin-top: -35px;
-            }
+            .nav { flex-direction: column; gap: 6px; }
+            .logo img { height: 42px; }
+            .ornament-top { background-size: 250% auto; height: 420px; top: -330px; margin-bottom: -340px; }
+            .ornament-header-bottom { background-size: 250% auto; height: 15px; margin-top: -20px; }
+            .ornament-bottom { background-size: 250% auto; height: 40px; margin-top: -35px; }
         }
     </style>
 </head>
@@ -571,28 +432,16 @@
         <footer class="footer">
             <div class="ornament-bottom"></div>
             <div class="container footer-grid">
-                <div>
-                    <h3>Контакты</h3>
-                    <p>+7 (999) 444-44-44<br>test@gmail.com</p>
-                </div>
-                <div>
-                    <h3>Разделы</h3>
-                    <p><a href="index.html">Главная</a><br><a href="catalog.html">Каталог</a><br><a href="about.html">О мастерах</a></p>
-                </div>
-                <div>
-                    <h3>Мы в соц-сетях</h3>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon">VK</a>
-                        <a href="#" class="social-icon">TG</a>
-                    </div>
-                </div>
+                <div><h3>Контакты</h3><p>+7 (999) 444-44-44<br>test@gmail.com</p></div>
+                <div><h3>Разделы</h3><p><a href="index.html">Главная</a><br><a href="catalog.html">Каталог</a><br><a href="about.html">О мастерах</a></p></div>
+                <div><h3>Мы в соц-сетях</h3><div class="social-icons"><a href="#" class="social-icon">VK</a><a href="#" class="social-icon">TG</a></div></div>
             </div>
         </footer>
     </div>
 
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-        import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
 
         const firebaseConfig = {
             apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
@@ -606,6 +455,20 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
+        // 🔥 UID АДМИНА (только этот пользователь будет перенаправлен в админку)
+        const ADMIN_UID = 'FRQ9vC3aBXUwgNgISezFuUG0YXf2';
+
+        // Если пользователь уже залогинен — перенаправляем
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                if (user.uid === ADMIN_UID) {
+                    window.location.href = 'admin.html';
+                } else {
+                    window.location.href = 'account.html';
+                }
+            }
+        });
+
         const loginForm = document.getElementById('loginForm');
         const errorMsg = document.getElementById('errorMsg');
 
@@ -615,8 +478,15 @@
             const password = document.getElementById('loginPassword').value;
 
             try {
-                await signInWithEmailAndPassword(auth, email, password);
-                window.location.href = 'account.html';
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                
+                // После входа проверяем — админ или обычный пользователь
+                if (user.uid === ADMIN_UID) {
+                    window.location.href = 'admin.html';
+                } else {
+                    window.location.href = 'account.html';
+                }
             } catch (error) {
                 errorMsg.style.display = 'block';
                 setTimeout(() => { errorMsg.style.display = 'none'; }, 3000);
