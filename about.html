@@ -19,68 +19,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>О мастерах - Чувашский сувенир</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Firebase SDK -->
-    <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-        import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, where } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
-            authDomain: "chuvash-souvenir.firebaseapp.com",
-            projectId: "chuvash-souvenir",
-            storageBucket: "chuvash-souvenir.firebasestorage.app",
-            messagingSenderId: "754730678926",
-            appId: "1:754730678926:web:5e45e557c0d298072027df"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-
-        window.db = db;
-        window.auth = auth;
-        window.addDoc = addDoc;
-        window.collection = collection;
-        window.getDocs = getDocs;
-    </script>
     <style>
-        /* ===== ОРНАМЕНТЫ ===== */
-        .ornament-top {
-            background-image: url("images/patternorna.png");
-            background-size: contain;
-            background-repeat: repeat-x;
-            height: 250px;
-            position: relative;
-            margin: 0;
-            background-position: center bottom;
-            top: -180px;
-            margin-bottom: -190px;
-            z-index: 0;
-        }
-        .ornament-header-bottom {
-            background-image: url("images/headerpattern.png");
-            background-size: contain;
-            background-repeat: repeat-x;
-            height: 15px;
-            position: relative;
-            margin: 0;
-            background-position: center top;
-            margin-top: -20px;
-            z-index: 0;
-        }
-        .ornament-bottom {
-            background-image: url("images/bottompattern.png");
-            background-size: contain;
-            background-repeat: repeat-x;
-            height: 20px;
-            position: relative;
-            margin: 0;
-            background-position: center top;
-            margin-top: -20px;
-        }
-
         /* ===== БАЗОВЫЕ СТИЛИ ===== */
         * {
             margin: 0;
@@ -108,12 +47,65 @@
             padding: 0 15px;
         }
 
-        /* ===== ХЕДЕР (ТОЧНО КАК НА ГЛАВНОЙ - БЕЗ ПОИСКА) ===== */
+        /* ===== ОРНАМЕНТЫ (как в главной) ===== */
+        .ornament-top {
+            background-image: url("images/patternorna.png");
+            background-size: contain;
+            background-repeat: repeat-x;
+            height: 250px;
+            position: relative;
+            margin: 0;
+            background-position: center bottom;
+            top: -180px;
+            margin-bottom: -190px;
+            z-index: 1;
+        }
+        .ornament-header-bottom {
+            background-image: url("images/headerpattern.png");
+            background-size: contain;
+            background-repeat: repeat-x;
+            height: 15px;
+            position: relative;
+            margin: 0;
+            background-position: center top;
+            margin-top: -20px;
+            z-index: 1;
+        }
+        .ornament-middle {
+            background-image: url("images/patternorna.png");
+            background-size: contain;
+            background-repeat: repeat-x;
+            height: 250px;
+            position: relative;
+            margin: 0px 0 0px 0;
+            background-position: center center;
+            z-index: 1;
+        }
+        .ornament-between {
+            background-image: url("images/midpattern.png");
+            background-size: contain;
+            background-repeat: repeat-x;
+            height: 30px;
+            position: relative;
+            margin: 5px 0;
+            background-position: center center;
+        }
+        .ornament-bottom {
+            background-image: url("images/bottompattern.png");
+            background-size: contain;
+            background-repeat: repeat-x;
+            height: 20px;
+            position: relative;
+            margin: 0;
+            background-position: center top;
+            margin-top: -20px;
+        }
+
+        /* ===== ХЕДЕР (ТОЧНО КАК В ГЛАВНОЙ) ===== */
         .header {
             background: #FFF4E5;
             position: relative;
             box-shadow: 0 2px 10px rgba(226, 74, 44, 0.1);
-            z-index: 10;
         }
         .header-content {
             display: flex;
@@ -150,8 +142,6 @@
             position: relative;
             transition: all 0.3s ease;
             white-space: nowrap;
-            z-index: 20;
-            cursor: pointer;
         }
         .nav-link:hover {
             color: #E24A2C;
@@ -213,8 +203,6 @@
         /* ===== СТРАНИЦА "О МАСТЕРАХ" ===== */
         .masters-page {
             padding: 40px 0;
-            position: relative;
-            z-index: 1;
         }
 
         .breadcrumbs {
@@ -669,7 +657,7 @@
         }
 
         /* ====================================================== */
-        /* ===== АДАПТИВ ===== */
+        /* ===== АДАПТИВ (ТОЧНО КАК В ГЛАВНОЙ) ===== */
         /* ====================================================== */
 
         @media (max-width: 1024px) {
@@ -689,14 +677,18 @@
         }
 
         @media (max-width: 768px) {
-            /* --- ХЕДЕР (ТОЧНО КАК НА ГЛАВНОЙ) --- */
+            /* --- ХЕДЕР (ТОЧНО КАК В ГЛАВНОЙ) --- */
             .header-content {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 12px 0;
+                gap: 10px;
+                flex-wrap: nowrap;
             }
             .logo {
                 order: 1;
+                flex: 0 0 auto;
             }
             .logo img {
                 height: 60px;
@@ -705,12 +697,15 @@
                 order: 2;
                 width: 100%;
                 justify-content: center;
-                gap: 15px;
+                gap: 12px;
                 flex-wrap: wrap;
+                padding: 5px 0;
             }
             .header-icons {
                 order: 3;
                 gap: 10px;
+                flex: 0 0 auto;
+                justify-content: flex-end;
             }
             .icon-link {
                 width: 40px;
@@ -718,7 +713,7 @@
                 font-size: 16px;
             }
 
-            /* --- ОРНАМЕНТЫ --- */
+            /* --- ОРНАМЕНТЫ (КАК В ГЛАВНОЙ) --- */
             .ornament-top {
                 background-size: 150% auto;
                 height: 320px;
@@ -730,6 +725,15 @@
                 height: 15px;
                 margin-top: -20px;
             }
+            .ornament-middle {
+                background-size: 150% auto;
+                height: 300px;
+                margin: -30px 0 -80px 0;
+            }
+            .ornament-between {
+                background-size: 150% auto;
+                height: 40px;
+            }
             .ornament-bottom {
                 background-size: 150% auto;
                 height: 30px;
@@ -740,74 +744,58 @@
             .masters-page {
                 padding: 20px 0;
             }
-
             .page-title {
                 font-size: 28px;
             }
-
             .page-subtitle {
                 font-size: 16px;
                 margin-bottom: 30px;
             }
-
             .intro-section {
                 margin-bottom: 50px;
             }
-
             .intro-text h2 {
                 font-size: 24px;
             }
-
             .stats-grid {
                 grid-template-columns: 1fr;
                 gap: 15px;
             }
-
             .image-placeholder {
                 height: 250px;
             }
-
             .masters-section {
                 margin-bottom: 50px;
             }
-
             .masters-section h2 {
                 font-size: 26px;
                 margin-bottom: 30px;
             }
-
             .masters-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
-
             .master-photo {
                 height: 200px;
             }
-
             .techniques-section {
                 margin-bottom: 50px;
             }
-
             .techniques-section h2 {
                 font-size: 26px;
                 margin-bottom: 30px;
             }
-
             .techniques-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
-
             .process-section {
                 margin-bottom: 50px;
             }
-
             .process-section h2 {
                 font-size: 26px;
                 margin-bottom: 30px;
             }
-
             .process-step {
                 flex-direction: column;
                 align-items: center;
@@ -815,30 +803,29 @@
                 gap: 15px;
                 padding: 20px;
             }
-
             .process-step:hover {
                 transform: translateY(-5px);
             }
-
             .cta-section {
                 padding: 30px 20px;
                 margin-bottom: 30px;
             }
-
             .cta-content h2 {
                 font-size: 24px;
             }
-
             .cta-content p {
                 font-size: 16px;
             }
-
             .cta-actions {
                 flex-direction: column;
                 align-items: center;
             }
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
 
-            /* --- ПОДВАЛ --- */
+            /* --- ПОДВАЛ (КАК В ГЛАВНОЙ) --- */
             .footer-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 30px;
@@ -854,32 +841,30 @@
         }
 
         @media (max-width: 480px) {
-            /* --- ХЕДЕР (ТОЧНО КАК НА ГЛАВНОЙ) --- */
+            /* --- ХЕДЕР (ТОЧНО КАК В ГЛАВНОЙ) --- */
             .header-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 12px;
+                padding: 10px 0;
+                gap: 8px;
             }
             .logo img {
                 height: 50px;
             }
             .nav {
-                flex-wrap: wrap;
-                gap: 10px 15px;
+                gap: 8px 12px;
             }
             .nav-link {
-                font-size: 14px;
+                font-size: 13px;
             }
             .header-icons {
-                gap: 10px;
+                gap: 8px;
             }
             .icon-link {
-                width: 38px;
-                height: 38px;
-                font-size: 16px;
+                width: 36px;
+                height: 36px;
+                font-size: 14px;
             }
 
-            /* --- ОРНАМЕНТЫ --- */
+            /* --- ОРНАМЕНТЫ (КАК В ГЛАВНОЙ) --- */
             .ornament-top {
                 background-size: 200% auto;
                 height: 380px;
@@ -891,6 +876,15 @@
                 height: 15px;
                 margin-top: -20px;
             }
+            .ornament-middle {
+                background-size: 200% auto;
+                height: 350px;
+                margin: -40px 0 -70px 0;
+            }
+            .ornament-between {
+                background-size: 200% auto;
+                height: 50px;
+            }
             .ornament-bottom {
                 background-size: 200% auto;
                 height: 35px;
@@ -901,69 +895,53 @@
             .page-title {
                 font-size: 24px;
             }
-
             .page-subtitle {
                 font-size: 14px;
             }
-
             .intro-text h2 {
                 font-size: 20px;
             }
-
             .intro-text p {
                 font-size: 14px;
             }
-
             .stat-item {
                 padding: 15px;
             }
-
             .stat-number {
                 font-size: 24px;
             }
-
             .image-placeholder {
                 height: 200px;
             }
-
             .master-card {
                 border-radius: 12px;
             }
-
             .master-info {
                 padding: 20px;
             }
-
             .master-info h3 {
                 font-size: 18px;
             }
-
             .technique-card {
                 padding: 20px;
             }
-
             .technique-card h3 {
                 font-size: 18px;
             }
-
             .step-number {
                 width: 40px;
                 height: 40px;
                 font-size: 16px;
             }
-
             .step-content h3 {
                 font-size: 16px;
             }
-
             .cta-content h2 {
                 font-size: 20px;
             }
-
             .cta-content p {
                 font-size: 14px;
             }
-
             .btn {
                 padding: 10px 20px;
                 font-size: 14px;
@@ -971,7 +949,7 @@
                 text-align: center;
             }
 
-            /* --- ПОДВАЛ --- */
+            /* --- ПОДВАЛ (КАК В ГЛАВНОЙ) --- */
             .footer-grid {
                 grid-template-columns: 1fr;
                 gap: 25px;
@@ -989,7 +967,7 @@
         @media (max-width: 360px) {
             .nav {
                 flex-direction: column;
-                gap: 8px;
+                gap: 6px;
             }
             .logo img {
                 height: 42px;
@@ -1005,6 +983,15 @@
                 background-size: 250% auto;
                 height: 15px;
                 margin-top: -20px;
+            }
+            .ornament-middle {
+                background-size: 250% auto;
+                height: 400px;
+                margin: -50px 0 -60px 0;
+            }
+            .ornament-between {
+                background-size: 250% auto;
+                height: 60px;
             }
             .ornament-bottom {
                 background-size: 250% auto;
@@ -1273,62 +1260,22 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            updateCartCounter();
-            setupAnimations();
-        });
-
         function updateCartCounter() {
-            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-            const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-            const cartCount = document.querySelector('.cart-count');
-            if (cartCount) {
-                cartCount.textContent = totalItems;
-                cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
+            let cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+            let total = cart.reduce((s, i) => s + i.quantity, 0);
+            let el = document.querySelector('.cart-count');
+            if (el) {
+                el.textContent = total;
+                el.style.display = total > 0 ? 'flex' : 'none';
             }
         }
-
-        function setupAnimations() {
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, observerOptions);
-
-            const animatedElements = document.querySelectorAll('.master-card, .technique-card, .process-step');
-            animatedElements.forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(el);
-            });
-        }
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+        updateCartCounter();
     </script>
-    <script type="module">
-        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
 
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+        
         const firebaseConfig = {
             apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
             authDomain: "chuvash-souvenir.firebaseapp.com",
@@ -1337,31 +1284,14 @@
             messagingSenderId: "754730678926",
             appId: "1:754730678926:web:5e45e557c0d298072027df"
         };
-
+        
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-
         const accountLink = document.getElementById('accountLink');
-        if (accountLink) {
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    accountLink.href = 'account.html';
-                } else {
-                    accountLink.href = 'login.html';
-                }
-            });
-        }
-
-        function updateCartCounter() {
-            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-            const total = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-            const cartCount = document.querySelector('.cart-count');
-            if (cartCount) {
-                cartCount.textContent = total;
-                cartCount.style.display = total > 0 ? 'flex' : 'none';
-            }
-        }
-        updateCartCounter();
+        
+        onAuthStateChanged(auth, (user) => {
+            accountLink.href = user ? 'account.html' : 'login.html';
+        });
     </script>
 </body>
 </html>
