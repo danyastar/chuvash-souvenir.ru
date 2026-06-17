@@ -4,35 +4,632 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Каталог - Чувашский сувенир</title>
-    <link rel="stylesheet" href="style.css">
     <style>
-        html, body { height: 100%; margin: 0; }
-        .main-content { display: flex; flex-direction: column; min-height: 100vh; }
-        .main-content .container { flex: 1; }
-        .catalog-page { padding: 40px 0; }
-        .catalog-page h2 { text-align: center; font-size: 32px; color: #8B2000; margin-bottom: 30px; }
-        .filters { display: flex; gap: 15px; margin-bottom: 30px; justify-content: center; flex-wrap: wrap; }
-        .filters select, .filters input { padding: 10px 15px; border: 2px solid #E0A400; border-radius: 8px; background: white; font-size: 14px; min-width: 120px; }
-        .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; margin-bottom: 40px; }
-        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s; display: flex; flex-direction: column; position: relative; }
-        .card:hover { transform: translateY(-5px); }
-        .card-image { height: 200px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; }
-        .card-image img { width: 100%; height: 100%; object-fit: cover; }
-        .card-content { padding: 20px; text-align: center; flex: 1; display: flex; flex-direction: column; }
-        .card-content h3 { margin: 0 0 10px; color: #8B2000; }
-        .card-content p { color: #666; font-size: 14px; margin-bottom: 10px; flex: 1; }
-        .price { font-size: 20px; font-weight: bold; color: #E24A2C; margin-bottom: 15px; }
-        .card-buttons { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-        .card-buttons .btn { flex: 1; text-align: center; background: linear-gradient(135deg, #E24A2C, #E66830); color: white; padding: 8px 0; border-radius: 25px; text-decoration: none; font-size: 14px; border: none; cursor: pointer; min-width: 80px; }
-        .btn-fav { background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px 10px; transition: transform 0.2s; }
-        .btn-fav:hover { transform: scale(1.1); }
-        .btn-fav.active { color: #E24A2C; }
-        .pagination { display: flex; justify-content: center; gap: 10px; margin: 20px 0 40px; flex-wrap: wrap; }
-        .pagination button { padding: 8px 16px; background: white; border: 2px solid #E0A400; border-radius: 8px; cursor: pointer; font-weight: bold; }
-        .pagination button.active { background: #E24A2C; border-color: #E24A2C; color: white; }
-        .loading { text-align: center; padding: 50px; font-size: 18px; color: #666; }
-        .error-msg { text-align: center; padding: 50px; font-size: 18px; color: #E24A2C; }
-        @media (max-width: 768px) { .catalog-grid { grid-template-columns: 1fr; } }
+        /* ===== БАЗОВЫЕ СТИЛИ ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: #FFF4E5;
+            color: #5A1F00;
+            line-height: 1.6;
+        }
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* ===== ОРНАМЕНТЫ ===== */
+        .ornament-top {
+            background-image: url("images/patternorna.png");
+            background-size: contain;
+            background-repeat: repeat-x;
+            height: 250px;
+            position: relative;
+            margin: 0;
+            background-position: center bottom;
+            top: -180px;
+            margin-bottom: -190px;
+            z-index: 1;
+        }
+        .ornament-header-bottom {
+            background-image: url("images/headerpattern.png");
+            background-size: contain;
+            background-repeat: repeat-x;
+            height: 15px;
+            position: relative;
+            margin: 0;
+            background-position: center top;
+            margin-top: -20px;
+            z-index: 1;
+        }
+        .ornament-bottom {
+            background-image: url("images/bottompattern.png");
+            background-size: contain;
+            background-repeat: repeat-x;
+            height: 20px;
+            position: relative;
+            margin: 0;
+            background-position: center top;
+            margin-top: -20px;
+        }
+
+        /* ===== ХЕДЕР (КАК НА ГЛАВНОЙ) ===== */
+        .header {
+            background: #FFF4E5;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(226, 74, 44, 0.1);
+        }
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 0;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .logo {
+            flex-shrink: 0;
+        }
+        .logo img {
+            height: 80px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+        .nav {
+            display: flex;
+            gap: 25px;
+            flex: 1;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .nav-link {
+            color: #5A1F00;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 8px 0;
+            position: relative;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        .nav-link:hover {
+            color: #E24A2C;
+        }
+        .nav-link.active {
+            color: #E24A2C;
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #E24A2C;
+        }
+        .header-icons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .icon-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #E24A2C, #E66830);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .icon-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(226, 74, 44, 0.3);
+        }
+        .cart-link {
+            position: relative;
+        }
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #FF5722;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===== КАТАЛОГ ===== */
+        .catalog-page {
+            padding: 40px 0;
+        }
+        .catalog-page h2 {
+            text-align: center;
+            font-size: 32px;
+            color: #8B2000;
+            margin-bottom: 30px;
+        }
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .filters select,
+        .filters input {
+            padding: 10px 15px;
+            border: 2px solid #E0A400;
+            border-radius: 8px;
+            background: white;
+            font-size: 14px;
+            min-width: 120px;
+            font-family: inherit;
+        }
+        .filters select:focus,
+        .filters input:focus {
+            border-color: #E24A2C;
+            outline: none;
+        }
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-image {
+            height: 200px;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 20px;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-content h3 {
+            margin: 0 0 10px;
+            color: #8B2000;
+            font-size: 20px;
+        }
+        .card-content p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+            flex: 1;
+        }
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #E24A2C;
+            margin-bottom: 15px;
+        }
+        .card-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .card-buttons .btn {
+            flex: 1;
+            text-align: center;
+            background: linear-gradient(135deg, #E24A2C, #E66830);
+            color: white;
+            padding: 8px 0;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            min-width: 80px;
+            transition: 0.3s;
+        }
+        .card-buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(226, 74, 44, 0.3);
+        }
+        .btn-fav {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px 10px;
+            transition: transform 0.2s;
+        }
+        .btn-fav:hover {
+            transform: scale(1.1);
+        }
+        .btn-fav.active {
+            color: #E24A2C;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0 40px;
+            flex-wrap: wrap;
+        }
+        .pagination button {
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid #E0A400;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .pagination button:hover {
+            background: #FFF6E1;
+        }
+        .pagination button.active {
+            background: #E24A2C;
+            border-color: #E24A2C;
+            color: white;
+        }
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 18px;
+            color: #666;
+        }
+        .error-msg {
+            text-align: center;
+            padding: 50px;
+            font-size: 18px;
+            color: #E24A2C;
+        }
+
+        /* ===== ПОДВАЛ ===== */
+        .footer {
+            background: #8B2000;
+            color: white;
+            margin-top: 50px;
+            padding: 40px 0 25px;
+            position: relative;
+            flex-shrink: 0;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .footer h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+            position: relative;
+            display: inline-block;
+            color: #fff;
+        }
+        .footer h3::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 35px;
+            height: 2px;
+            background: #FBE8C7;
+        }
+        .footer p {
+            line-height: 1.6;
+            margin: 5px 0;
+            font-size: 14px;
+            color: #fff;
+        }
+        .footer a {
+            text-decoration: none;
+            color: #fff;
+            transition: opacity 0.3s ease;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+            opacity: 0.8;
+        }
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .social-icon {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            display: inline-block;
+            padding: 6px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            background: rgba(255, 255, 255, 0.15);
+            text-decoration: none;
+            border-color: #fff;
+        }
+
+        /* ====================================================== */
+        /* ===== АДАПТИВ ===== */
+        /* ====================================================== */
+
+        @media (max-width: 1024px) {
+            .header-content {
+                gap: 15px;
+            }
+            .nav {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* --- ХЕДЕР --- */
+            .header-content {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 12px 0;
+                gap: 10px;
+                flex-wrap: nowrap;
+            }
+            .logo {
+                order: 1;
+                flex: 0 0 auto;
+            }
+            .logo img {
+                height: 60px;
+            }
+            .nav {
+                order: 2;
+                width: 100%;
+                justify-content: center;
+                gap: 12px;
+                flex-wrap: wrap;
+                padding: 5px 0;
+            }
+            .header-icons {
+                order: 3;
+                gap: 10px;
+                flex: 0 0 auto;
+                justify-content: flex-end;
+            }
+            .icon-link {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            /* --- ОРНАМЕНТЫ --- */
+            .ornament-top {
+                background-size: 150% auto;
+                height: 320px;
+                top: -250px;
+                margin-bottom: -260px;
+            }
+            .ornament-header-bottom {
+                background-size: 150% auto;
+                height: 15px;
+                margin-top: -20px;
+            }
+            .ornament-bottom {
+                background-size: 150% auto;
+                height: 30px;
+                margin-top: -25px;
+            }
+
+            /* --- КАТАЛОГ --- */
+            .catalog-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .filters {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            .filters select,
+            .filters input {
+                width: 100%;
+                max-width: 300px;
+            }
+            .catalog-page h2 {
+                font-size: 26px;
+            }
+            .card-buttons .btn {
+                min-width: 100px;
+            }
+
+            /* --- ПОДВАЛ --- */
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+                text-align: center;
+            }
+            .footer h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .social-icons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* --- ХЕДЕР --- */
+            .header-content {
+                padding: 10px 0;
+                gap: 8px;
+            }
+            .logo img {
+                height: 50px;
+            }
+            .nav {
+                gap: 8px 12px;
+            }
+            .nav-link {
+                font-size: 13px;
+            }
+            .header-icons {
+                gap: 8px;
+            }
+            .icon-link {
+                width: 36px;
+                height: 36px;
+                font-size: 14px;
+            }
+
+            /* --- ОРНАМЕНТЫ --- */
+            .ornament-top {
+                background-size: 200% auto;
+                height: 380px;
+                top: -300px;
+                margin-bottom: -310px;
+            }
+            .ornament-header-bottom {
+                background-size: 200% auto;
+                height: 15px;
+                margin-top: -20px;
+            }
+            .ornament-bottom {
+                background-size: 200% auto;
+                height: 35px;
+                margin-top: -30px;
+            }
+
+            /* --- КАТАЛОГ --- */
+            .catalog-page {
+                padding: 20px 0;
+            }
+            .catalog-page h2 {
+                font-size: 22px;
+                margin-bottom: 20px;
+            }
+            .filters {
+                gap: 8px;
+            }
+            .filters select,
+            .filters input {
+                padding: 8px 12px;
+                font-size: 13px;
+                min-width: unset;
+                width: 100%;
+                max-width: 280px;
+            }
+            .catalog-grid {
+                gap: 15px;
+            }
+            .card-image {
+                height: 180px;
+            }
+            .card-content {
+                padding: 15px;
+            }
+            .card-content h3 {
+                font-size: 17px;
+            }
+            .price {
+                font-size: 17px;
+            }
+            .card-buttons .btn {
+                font-size: 13px;
+                padding: 6px 0;
+                min-width: 80px;
+            }
+
+            /* --- ПОДВАЛ --- */
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                text-align: center;
+            }
+            .footer h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .social-icons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .nav {
+                flex-direction: column;
+                gap: 6px;
+            }
+            .logo img {
+                height: 42px;
+            }
+            .filters select,
+            .filters input {
+                max-width: 240px;
+            }
+
+            .ornament-top {
+                background-size: 250% auto;
+                height: 420px;
+                top: -330px;
+                margin-bottom: -340px;
+            }
+            .ornament-header-bottom {
+                background-size: 250% auto;
+                height: 15px;
+                margin-top: -20px;
+            }
+            .ornament-bottom {
+                background-size: 250% auto;
+                height: 40px;
+                margin-top: -35px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -41,20 +638,23 @@
             <div class="ornament-top"></div>
             <div class="container">
                 <div class="header-content">
-                    <div class="logo"><a href="index.html"><img src="images/logo.png" alt="Чувашский сувенир"></a></div>
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="images/logo.png" alt="Чувашский сувенир">
+                        </a>
+                    </div>
                     <nav class="nav">
                         <a href="index.html" class="nav-link">Главная</a>
                         <a href="catalog.html" class="nav-link active">Каталог</a>
                         <a href="about.html" class="nav-link">О мастерах</a>
                         <a href="contacts.html" class="nav-link">Контакты</a>
                     </nav>
-                    <div class="header-actions">
-                        <div class="search-box"><input type="text" placeholder="Поиск товаров..." class="search-input" id="globalSearch"><button class="search-btn">🔍</button></div>
-                        <div class="header-icons">
-                            <a href="favorites.html" class="icon-link" title="Избранное">❤️</a>
-                            <a href="account.html" class="icon-link" title="Личный кабинет"><span class="icon">👤</span></a>
-                            <a href="cart.html" class="icon-link cart-link" title="Корзина"><span class="icon">🛒</span><span class="cart-count">0</span></a>
-                        </div>
+                    <div class="header-icons">
+                        <a href="#" id="accountLink" class="icon-link" title="Личный кабинет">👤</a>
+                        <a href="cart.html" class="icon-link cart-link" title="Корзина">
+                            🛒
+                            <span class="cart-count">0</span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -89,9 +689,21 @@
         <footer class="footer">
             <div class="ornament-bottom"></div>
             <div class="container footer-grid">
-                <div><h3>Контакты</h3><p>+7 (999) 444-44-44<br>test@gmail.com</p></div>
-                <div><h3>Разделы</h3><p><a href="index.html">Главная</a><br><a href="catalog.html">Каталог</a><br><a href="about.html">О мастерах</a></p></div>
-                <div><h3>Мы в соц-сетях</h3><div class="social-icons"><a href="#" class="social-icon">VK</a><a href="#" class="social-icon">TG</a></div></div>
+                <div>
+                    <h3>Контакты</h3>
+                    <p>+7 (999) 444-44-44<br>test@gmail.com</p>
+                </div>
+                <div>
+                    <h3>Разделы</h3>
+                    <p><a href="index.html">Главная</a><br><a href="catalog.html">Каталог</a><br><a href="about.html">О мастерах</a></p>
+                </div>
+                <div>
+                    <h3>Мы в соц-сетях</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon">VK</a>
+                        <a href="#" class="social-icon">TG</a>
+                    </div>
+                </div>
             </div>
         </footer>
     </div>
@@ -99,8 +711,8 @@
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
         import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
-        import { addToFavorites, removeFromFavorites, getFavoriteIds, onFavoritesUpdate } from './favorites.js';
-        
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+
         const firebaseConfig = {
             apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
             authDomain: "chuvash-souvenir.firebaseapp.com",
@@ -109,15 +721,48 @@
             messagingSenderId: "754730678926",
             appId: "1:754730678926:web:5e45e557c0d298072027df"
         };
-        
+
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-        
+        const auth = getAuth(app);
+
+        const accountLink = document.getElementById('accountLink');
+        if (accountLink) {
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    accountLink.href = 'account.html';
+                } else {
+                    accountLink.href = 'login.html';
+                }
+            });
+        }
+
         let allProducts = [];
         let filteredProducts = [];
         let currentPage = 1;
         const itemsPerPage = 6;
-        
+
+        // Функции избранного
+        function getFavoriteIds() {
+            try {
+                return JSON.parse(localStorage.getItem('favorites')) || [];
+            } catch { return []; }
+        }
+
+        async function addToFavorites(id, name) {
+            const favs = getFavoriteIds();
+            if (!favs.includes(id)) {
+                favs.push(id);
+                localStorage.setItem('favorites', JSON.stringify(favs));
+            }
+        }
+
+        async function removeFromFavorites(id) {
+            let favs = getFavoriteIds();
+            favs = favs.filter(fid => fid !== id);
+            localStorage.setItem('favorites', JSON.stringify(favs));
+        }
+
         async function loadProducts() {
             const grid = document.getElementById('catalogGrid');
             grid.innerHTML = '<div class="loading">Загрузка товаров...</div>';
@@ -134,31 +779,31 @@
                 }
             } catch (error) {
                 console.error('Ошибка загрузки:', error);
-                grid.innerHTML = '<div class="error-msg">❌ Ошибка подключения к базе данных. Проверьте Firebase.</div>';
+                grid.innerHTML = '<div class="error-msg">❌ Ошибка подключения к базе данных</div>';
             }
         }
-        
+
         function applyFilters() {
             const search = document.getElementById('searchInput')?.value.toLowerCase() || '';
             const category = document.getElementById('categoryFilter').value;
             const min = parseInt(document.getElementById('priceMin').value) || 0;
             const max = parseInt(document.getElementById('priceMax').value) || Infinity;
             const sort = document.getElementById('sortBy').value;
-            
+
             filteredProducts = allProducts.filter(p => {
                 const searchMatch = p.name.toLowerCase().includes(search);
                 const catMatch = category === 'all' || p.category === category;
                 const priceMatch = p.price >= min && p.price <= max;
                 return searchMatch && catMatch && priceMatch;
             });
-            
+
             if (sort === 'price_asc') filteredProducts.sort((a, b) => a.price - b.price);
             if (sort === 'price_desc') filteredProducts.sort((a, b) => b.price - a.price);
-            
+
             currentPage = 1;
             renderProducts();
         }
-        
+
         function renderProducts() {
             const grid = document.getElementById('catalogGrid');
             if (!filteredProducts.length) {
@@ -166,12 +811,12 @@
                 document.getElementById('pagination').innerHTML = '';
                 return;
             }
-            
+
             const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
             const start = (currentPage - 1) * itemsPerPage;
             const pageProducts = filteredProducts.slice(start, start + itemsPerPage);
             const favoriteIds = getFavoriteIds();
-            
+
             grid.innerHTML = '';
             pageProducts.forEach(product => {
                 const isFav = favoriteIds.includes(product.id);
@@ -181,7 +826,7 @@
                     <div class="card-image"><img src="images/test.jpg" alt="${product.name}"></div>
                     <div class="card-content">
                         <h3>${product.name}</h3>
-                        <p>${product.description}</p>
+                        <p>${product.description || 'Традиционный чувашский сувенир'}</p>
                         <div class="price">${product.price} ₽</div>
                         <div class="card-buttons">
                             <button class="btn-fav ${isFav ? 'active' : ''}" data-id="${product.id}" data-name="${product.name}">${isFav ? '❤️' : '🤍'}</button>
@@ -192,7 +837,7 @@
                 `;
                 grid.appendChild(card);
             });
-            
+
             document.querySelectorAll('.add-to-cart').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const name = btn.dataset.name;
@@ -206,36 +851,28 @@
                     alert(`"${name}" добавлен в корзину`);
                 });
             });
-            
-            // ОБРАБОТЧИК ИЗБРАННОГО (правильное место!)
+
             document.querySelectorAll('.btn-fav').forEach(btn => {
                 btn.addEventListener('click', async (e) => {
                     e.stopPropagation();
                     const id = btn.dataset.id;
                     const name = btn.dataset.name;
-                    
-                    // Мгновенно меняем UI
                     const wasActive = btn.classList.contains('active');
                     if (wasActive) {
                         btn.classList.remove('active');
                         btn.innerHTML = '🤍';
+                        await removeFromFavorites(id);
                     } else {
                         btn.classList.add('active');
                         btn.innerHTML = '❤️';
-                    }
-                    
-                    // Фоновый запрос к Firebase
-                    if (wasActive) {
-                        await removeFromFavorites(id);
-                    } else {
                         await addToFavorites(id, name);
                     }
                 });
             });
-            
+
             renderPagination(totalPages);
         }
-        
+
         function renderPagination(totalPages) {
             const paginationDiv = document.getElementById('pagination');
             if (totalPages <= 1) { paginationDiv.innerHTML = ''; return; }
@@ -252,88 +889,23 @@
                 });
             });
         }
-        
+
         function updateCartCounter() {
             const cart = JSON.parse(localStorage.getItem('cartItems')) || [];
             const total = cart.reduce((s, i) => s + i.quantity, 0);
             const el = document.querySelector('.cart-count');
-            if (el) { el.textContent = total; el.style.display = total > 0 ? 'flex' : 'none'; }
+            if (el) { el.textContent = total;
+                el.style.display = total > 0 ? 'flex' : 'none'; }
         }
-        
-        // Слушатели событий фильтров
+
         document.getElementById('searchInput').addEventListener('input', () => applyFilters());
         document.getElementById('categoryFilter').addEventListener('change', () => applyFilters());
         document.getElementById('priceMin').addEventListener('input', () => applyFilters());
         document.getElementById('priceMax').addEventListener('input', () => applyFilters());
         document.getElementById('sortBy').addEventListener('change', () => applyFilters());
-        
-        // Глобальный поиск в шапке
-        document.getElementById('globalSearch').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                document.getElementById('searchInput').value = e.target.value;
-                applyFilters();
-            }
-        });
-        document.querySelector('.search-btn').addEventListener('click', () => {
-            const searchVal = document.getElementById('globalSearch').value;
-            document.getElementById('searchInput').value = searchVal;
-            applyFilters();
-        });
-        
-        onFavoritesUpdate(() => {
-            const favoriteIds = getFavoriteIds();
-            document.querySelectorAll('.btn-fav').forEach(btn => {
-                const id = btn.dataset.id;
-                if (favoriteIds.includes(id)) {
-                    btn.classList.add('active');
-                    btn.innerHTML = '❤️';
-                } else {
-                    btn.classList.remove('active');
-                    btn.innerHTML = '🤍';
-                }
-            });
-        });
-        
+
         loadProducts();
         updateCartCounter();
     </script>
-    <script type="module">
-    import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-    
-    const firebaseConfig = {
-        apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
-        authDomain: "chuvash-souvenir.firebaseapp.com",
-        projectId: "chuvash-souvenir",
-        storageBucket: "chuvash-souvenir.firebasestorage.app",
-        messagingSenderId: "754730678926",
-        appId: "1:754730678926:web:5e45e557c0d298072027df"
-    };
-    
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    
-    const accountLink = document.querySelector('.icon-link[title="Личный кабинет"]');
-    if (accountLink) {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                accountLink.href = 'account.html';
-            } else {
-                accountLink.href = 'login.html';
-            }
-        });
-    }
-    
-    function updateCartCounter() {
-        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-        const total = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-        const cartCount = document.querySelector('.cart-count');
-        if (cartCount) {
-            cartCount.textContent = total;
-            cartCount.style.display = total > 0 ? 'flex' : 'none';
-        }
-    }
-    updateCartCounter();
-</script>
 </body>
 </html>
