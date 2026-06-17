@@ -6,52 +6,693 @@
     <title>Личный кабинет - Чувашский сувенир</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        html, body { height: 100%; margin: 0; }
-        .main-content { display: flex; flex-direction: column; min-height: 100vh; }
-        .main-content .container { flex: 1; }
-        
-        .account-container { display: flex; gap: 40px; margin: 40px 0; flex-wrap: wrap; }
-        .account-sidebar { width: 280px; background: white; border-radius: 15px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .user-avatar { font-size: 60px; text-align: center; margin-bottom: 15px; }
-        .account-sidebar h3 { text-align: center; margin: 0 0 5px; color: #8B2000; }
-        .account-sidebar p { text-align: center; color: #666; margin-bottom: 20px; }
-        .account-nav { display: flex; flex-direction: column; gap: 10px; }
-        .nav-btn { display: flex; align-items: center; gap: 12px; padding: 12px 15px; background: none; border: none; border-radius: 10px; cursor: pointer; transition: 0.3s; width: 100%; text-align: left; font-size: 16px; }
-        .nav-btn:hover { background: #FFF6E1; }
-        .nav-btn.active { background: #FFF6E1; color: #E24A2C; border-left: 3px solid #E24A2C; }
-        .nav-badge { background: #E24A2C; color: white; border-radius: 12px; padding: 2px 8px; font-size: 12px; margin-left: auto; }
-        .logout-btn { margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px; color: #E24A2C; }
-        
-        .account-main { flex: 1; background: white; border-radius: 15px; padding: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-        .tab-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #E0A400; padding-bottom: 10px; }
-        .tab-header h2 { margin: 0; color: #8B2000; }
-        
-        .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-        .info-item label { color: #666; font-size: 14px; display: block; margin-bottom: 5px; }
-        .info-item p { margin: 0; font-weight: 500; color: #5A1F00; }
-        
-        .order-card { border: 1px solid #eee; border-radius: 10px; padding: 15px; margin-bottom: 15px; }
-        .order-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
-        .order-status { padding: 2px 8px; border-radius: 12px; font-size: 12px; background: #FFF3E0; color: #EF6C00; }
-        .order-items { font-size: 14px; color: #555; margin-bottom: 10px; }
-        .order-total { font-weight: bold; text-align: right; }
-        
-        .favorites-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
-        .favorite-item { background: #FFF6E1; border-radius: 12px; padding: 15px; text-align: center; border: 1px solid #E0A400; transition: 0.3s; }
-        .favorite-item:hover { transform: translateY(-3px); }
-        .favorite-item img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
-        .favorite-item h4 { margin: 10px 0 5px; color: #8B2000; }
-        .favorite-item p { color: #E24A2C; font-weight: bold; margin: 5px 0; }
-        .favorite-item .btn { display: inline-block; background: linear-gradient(135deg, #E24A2C, #E66830); color: white; padding: 8px 16px; border-radius: 25px; text-decoration: none; font-size: 14px; margin-top: 10px; }
-        .empty-favorites { text-align: center; padding: 40px; color: #666; }
-        
-        .edit-form { display: none; margin-top: 20px; padding: 20px; background: #FFF6E1; border-radius: 12px; }
-        .edit-form input { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 8px; }
-        .edit-form button { margin-right: 10px; }
-        
-        @media (max-width: 768px) { .account-container { flex-direction: column; } .account-sidebar { width: auto; } .info-grid { grid-template-columns: 1fr; } .favorites-grid { grid-template-columns: 1fr; } }
+        /* ===== БАЗОВЫЕ СТИЛИ ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: #FFF4E5;
+            color: #5A1F00;
+            line-height: 1.6;
+        }
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* ===== ОРНАМЕНТЫ (как в главной) ===== */
+        .ornament-top {
+            background-image: url("images/patternorna.png");
+            background-size: contain;
+            background-repeat: repeat-x;
+            height: 250px;
+            position: relative;
+            margin: 0;
+            background-position: center bottom;
+            top: -180px;
+            margin-bottom: -190px;
+            z-index: 1;
+        }
+        .ornament-header-bottom {
+            background-image: url("images/headerpattern.png");
+            background-size: contain;
+            background-repeat: repeat-x;
+            height: 15px;
+            position: relative;
+            margin: 0;
+            background-position: center top;
+            margin-top: -20px;
+            z-index: 1;
+        }
+        .ornament-bottom {
+            background-image: url("images/bottompattern.png");
+            background-size: contain;
+            background-repeat: repeat-x;
+            height: 20px;
+            position: relative;
+            margin: 0;
+            background-position: center top;
+            margin-top: -20px;
+        }
+
+        /* ===== ХЕДЕР (ТОЧНО КАК В ГЛАВНОЙ) ===== */
+        .header {
+            background: #FFF4E5;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(226, 74, 44, 0.1);
+        }
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 0;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .logo {
+            flex-shrink: 0;
+        }
+        .logo img {
+            height: 80px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+        .nav {
+            display: flex;
+            gap: 25px;
+            flex: 1;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .nav-link {
+            color: #5A1F00;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 8px 0;
+            position: relative;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        .nav-link:hover {
+            color: #E24A2C;
+        }
+        .nav-link.active {
+            color: #E24A2C;
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #E24A2C;
+        }
+        .header-icons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .icon-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #E24A2C, #E66830);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .icon-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(226, 74, 44, 0.3);
+        }
+        .cart-link {
+            position: relative;
+        }
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #FF5722;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===== СТРАНИЦА ЛИЧНОГО КАБИНЕТА ===== */
+        .account-container {
+            display: flex;
+            gap: 40px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        .account-sidebar {
+            width: 280px;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .user-avatar {
+            font-size: 60px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .account-sidebar h3 {
+            text-align: center;
+            margin: 0 0 5px;
+            color: #8B2000;
+        }
+        .account-sidebar p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .account-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            background: none;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            text-align: left;
+            font-size: 16px;
+            font-family: inherit;
+        }
+        .nav-btn:hover {
+            background: #FFF6E1;
+        }
+        .nav-btn.active {
+            background: #FFF6E1;
+            color: #E24A2C;
+            border-left: 3px solid #E24A2C;
+        }
+        .nav-badge {
+            background: #E24A2C;
+            color: white;
+            border-radius: 12px;
+            padding: 2px 8px;
+            font-size: 12px;
+            margin-left: auto;
+        }
+        .logout-btn {
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            color: #E24A2C;
+        }
+
+        .account-main {
+            flex: 1;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .tab-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #E0A400;
+            padding-bottom: 10px;
+        }
+        .tab-header h2 {
+            margin: 0;
+            color: #8B2000;
+            font-size: 24px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .info-item label {
+            color: #666;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .info-item p {
+            margin: 0;
+            font-weight: 500;
+            color: #5A1F00;
+        }
+
+        .order-card {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .order-status {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            background: #FFF3E0;
+            color: #EF6C00;
+        }
+        .order-items {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        .order-total {
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .favorites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .favorite-item {
+            background: #FFF6E1;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #E0A400;
+            transition: 0.3s;
+        }
+        .favorite-item:hover {
+            transform: translateY(-3px);
+        }
+        .favorite-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background: #f0e8d8;
+        }
+        .favorite-item h4 {
+            margin: 10px 0 5px;
+            color: #8B2000;
+        }
+        .favorite-item p {
+            color: #E24A2C;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        .favorite-item .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #E24A2C, #E66830);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            margin-top: 10px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .favorite-item .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(226, 74, 44, 0.3);
+        }
+        .empty-favorites {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .edit-form {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #FFF6E1;
+            border-radius: 12px;
+        }
+        .edit-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 2px solid #E0A400;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .edit-form input:focus {
+            border-color: #E24A2C;
+            outline: none;
+        }
+        .edit-form .btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+            margin-right: 10px;
+        }
+        .edit-form .btn-primary {
+            background: linear-gradient(135deg, #E24A2C, #E66830);
+            color: white;
+        }
+        .edit-form .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(226, 74, 44, 0.3);
+        }
+        .edit-form .btn-outline-small {
+            background: transparent;
+            color: #E24A2C;
+            border: 2px solid #E24A2C;
+            padding: 8px 18px;
+        }
+        .edit-form .btn-outline-small:hover {
+            background: #E24A2C;
+            color: white;
+        }
+
+        .btn-outline-small {
+            background: transparent;
+            color: #E24A2C;
+            border: 2px solid #E24A2C;
+            padding: 8px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+            font-family: inherit;
+        }
+        .btn-outline-small:hover {
+            background: #E24A2C;
+            color: white;
+        }
+
+        /* ===== ПОДВАЛ ===== */
+        .footer {
+            background: #8B2000;
+            color: white;
+            margin-top: 50px;
+            padding: 40px 0 25px;
+            position: relative;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .footer h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+            position: relative;
+            display: inline-block;
+            color: #fff;
+        }
+        .footer h3::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 35px;
+            height: 2px;
+            background: #FBE8C7;
+        }
+        .footer p {
+            line-height: 1.6;
+            margin: 5px 0;
+            font-size: 14px;
+            color: #fff;
+        }
+        .footer a {
+            text-decoration: none;
+            color: #fff;
+            transition: opacity 0.3s ease;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+            opacity: 0.8;
+        }
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .social-icon {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            display: inline-block;
+            padding: 6px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            background: rgba(255, 255, 255, 0.15);
+            text-decoration: none;
+            border-color: #fff;
+        }
+
+        /* ====================================================== */
+        /* ===== АДАПТИВ ===== */
+        /* ====================================================== */
+
+        @media (max-width: 1024px) {
+            .header-content {
+                gap: 15px;
+            }
+            .nav {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* --- ХЕДЕР (КАК В ГЛАВНОЙ) --- */
+            .header-content {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 12px 0;
+                gap: 10px;
+                flex-wrap: nowrap;
+            }
+            .logo {
+                order: 1;
+                flex: 0 0 auto;
+            }
+            .logo img {
+                height: 60px;
+            }
+            .nav {
+                order: 2;
+                width: 100%;
+                justify-content: center;
+                gap: 12px;
+                flex-wrap: wrap;
+                padding: 5px 0;
+            }
+            .header-icons {
+                order: 3;
+                gap: 10px;
+                flex: 0 0 auto;
+                justify-content: flex-end;
+            }
+            .icon-link {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            /* --- ОРНАМЕНТЫ --- */
+            .ornament-top {
+                background-size: 150% auto;
+                height: 320px;
+                top: -250px;
+                margin-bottom: -260px;
+            }
+            .ornament-header-bottom {
+                background-size: 150% auto;
+                height: 15px;
+                margin-top: -20px;
+            }
+            .ornament-bottom {
+                background-size: 150% auto;
+                height: 30px;
+                margin-top: -25px;
+            }
+
+            /* --- СТРАНИЦА --- */
+            .account-container {
+                flex-direction: column;
+            }
+            .account-sidebar {
+                width: auto;
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .favorites-grid {
+                grid-template-columns: 1fr;
+            }
+            .tab-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            /* --- ПОДВАЛ --- */
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+                text-align: center;
+            }
+            .footer h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .social-icons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* --- ХЕДЕР (КАК В ГЛАВНОЙ) --- */
+            .header-content {
+                padding: 10px 0;
+                gap: 8px;
+            }
+            .logo img {
+                height: 50px;
+            }
+            .nav {
+                gap: 8px 12px;
+            }
+            .nav-link {
+                font-size: 13px;
+            }
+            .header-icons {
+                gap: 8px;
+            }
+            .icon-link {
+                width: 36px;
+                height: 36px;
+                font-size: 14px;
+            }
+
+            /* --- ОРНАМЕНТЫ --- */
+            .ornament-top {
+                background-size: 200% auto;
+                height: 380px;
+                top: -300px;
+                margin-bottom: -310px;
+            }
+            .ornament-header-bottom {
+                background-size: 200% auto;
+                height: 15px;
+                margin-top: -20px;
+            }
+            .ornament-bottom {
+                background-size: 200% auto;
+                height: 35px;
+                margin-top: -30px;
+            }
+
+            /* --- СТРАНИЦА --- */
+            .account-main {
+                padding: 20px;
+            }
+            .account-sidebar {
+                padding: 15px;
+            }
+
+            /* --- ПОДВАЛ --- */
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                text-align: center;
+            }
+            .footer h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .social-icons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .nav {
+                flex-direction: column;
+                gap: 6px;
+            }
+            .logo img {
+                height: 42px;
+            }
+
+            .ornament-top {
+                background-size: 250% auto;
+                height: 420px;
+                top: -330px;
+                margin-bottom: -340px;
+            }
+            .ornament-header-bottom {
+                background-size: 250% auto;
+                height: 15px;
+                margin-top: -20px;
+            }
+            .ornament-bottom {
+                background-size: 250% auto;
+                height: 40px;
+                margin-top: -35px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -60,20 +701,25 @@
             <div class="ornament-top"></div>
             <div class="container">
                 <div class="header-content">
-                    <div class="logo"><a href="index.html"><img src="images/logo.png" alt="Чувашский сувенир"></a></div>
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="images/logo.png" alt="Чувашский сувенир">
+                        </a>
+                    </div>
+
                     <nav class="nav">
                         <a href="index.html" class="nav-link">Главная</a>
                         <a href="catalog.html" class="nav-link">Каталог</a>
                         <a href="about.html" class="nav-link">О мастерах</a>
                         <a href="contacts.html" class="nav-link">Контакты</a>
                     </nav>
-                    <div class="header-actions">
-                        <div class="search-box"><input type="text" placeholder="Поиск товаров..." class="search-input"><button class="search-btn">🔍</button></div>
-                        <div class="header-icons">
-                            <a href="favorites.html" class="icon-link" title="Избранное">❤️</a>
-                            <a href="account.html" class="icon-link" title="Личный кабинет"><span class="icon">👤</span></a>
-                            <a href="cart.html" class="icon-link cart-link" title="Корзина"><span class="icon">🛒</span><span class="cart-count">0</span></a>
-                        </div>
+
+                    <div class="header-icons">
+                        <a href="#" id="accountLink" class="icon-link" title="Личный кабинет">👤</a>
+                        <a href="cart.html" class="icon-link cart-link" title="Корзина">
+                            🛒
+                            <span class="cart-count">0</span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -105,18 +751,18 @@
                         </div>
                         <div id="editProfileForm" class="edit-form">
                             <input type="text" id="editName" placeholder="Имя">
-                            <button id="saveProfileBtn" class="btn">Сохранить</button>
-                            <button id="cancelEditBtn" class="btn-outline-small">Отмена</button>
+                            <button id="saveProfileBtn" class="btn btn-primary">Сохранить</button>
+                            <button id="cancelEditBtn" class="btn btn-outline-small">Отмена</button>
                         </div>
                     </div>
-                    
+
                     <div class="tab-content" id="orders">
                         <div class="tab-header">
                             <h2>История заказов</h2>
                         </div>
                         <div id="ordersList">Загрузка...</div>
                     </div>
-                    
+
                     <div class="tab-content" id="favorites">
                         <div class="tab-header">
                             <h2>Избранные товары</h2>
@@ -130,9 +776,21 @@
         <footer class="footer">
             <div class="ornament-bottom"></div>
             <div class="container footer-grid">
-                <div><h3>Контакты</h3><p>+7 (999) 444-44-44<br>test@gmail.com</p></div>
-                <div><h3>Разделы</h3><p><a href="index.html">Главная</a><br><a href="catalog.html">Каталог</a><br><a href="about.html">О мастерах</a></p></div>
-                <div><h3>Мы в соц-сетях</h3><div class="social-icons"><a href="#" class="social-icon">VK</a><a href="#" class="social-icon">TG</a></div></div>
+                <div>
+                    <h3>Контакты</h3>
+                    <p>+7 (999) 444-44-44<br>test@gmail.com</p>
+                </div>
+                <div>
+                    <h3>Разделы</h3>
+                    <p><a href="index.html">Главная</a><br><a href="catalog.html">Каталог</a><br><a href="about.html">О мастерах</a></p>
+                </div>
+                <div>
+                    <h3>Мы в соц-сетях</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon">VK</a>
+                        <a href="#" class="social-icon">TG</a>
+                    </div>
+                </div>
             </div>
         </footer>
     </div>
@@ -141,7 +799,7 @@
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
         import { getAuth, onAuthStateChanged, signOut, updateProfile } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
         import { getFirestore, doc, getDoc, collection, query, where, getDocs, updateDoc } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
-        
+
         const firebaseConfig = {
             apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
             authDomain: "chuvash-souvenir.firebaseapp.com",
@@ -150,13 +808,13 @@
             messagingSenderId: "754730678926",
             appId: "1:754730678926:web:5e45e557c0d298072027df"
         };
-        
+
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
-        
+
         let currentUser = null;
-        
+
         onAuthStateChanged(auth, async (user) => {
             if (!user) {
                 window.location.href = 'login.html';
@@ -168,11 +826,11 @@
             document.getElementById('userName').textContent = user.displayName || user.email.split('@')[0];
             document.getElementById('userEmail').textContent = user.email;
             document.getElementById('editName').value = user.displayName || '';
-            
+
             await loadOrders();
             await loadFavorites();
         });
-        
+
         async function loadOrders() {
             const q = query(collection(db, 'orders'), where('customer.email', '==', currentUser?.email));
             const snapshot = await getDocs(q);
@@ -197,14 +855,14 @@
                 `;
             });
         }
-        
+
         async function loadFavorites() {
             if (!currentUser) return;
             const favoritesRef = collection(db, 'users', currentUser.uid, 'favorites');
             const snapshot = await getDocs(favoritesRef);
             const favoriteIds = snapshot.docs.map(doc => doc.id);
             document.getElementById('favCount').textContent = favoriteIds.length;
-            
+
             const grid = document.getElementById('favoritesGrid');
             if (favoriteIds.length === 0) {
                 grid.innerHTML = '<div class="empty-favorites">У вас пока нет избранных товаров</div>';
@@ -227,7 +885,7 @@
                 }
             }
         }
-        
+
         // Переключение вкладок
         document.querySelectorAll('.nav-btn').forEach(btn => {
             if (btn.classList.contains('logout-btn')) return;
@@ -238,7 +896,7 @@
                 document.getElementById(btn.dataset.tab).classList.add('active');
             });
         });
-        
+
         // Редактирование профиля
         let editMode = false;
         document.getElementById('editProfileBtn').addEventListener('click', () => {
@@ -260,18 +918,19 @@
                 alert('Имя обновлено');
             }
         });
-        
+
         // Выход
         document.querySelector('.logout-btn').addEventListener('click', async () => {
             await signOut(auth);
             window.location.href = 'index.html';
         });
-        
+
         function updateCartCounter() {
             const cart = JSON.parse(localStorage.getItem('cartItems')) || [];
             const total = cart.reduce((s, i) => s + i.quantity, 0);
             const el = document.querySelector('.cart-count');
-            if (el) { el.textContent = total; el.style.display = total > 0 ? 'flex' : 'none'; }
+            if (el) { el.textContent = total;
+                el.style.display = total > 0 ? 'flex' : 'none'; }
         }
         updateCartCounter();
     </script>
