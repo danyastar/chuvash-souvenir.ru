@@ -25,6 +25,9 @@
             flex-direction: column;
             min-height: 100vh;
         }
+        .main-content .container {
+            flex: 1;
+        }
         .container {
             width: 90%;
             max-width: 1100px;
@@ -370,13 +373,14 @@
             box-shadow: 0 6px 16px rgba(226, 74, 44, 0.4);
         }
 
-        /* ===== ПОДВАЛ ===== */
+        /* ===== ПОДВАЛ (ПРИЖАТ К НИЗУ) ===== */
         .footer {
             background: #8B2000;
             color: white;
             margin-top: 50px;
             padding: 40px 0 25px;
             position: relative;
+            flex-shrink: 0;
         }
         .footer-grid {
             display: grid;
