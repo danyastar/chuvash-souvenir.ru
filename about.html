@@ -108,7 +108,7 @@
             padding: 0 15px;
         }
 
-        /* ===== ХЕДЕР (ТОЧНО КАК НА ГЛАВНОЙ) ===== */
+        /* ===== ХЕДЕР (ТОЧНО КАК НА ГЛАВНОЙ - БЕЗ ПОИСКА) ===== */
         .header {
             background: #FFF4E5;
             position: relative;
@@ -167,56 +167,6 @@
             width: 100%;
             height: 2px;
             background: #E24A2C;
-        }
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            flex-shrink: 0;
-        }
-        .search-box {
-            display: flex;
-            align-items: center;
-            background: white;
-            border: 2px solid #E0A400;
-            border-radius: 25px;
-            padding: 5px;
-            transition: all 0.3s ease;
-        }
-        .search-box:focus-within {
-            border-color: #E24A2C;
-            box-shadow: 0 0 0 3px rgba(226, 74, 44, 0.1);
-        }
-        .search-input {
-            border: none;
-            outline: none;
-            padding: 8px 15px;
-            border-radius: 20px;
-            width: 180px;
-            font-size: 14px;
-            background: transparent;
-        }
-        .search-input::placeholder {
-            color: #8B4513;
-            opacity: 0.7;
-        }
-        .search-btn {
-            background: linear-gradient(135deg, #E24A2C, #E66830);
-            border: none;
-            border-radius: 50%;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: white;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            flex-shrink: 0;
-        }
-        .search-btn:hover {
-            transform: scale(1.1);
         }
         .header-icons {
             display: flex;
@@ -729,9 +679,6 @@
             .nav {
                 gap: 20px;
             }
-            .search-input {
-                width: 150px;
-            }
             .intro-content {
                 grid-template-columns: 1fr;
                 gap: 40px;
@@ -751,22 +698,19 @@
             .logo {
                 order: 1;
             }
+            .logo img {
+                height: 60px;
+            }
             .nav {
-                order: 3;
+                order: 2;
                 width: 100%;
                 justify-content: center;
                 gap: 15px;
                 flex-wrap: wrap;
             }
-            .header-actions {
-                order: 2;
+            .header-icons {
+                order: 3;
                 gap: 10px;
-            }
-            .search-box {
-                width: 200px;
-            }
-            .search-input {
-                width: 100%;
             }
             .icon-link {
                 width: 40px;
@@ -917,7 +861,7 @@
                 gap: 12px;
             }
             .logo img {
-                height: 60px;
+                height: 50px;
             }
             .nav {
                 flex-wrap: wrap;
@@ -926,18 +870,8 @@
             .nav-link {
                 font-size: 14px;
             }
-            .header-actions {
-                flex-direction: column;
+            .header-icons {
                 gap: 10px;
-                width: 100%;
-            }
-            .search-box {
-                width: 100%;
-                max-width: 280px;
-                margin: 0 auto;
-            }
-            .search-input {
-                width: 100%;
             }
             .icon-link {
                 width: 38px;
@@ -1058,7 +992,7 @@
                 gap: 8px;
             }
             .logo img {
-                height: 50px;
+                height: 42px;
             }
 
             .ornament-top {
@@ -1099,18 +1033,12 @@
                         <a href="contacts.html" class="nav-link">Контакты</a>
                     </nav>
 
-                    <div class="header-actions">
-                        <div class="search-box">
-                            <input type="text" placeholder="Поиск..." class="search-input">
-                            <button class="search-btn">🔍</button>
-                        </div>
-                        <div class="header-icons">
-                            <a href="#" id="accountLink" class="icon-link" title="Личный кабинет">👤</a>
-                            <a href="cart.html" class="icon-link cart-link" title="Корзина">
-                                🛒
-                                <span class="cart-count">0</span>
-                            </a>
-                        </div>
+                    <div class="header-icons">
+                        <a href="#" id="accountLink" class="icon-link" title="Личный кабинет">👤</a>
+                        <a href="cart.html" class="icon-link cart-link" title="Корзина">
+                            🛒
+                            <span class="cart-count">0</span>
+                        </a>
                     </div>
                 </div>
             </div>
