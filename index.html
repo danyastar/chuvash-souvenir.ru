@@ -32,19 +32,21 @@
             padding: 0 15px;
         }
 
-        /* ===== ОРНАМЕНТЫ (десктоп - как было) ===== */
+        /* ===== ОРНАМЕНТЫ ===== */
+        /* Верхний орнамент - уменьшенный */
         .ornament-top {
             background-image: url("images/patternorna.png");
-            background-size: contain;
+            background-size: 60% auto;
             background-repeat: repeat-x;
-            height: 250px;
+            height: 100px;
             position: relative;
             margin: 0;
             background-position: center bottom;
-            top: -180px;
-            margin-bottom: -190px;
+            top: -60px;
+            margin-bottom: -80px;
             z-index: 1;
         }
+        /* Под хедером - как был */
         .ornament-header-bottom {
             background-image: url("images/headerpattern.png");
             background-size: contain;
@@ -56,15 +58,17 @@
             margin-top: -20px;
             z-index: 1;
         }
+        /* Средний орнамент - уменьшенный */
         .ornament-middle {
             background-image: url("images/patternorna.png");
-            background-size: contain;
+            background-size: 60% auto;
             background-repeat: repeat-x;
-            height: 250px;
+            height: 100px;
             position: relative;
             margin: 0px 0 0px 0;
             background-position: center center;
         }
+        /* Между секциями - как был */
         .ornament-between {
             background-image: url("images/midpattern.png");
             background-size: contain;
@@ -74,11 +78,12 @@
             margin: 5px 0;
             background-position: center center;
         }
+        /* Нижний орнамент - уменьшенный */
         .ornament-bottom {
             background-image: url("images/bottompattern.png");
-            background-size: contain;
+            background-size: 60% auto;
             background-repeat: repeat-x;
-            height: 20px;
+            height: 80px;
             position: relative;
             margin: 0;
             background-position: center top;
@@ -186,8 +191,10 @@
 
         /* ===== ГЕРОЙ ===== */
         .hero {
-            padding: 30px 0;
-            margin-top: -40px;
+            padding: 10px 0 20px;
+            margin-top: -20px;
+            position: relative;
+            z-index: 2;
         }
         .hero-content {
             display: flex;
@@ -232,6 +239,7 @@
             justify-content: center;
             align-items: flex-end;
             position: relative;
+            margin-bottom: -30px;
         }
         .hero-girl {
             max-width: 100%;
@@ -239,13 +247,15 @@
             max-height: 400px;
             filter: drop-shadow(0 10px 20px rgba(90, 31, 0, 0.3));
             object-fit: contain;
-            margin-bottom: -50px;
+            display: block;
         }
 
         /* ===== ПОПУЛЯРНЫЕ ТОВАРЫ ===== */
         .popular {
             padding: 40px 0;
-            margin-top: -50px;
+            margin-top: -20px;
+            position: relative;
+            z-index: 1;
         }
         .popular h2 {
             text-align: center;
@@ -519,7 +529,7 @@
             .hero-content {
                 flex-direction: column;
                 text-align: center;
-                gap: 30px;
+                gap: 20px;
             }
             .hero-text {
                 text-align: center;
@@ -528,9 +538,11 @@
             .hero-text h1 {
                 font-size: 32px;
             }
+            .hero-image-wrapper {
+                margin-bottom: -10px;
+            }
             .hero-girl {
                 max-height: 300px;
-                margin-bottom: 0;
             }
 
             .about-content {
@@ -561,28 +573,20 @@
                 justify-content: center;
             }
 
-            /* Орнаменты на планшете - увеличиваем масштаб картинки, но высота и отступы остаются */
+            /* Уменьшенные орнаменты на планшете - делаем чуть крупнее */
             .ornament-top {
-                background-size: 200% auto;
-                top: -180px;
-                margin-bottom: -190px;
-                height: 250px;
+                background-size: 80% auto;
+                height: 100px;
+                top: -60px;
+                margin-bottom: -80px;
             }
             .ornament-middle {
-                background-size: 200% auto;
-                height: 250px;
-            }
-            .ornament-between {
-                background-size: 200% auto;
-                height: 30px;
-            }
-            .ornament-header-bottom {
-                background-size: 200% auto;
-                height: 15px;
+                background-size: 80% auto;
+                height: 100px;
             }
             .ornament-bottom {
-                background-size: 200% auto;
-                height: 20px;
+                background-size: 80% auto;
+                height: 80px;
             }
         }
 
@@ -618,6 +622,12 @@
                 padding: 12px 25px;
                 font-size: 14px;
             }
+            .hero-image-wrapper {
+                margin-bottom: 0px;
+            }
+            .hero-girl {
+                max-height: 250px;
+            }
 
             .popular-grid {
                 grid-template-columns: 1fr;
@@ -641,28 +651,26 @@
                 justify-content: center;
             }
 
-            /* Орнаменты на телефоне - еще крупнее, но высота и отступы те же */
+            /* Уменьшенные орнаменты на телефоне - делаем чуть крупнее */
             .ornament-top {
-                background-size: 300% auto;
-                top: -180px;
-                margin-bottom: -190px;
-                height: 250px;
+                background-size: 100% auto;
+                height: 80px;
+                top: -50px;
+                margin-bottom: -65px;
             }
             .ornament-middle {
-                background-size: 300% auto;
-                height: 250px;
-            }
-            .ornament-between {
-                background-size: 300% auto;
-                height: 30px;
-            }
-            .ornament-header-bottom {
-                background-size: 300% auto;
-                height: 15px;
+                background-size: 100% auto;
+                height: 80px;
             }
             .ornament-bottom {
-                background-size: 300% auto;
-                height: 20px;
+                background-size: 100% auto;
+                height: 60px;
+            }
+            .ornament-header-bottom {
+                height: 12px;
+            }
+            .ornament-between {
+                height: 25px;
             }
         }
 
@@ -677,29 +685,23 @@
             .hero-text h1 {
                 font-size: 22px;
             }
+            .hero-girl {
+                max-height: 200px;
+            }
             
-            /* Орнаменты на очень маленьких экранах - еще крупнее */
             .ornament-top {
-                background-size: 400% auto;
-                height: 250px;
-                top: -180px;
-                margin-bottom: -190px;
+                background-size: 120% auto;
+                height: 70px;
+                top: -40px;
+                margin-bottom: -55px;
             }
             .ornament-middle {
-                background-size: 400% auto;
-                height: 250px;
-            }
-            .ornament-between {
-                background-size: 400% auto;
-                height: 30px;
-            }
-            .ornament-header-bottom {
-                background-size: 400% auto;
-                height: 15px;
+                background-size: 120% auto;
+                height: 70px;
             }
             .ornament-bottom {
-                background-size: 400% auto;
-                height: 20px;
+                background-size: 120% auto;
+                height: 50px;
             }
         }
     </style>
