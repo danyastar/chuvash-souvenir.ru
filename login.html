@@ -25,6 +25,9 @@
             flex-direction: column;
             min-height: 100vh;
         }
+        .main-content .container {
+            flex: 1;
+        }
         .container {
             width: 90%;
             max-width: 1100px;
@@ -171,8 +174,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            flex: 1;
             padding: 40px 0;
+            flex: 1;
         }
         .auth-box {
             background: white;
@@ -252,7 +255,7 @@
             display: none;
         }
 
-        /* ===== ПОДВАЛ ===== */
+        /* ===== ПОДВАЛ (ПРИЖАТ К НИЗУ) ===== */
         .footer {
             background: #8B2000;
             color: white;
@@ -458,6 +461,7 @@
             /* --- ВХОД --- */
             .auth-box {
                 padding: 25px 20px;
+                margin: 0 10px;
             }
             .auth-box h2 {
                 font-size: 22px;
