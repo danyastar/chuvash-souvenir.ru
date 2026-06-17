@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Личный кабинет - Чувашский сувенир</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Вход - Чувашский сувенир</title>
     <style>
         /* ===== БАЗОВЫЕ СТИЛИ ===== */
         * {
@@ -68,7 +67,7 @@
             margin-top: -20px;
         }
 
-        /* ===== ХЕДЕР (ТОЛЬКО ЛОГО + ВКЛАДКИ + ИКОНКИ) ===== */
+        /* ===== ХЕДЕР (ТАКОЙ ЖЕ КАК НА ГЛАВНОЙ) ===== */
         .header {
             background: #FFF4E5;
             position: relative;
@@ -167,269 +166,87 @@
             justify-content: center;
         }
 
-        /* ===== СТРАНИЦА ЛИЧНОГО КАБИНЕТА ===== */
-        .account-container {
+        /* ===== СТРАНИЦА ЛОГИНА ===== */
+        .login-wrapper {
             display: flex;
-            gap: 40px;
-            margin: 40px 0;
-            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            padding: 40px 0;
         }
-        .account-sidebar {
-            width: 280px;
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        .user-avatar {
-            font-size: 60px;
+        .login-box {
+            width: 380px;
+            background: #FFF6E1;
+            padding: 40px;
+            border-radius: 18px;
+            border: 2px solid #E0A400;
+            box-shadow: 0 6px 18px rgba(226, 164, 0, 0.15);
             text-align: center;
-            margin-bottom: 15px;
         }
-        .account-sidebar h3 {
-            text-align: center;
-            margin: 0 0 5px;
+        .login-box h2 {
+            margin-bottom: 25px;
             color: #8B2000;
+            font-size: 28px;
         }
-        .account-sidebar p {
-            text-align: center;
-            color: #666;
-            margin-bottom: 20px;
-        }
-        .account-nav {
+        .login-box form {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 15px;
         }
-        .nav-btn {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        .login-box input {
             padding: 12px 15px;
-            background: none;
-            border: none;
             border-radius: 10px;
-            cursor: pointer;
-            transition: 0.3s;
-            width: 100%;
-            text-align: left;
-            font-size: 16px;
-            font-family: inherit;
-        }
-        .nav-btn:hover {
-            background: #FFF6E1;
-        }
-        .nav-btn.active {
-            background: #FFF6E1;
-            color: #E24A2C;
-            border-left: 3px solid #E24A2C;
-        }
-        .nav-badge {
-            background: #E24A2C;
-            color: white;
-            border-radius: 12px;
-            padding: 2px 8px;
-            font-size: 12px;
-            margin-left: auto;
-        }
-        .logout-btn {
-            margin-top: 20px;
-            border-top: 1px solid #eee;
-            padding-top: 15px;
-            color: #E24A2C;
-        }
-
-        .account-main {
-            flex: 1;
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        .tab-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #E0A400;
-            padding-bottom: 10px;
-        }
-        .tab-header h2 {
-            margin: 0;
-            color: #8B2000;
-            font-size: 24px;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-        .info-item label {
-            color: #666;
-            font-size: 14px;
-            display: block;
-            margin-bottom: 5px;
-        }
-        .info-item p {
-            margin: 0;
-            font-weight: 500;
-            color: #5A1F00;
-        }
-
-        .order-card {
-            border: 1px solid #eee;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 15px;
-        }
-        .order-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-        .order-status {
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-            background: #FFF3E0;
-            color: #EF6C00;
-        }
-        .order-items {
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 10px;
-        }
-        .order-total {
-            font-weight: bold;
-            text-align: right;
-        }
-
-        .favorites-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        .favorite-item {
-            background: #FFF6E1;
-            border-radius: 12px;
-            padding: 15px;
-            text-align: center;
-            border: 1px solid #E0A400;
-            transition: 0.3s;
-        }
-        .favorite-item:hover {
-            transform: translateY(-3px);
-        }
-        .favorite-item img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            background: #f0e8d8;
-        }
-        .favorite-item h4 {
-            margin: 10px 0 5px;
-            color: #8B2000;
-        }
-        .favorite-item p {
-            color: #E24A2C;
-            font-weight: bold;
-            margin: 5px 0;
-        }
-        .favorite-item .btn {
-            display: inline-block;
-            background: linear-gradient(135deg, #E24A2C, #E66830);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-size: 14px;
-            margin-top: 10px;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .favorite-item .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(226, 74, 44, 0.3);
-        }
-        .empty-favorites {
-            text-align: center;
-            padding: 40px;
-            color: #666;
-        }
-
-        .edit-form {
-            display: none;
-            margin-top: 20px;
-            padding: 20px;
-            background: #FFF6E1;
-            border-radius: 12px;
-        }
-        .edit-form input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
             border: 2px solid #E0A400;
-            border-radius: 8px;
-            font-size: 16px;
+            font-size: 15px;
+            background: #ffffffde;
         }
-        .edit-form input:focus {
+        .login-box input:focus {
             border-color: #E24A2C;
             outline: none;
+            background: #fff;
         }
-        .edit-form .btn {
-            padding: 10px 20px;
-            border-radius: 25px;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            transition: 0.3s;
-            margin-right: 10px;
-        }
-        .edit-form .btn-primary {
+        .login-box .btn {
+            width: 100%;
+            padding: 14px;
             background: linear-gradient(135deg, #E24A2C, #E66830);
             color: white;
-        }
-        .edit-form .btn-primary:hover {
-            transform: translateY(-2px);
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
             box-shadow: 0 4px 12px rgba(226, 74, 44, 0.3);
         }
-        .edit-form .btn-outline-small {
-            background: transparent;
-            color: #E24A2C;
-            border: 2px solid #E24A2C;
-            padding: 8px 18px;
+        .login-box .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(226, 74, 44, 0.4);
         }
-        .edit-form .btn-outline-small:hover {
-            background: #E24A2C;
-            color: white;
+        .login-sub {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
         }
-
-        .btn-outline-small {
-            background: transparent;
+        .login-sub a {
             color: #E24A2C;
-            border: 2px solid #E24A2C;
-            padding: 8px 18px;
-            border-radius: 25px;
-            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .login-sub a:hover {
+            text-decoration: underline;
+        }
+        .login-box label {
+            text-align: left;
             font-size: 14px;
             font-weight: 600;
-            transition: 0.3s;
-            font-family: inherit;
+            color: #5A1F00;
         }
-        .btn-outline-small:hover {
-            background: #E24A2C;
-            color: white;
+        .error-msg {
+            color: #E24A2C;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
         }
 
         /* ===== ПОДВАЛ ===== */
@@ -568,23 +385,11 @@
                 margin-top: -25px;
             }
 
-            /* --- СТРАНИЦА --- */
-            .account-container {
-                flex-direction: column;
-            }
-            .account-sidebar {
-                width: auto;
-            }
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-            .favorites-grid {
-                grid-template-columns: 1fr;
-            }
-            .tab-header {
-                flex-direction: column;
-                gap: 10px;
-                align-items: flex-start;
+            /* --- ЛОГИН --- */
+            .login-box {
+                width: 100%;
+                max-width: 380px;
+                padding: 30px 20px;
             }
 
             /* --- ПОДВАЛ --- */
@@ -644,12 +449,12 @@
                 margin-top: -30px;
             }
 
-            /* --- СТРАНИЦА --- */
-            .account-main {
-                padding: 20px;
+            /* --- ЛОГИН --- */
+            .login-box {
+                padding: 25px 15px;
             }
-            .account-sidebar {
-                padding: 15px;
+            .login-box h2 {
+                font-size: 24px;
             }
 
             /* --- ПОДВАЛ --- */
@@ -715,7 +520,7 @@
                     </nav>
 
                     <div class="header-icons">
-                        <a href="#" id="accountLink" class="icon-link" title="Личный кабинет">👤</a>
+                        <a href="account.html" class="icon-link" title="Личный кабинет">👤</a>
                         <a href="cart.html" class="icon-link cart-link" title="Корзина">
                             🛒
                             <span class="cart-count">0</span>
@@ -727,47 +532,19 @@
         </header>
 
         <div class="container">
-            <div class="account-container" id="accountContainer">
-                <div class="account-sidebar">
-                    <div class="user-avatar">👤</div>
-                    <h3 id="userName">Загрузка...</h3>
-                    <p id="userEmail">-</p>
-                    <div class="account-nav">
-                        <button class="nav-btn active" data-tab="profile">👤 Личные данные</button>
-                        <button class="nav-btn" data-tab="orders">📦 История заказов</button>
-                        <button class="nav-btn" data-tab="favorites">❤️ Избранное <span id="favCount" class="nav-badge">0</span></button>
-                        <button class="nav-btn logout-btn">🚪 Выйти</button>
-                    </div>
-                </div>
-                <div class="account-main">
-                    <div class="tab-content active" id="profile">
-                        <div class="tab-header">
-                            <h2>Личные данные</h2>
-                            <button class="btn-outline-small" id="editProfileBtn">Редактировать</button>
-                        </div>
-                        <div class="info-grid" id="profileInfo">
-                            <div class="info-item"><label>Имя</label><p id="displayName">-</p></div>
-                            <div class="info-item"><label>Email</label><p id="displayEmail">-</p></div>
-                        </div>
-                        <div id="editProfileForm" class="edit-form">
-                            <input type="text" id="editName" placeholder="Имя">
-                            <button id="saveProfileBtn" class="btn btn-primary">Сохранить</button>
-                            <button id="cancelEditBtn" class="btn btn-outline-small">Отмена</button>
-                        </div>
-                    </div>
-
-                    <div class="tab-content" id="orders">
-                        <div class="tab-header">
-                            <h2>История заказов</h2>
-                        </div>
-                        <div id="ordersList">Загрузка...</div>
-                    </div>
-
-                    <div class="tab-content" id="favorites">
-                        <div class="tab-header">
-                            <h2>Избранные товары</h2>
-                        </div>
-                        <div id="favoritesGrid" class="favorites-grid"></div>
+            <div class="login-wrapper">
+                <div class="login-box">
+                    <h2>🔐 Вход в аккаунт</h2>
+                    <form id="loginForm">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" placeholder="example@mail.ru" required>
+                        <label for="loginPassword">Пароль</label>
+                        <input type="password" id="loginPassword" placeholder="••••••••" required>
+                        <button type="submit" class="btn">Войти</button>
+                    </form>
+                    <div class="error-msg" id="errorMsg">Неверный email или пароль</div>
+                    <div class="login-sub">
+                        Нет аккаунта? <a href="register.html">Зарегистрироваться</a>
                     </div>
                 </div>
             </div>
@@ -797,8 +574,7 @@
 
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-        import { getAuth, onAuthStateChanged, signOut, updateProfile } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
-        import { getFirestore, doc, getDoc, collection, query, where, getDocs } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+        import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
 
         const firebaseConfig = {
             apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
@@ -811,126 +587,32 @@
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-        const db = getFirestore(app);
 
-        let currentUser = null;
+        const loginForm = document.getElementById('loginForm');
+        const errorMsg = document.getElementById('errorMsg');
 
-        onAuthStateChanged(auth, async (user) => {
-            if (!user) {
-                window.location.href = 'login.html';
-                return;
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                window.location.href = 'account.html';
+            } catch (error) {
+                errorMsg.style.display = 'block';
+                setTimeout(() => { errorMsg.style.display = 'none'; }, 3000);
             }
-            currentUser = user;
-            document.getElementById('displayName').textContent = user.displayName || user.email.split('@')[0];
-            document.getElementById('displayEmail').textContent = user.email;
-            document.getElementById('userName').textContent = user.displayName || user.email.split('@')[0];
-            document.getElementById('userEmail').textContent = user.email;
-            document.getElementById('editName').value = user.displayName || '';
-
-            await loadOrders();
-            await loadFavorites();
-        });
-
-        async function loadOrders() {
-            const q = query(collection(db, 'orders'), where('customer.email', '==', currentUser?.email));
-            const snapshot = await getDocs(q);
-            const ordersList = document.getElementById('ordersList');
-            if (snapshot.empty) {
-                ordersList.innerHTML = '<p>У вас пока нет заказов</p>';
-                return;
-            }
-            ordersList.innerHTML = '';
-            snapshot.forEach((doc) => {
-                const order = doc.data();
-                const orderDate = order.createdAt?.toDate?.() || new Date();
-                ordersList.innerHTML += `
-                    <div class="order-card">
-                        <div class="order-header">
-                            <span>${orderDate.toLocaleDateString('ru-RU')}</span>
-                            <span class="order-status">${order.status === 'new' ? 'Новый' : 'Выполнен'}</span>
-                        </div>
-                        <div class="order-items">${order.items.map(i => `${i.name} x${i.quantity} — ${i.price * i.quantity} ₽`).join('<br>')}</div>
-                        <div class="order-total">Итого: ${order.total} ₽</div>
-                    </div>
-                `;
-            });
-        }
-
-        async function loadFavorites() {
-            if (!currentUser) return;
-            const favoritesRef = collection(db, 'users', currentUser.uid, 'favorites');
-            const snapshot = await getDocs(favoritesRef);
-            const favoriteIds = snapshot.docs.map(doc => doc.id);
-            document.getElementById('favCount').textContent = favoriteIds.length;
-
-            const grid = document.getElementById('favoritesGrid');
-            if (favoriteIds.length === 0) {
-                grid.innerHTML = '<div class="empty-favorites">У вас пока нет избранных товаров</div>';
-                return;
-            }
-            grid.innerHTML = '';
-            for (const id of favoriteIds) {
-                const productRef = doc(db, 'products', id);
-                const productSnap = await getDoc(productRef);
-                if (productSnap.exists()) {
-                    const product = productSnap.data();
-                    grid.innerHTML += `
-                        <div class="favorite-item">
-                            <img src="images/test.jpg" alt="${product.name}">
-                            <h4>${product.name}</h4>
-                            <p>${product.price} ₽</p>
-                            <a href="product.html?id=${id}" class="btn">Подробнее</a>
-                        </div>
-                    `;
-                }
-            }
-        }
-
-        // Переключение вкладок
-        document.querySelectorAll('.nav-btn').forEach(btn => {
-            if (btn.classList.contains('logout-btn')) return;
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-                btn.classList.add('active');
-                document.getElementById(btn.dataset.tab).classList.add('active');
-            });
-        });
-
-        // Редактирование профиля
-        let editMode = false;
-        document.getElementById('editProfileBtn').addEventListener('click', () => {
-            editMode = !editMode;
-            document.getElementById('editProfileForm').style.display = editMode ? 'block' : 'none';
-        });
-        document.getElementById('cancelEditBtn').addEventListener('click', () => {
-            editMode = false;
-            document.getElementById('editProfileForm').style.display = 'none';
-        });
-        document.getElementById('saveProfileBtn').addEventListener('click', async () => {
-            const newName = document.getElementById('editName').value;
-            if (newName && currentUser) {
-                await updateProfile(currentUser, { displayName: newName });
-                document.getElementById('displayName').textContent = newName;
-                document.getElementById('userName').textContent = newName;
-                editMode = false;
-                document.getElementById('editProfileForm').style.display = 'none';
-                alert('Имя обновлено');
-            }
-        });
-
-        // Выход
-        document.querySelector('.logout-btn').addEventListener('click', async () => {
-            await signOut(auth);
-            window.location.href = 'index.html';
         });
 
         function updateCartCounter() {
             const cart = JSON.parse(localStorage.getItem('cartItems')) || [];
             const total = cart.reduce((s, i) => s + i.quantity, 0);
             const el = document.querySelector('.cart-count');
-            if (el) { el.textContent = total;
-                el.style.display = total > 0 ? 'flex' : 'none'; }
+            if (el) {
+                el.textContent = total;
+                el.style.display = total > 0 ? 'flex' : 'none';
+            }
         }
         updateCartCounter();
     </script>
