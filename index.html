@@ -33,20 +33,18 @@
         }
 
         /* ===== ОРНАМЕНТЫ ===== */
-        /* Верхний орнамент - уменьшенный */
         .ornament-top {
             background-image: url("images/patternorna.png");
-            background-size: 60% auto;
+            background-size: contain;
             background-repeat: repeat-x;
-            height: 100px;
+            height: 250px;
             position: relative;
             margin: 0;
             background-position: center bottom;
-            top: -60px;
-            margin-bottom: -80px;
+            top: -180px;
+            margin-bottom: -190px;
             z-index: 1;
         }
-        /* Под хедером - как был */
         .ornament-header-bottom {
             background-image: url("images/headerpattern.png");
             background-size: contain;
@@ -58,17 +56,16 @@
             margin-top: -20px;
             z-index: 1;
         }
-        /* Средний орнамент - уменьшенный */
         .ornament-middle {
             background-image: url("images/patternorna.png");
-            background-size: 60% auto;
+            background-size: contain;
             background-repeat: repeat-x;
-            height: 100px;
+            height: 250px;
             position: relative;
             margin: 0px 0 0px 0;
             background-position: center center;
+            z-index: 1;
         }
-        /* Между секциями - как был */
         .ornament-between {
             background-image: url("images/midpattern.png");
             background-size: contain;
@@ -78,12 +75,11 @@
             margin: 5px 0;
             background-position: center center;
         }
-        /* Нижний орнамент - уменьшенный */
         .ornament-bottom {
             background-image: url("images/bottompattern.png");
-            background-size: 60% auto;
+            background-size: contain;
             background-repeat: repeat-x;
-            height: 80px;
+            height: 20px;
             position: relative;
             margin: 0;
             background-position: center top;
@@ -191,8 +187,8 @@
 
         /* ===== ГЕРОЙ ===== */
         .hero {
-            padding: 10px 0 20px;
-            margin-top: -20px;
+            padding: 10px 0 0px;
+            margin-top: -60px;
             position: relative;
             z-index: 2;
         }
@@ -239,12 +235,13 @@
             justify-content: center;
             align-items: flex-end;
             position: relative;
-            margin-bottom: -30px;
+            margin-bottom: -40px;
+            z-index: 3;
         }
         .hero-girl {
             max-width: 100%;
             height: auto;
-            max-height: 400px;
+            max-height: 420px;
             filter: drop-shadow(0 10px 20px rgba(90, 31, 0, 0.3));
             object-fit: contain;
             display: block;
@@ -253,7 +250,7 @@
         /* ===== ПОПУЛЯРНЫЕ ТОВАРЫ ===== */
         .popular {
             padding: 40px 0;
-            margin-top: -20px;
+            margin-top: -30px;
             position: relative;
             z-index: 1;
         }
@@ -501,35 +498,52 @@
             .hero-text h1 {
                 font-size: 36px;
             }
+            .hero-girl {
+                max-height: 350px;
+            }
         }
 
         @media (max-width: 768px) {
+            /* Хедер - логотип слева, иконки справа */
             .header-content {
-                flex-direction: column;
+                display: flex;
                 align-items: center;
-                text-align: center;
-                gap: 15px;
+                justify-content: space-between;
+                padding: 12px 0;
+                gap: 10px;
+                flex-wrap: nowrap;
             }
             .logo {
                 order: 1;
+                flex: 0 0 auto;
+            }
+            .logo img {
+                height: 60px;
             }
             .nav {
                 order: 2;
                 width: 100%;
                 justify-content: center;
-                gap: 15px;
+                gap: 12px;
                 flex-wrap: wrap;
+                padding: 5px 0;
             }
             .header-icons {
                 order: 3;
-                gap: 12px;
-                justify-content: center;
+                gap: 10px;
+                flex: 0 0 auto;
+                justify-content: flex-end;
+            }
+            .icon-link {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
             }
 
             .hero-content {
                 flex-direction: column;
                 text-align: center;
-                gap: 20px;
+                gap: 10px;
             }
             .hero-text {
                 text-align: center;
@@ -538,11 +552,15 @@
             .hero-text h1 {
                 font-size: 32px;
             }
+            .hero {
+                margin-top: -40px;
+                padding: 5px 0 0px;
+            }
             .hero-image-wrapper {
-                margin-bottom: -10px;
+                margin-bottom: -30px;
             }
             .hero-girl {
-                max-height: 300px;
+                max-height: 320px;
             }
 
             .about-content {
@@ -559,6 +577,9 @@
                 grid-template-columns: repeat(2, 1fr);
                 gap: 20px;
             }
+            .popular {
+                margin-top: -20px;
+            }
 
             .footer-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -572,58 +593,43 @@
             .social-icons {
                 justify-content: center;
             }
-
-            /* Уменьшенные орнаменты на планшете - делаем чуть крупнее */
-            .ornament-top {
-                background-size: 80% auto;
-                height: 100px;
-                top: -60px;
-                margin-bottom: -80px;
-            }
-            .ornament-middle {
-                background-size: 80% auto;
-                height: 100px;
-            }
-            .ornament-bottom {
-                background-size: 80% auto;
-                height: 80px;
-            }
         }
 
         @media (max-width: 480px) {
             .header-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 12px;
+                padding: 10px 0;
+                gap: 8px;
             }
             .logo img {
-                height: 60px;
+                height: 50px;
             }
             .nav {
-                flex-wrap: wrap;
-                gap: 10px 15px;
+                gap: 8px 12px;
             }
             .nav-link {
-                font-size: 14px;
+                font-size: 13px;
             }
             .header-icons {
-                gap: 10px;
+                gap: 8px;
             }
             .icon-link {
-                width: 38px;
-                height: 38px;
-                font-size: 16px;
+                width: 36px;
+                height: 36px;
+                font-size: 14px;
             }
 
             .hero-text h1 {
-                font-size: 26px;
+                font-size: 24px;
             }
             .btn {
-                padding: 12px 25px;
-                font-size: 14px;
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+            .hero {
+                margin-top: -30px;
             }
             .hero-image-wrapper {
-                margin-bottom: 0px;
+                margin-bottom: -20px;
             }
             .hero-girl {
                 max-height: 250px;
@@ -633,9 +639,12 @@
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
+            .popular {
+                margin-top: -10px;
+            }
 
             .about-art img {
-                max-width: 180px;
+                max-width: 160px;
             }
 
             .footer-grid {
@@ -650,58 +659,24 @@
             .social-icons {
                 justify-content: center;
             }
-
-            /* Уменьшенные орнаменты на телефоне - делаем чуть крупнее */
-            .ornament-top {
-                background-size: 100% auto;
-                height: 80px;
-                top: -50px;
-                margin-bottom: -65px;
-            }
-            .ornament-middle {
-                background-size: 100% auto;
-                height: 80px;
-            }
-            .ornament-bottom {
-                background-size: 100% auto;
-                height: 60px;
-            }
-            .ornament-header-bottom {
-                height: 12px;
-            }
-            .ornament-between {
-                height: 25px;
-            }
         }
 
         @media (max-width: 360px) {
             .nav {
                 flex-direction: column;
-                gap: 8px;
+                gap: 6px;
             }
             .logo img {
-                height: 50px;
+                height: 42px;
             }
             .hero-text h1 {
-                font-size: 22px;
+                font-size: 20px;
             }
             .hero-girl {
                 max-height: 200px;
             }
-            
-            .ornament-top {
-                background-size: 120% auto;
-                height: 70px;
-                top: -40px;
-                margin-bottom: -55px;
-            }
-            .ornament-middle {
-                background-size: 120% auto;
-                height: 70px;
-            }
-            .ornament-bottom {
-                background-size: 120% auto;
-                height: 50px;
+            .hero-image-wrapper {
+                margin-bottom: -15px;
             }
         }
     </style>
