@@ -4,43 +4,689 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Корзина - Чувашский сувенир</title>
-    <link rel="stylesheet" href="style.css">
     <style>
-        html, body { height: 100%; margin: 0; }
-        .main-content { display: flex; flex-direction: column; min-height: 100vh; }
-        .main-content .container { flex: 1; }
-        
-        .cart-header { text-align: center; margin: 30px 0; }
-        .cart-header h1 { font-size: 32px; color: #8B2000; }
-        .cart-content { display: flex; gap: 40px; flex-wrap: wrap; }
-        .cart-left { flex: 2; min-width: 300px; }
-        .cart-right { flex: 1; min-width: 280px; }
-        
-        .cart-item { background: white; border-radius: 12px; padding: 20px; margin-bottom: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
-        .cart-item-image { width: 100px; height: 100px; background: #f5f5f5; border-radius: 8px; overflow: hidden; flex-shrink: 0; }
-        .cart-item-image img { width: 100%; height: 100%; object-fit: cover; }
-        .cart-item-info { flex: 1; min-width: 150px; }
-        .cart-item-info h3 { margin: 0 0 5px; color: #8B2000; }
-        .cart-item-info p { margin: 0; color: #666; font-size: 14px; }
-        .cart-item-price { font-size: 18px; font-weight: bold; color: #E24A2C; min-width: 100px; text-align: center; }
-        .cart-item-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-        .quantity-control { display: flex; align-items: center; gap: 5px; }
-        .quantity-control button { width: 30px; height: 30px; border: 1px solid #E0A400; background: white; border-radius: 6px; cursor: pointer; font-size: 18px; }
-        .quantity-control span { min-width: 30px; text-align: center; }
-        .delete-btn { background: none; border: none; font-size: 20px; cursor: pointer; opacity: 0.6; }
-        .delete-btn:hover { opacity: 1; }
-        
-        .order-summary { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 20px; }
-        .order-summary h3 { margin-top: 0; color: #8B2000; border-bottom: 2px solid #E0A400; padding-bottom: 10px; }
-        .summary-row { display: flex; justify-content: space-between; margin: 12px 0; }
-        .summary-row.total { font-weight: bold; font-size: 18px; color: #8B2000; border-top: 1px solid #eee; padding-top: 12px; margin-top: 12px; }
-        .delivery-select { width: 100%; padding: 10px; border: 2px solid #E0A400; border-radius: 8px; margin: 10px 0; }
-        .checkout-btn { width: 100%; padding: 12px; background: linear-gradient(135deg, #E24A2C, #E66830); color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 16px; margin-top: 15px; }
-        .checkout-btn:hover { transform: scale(1.02); }
-        .empty-cart { text-align: center; padding: 50px; background: white; border-radius: 12px; }
-        .empty-cart .btn { display: inline-block; margin-top: 20px; }
-        
-        @media (max-width: 768px) { .cart-content { flex-direction: column; } .cart-item { flex-direction: column; text-align: center; } }
+        /* ===== БАЗОВЫЕ СТИЛИ ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: #FFF4E5;
+            color: #5A1F00;
+            line-height: 1.6;
+        }
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* ===== ОРНАМЕНТЫ ===== */
+        .ornament-top {
+            background-image: url("images/patternorna.png");
+            background-size: contain;
+            background-repeat: repeat-x;
+            height: 250px;
+            position: relative;
+            margin: 0;
+            background-position: center bottom;
+            top: -180px;
+            margin-bottom: -190px;
+            z-index: 1;
+        }
+        .ornament-header-bottom {
+            background-image: url("images/headerpattern.png");
+            background-size: contain;
+            background-repeat: repeat-x;
+            height: 15px;
+            position: relative;
+            margin: 0;
+            background-position: center top;
+            margin-top: -20px;
+            z-index: 1;
+        }
+        .ornament-bottom {
+            background-image: url("images/bottompattern.png");
+            background-size: contain;
+            background-repeat: repeat-x;
+            height: 20px;
+            position: relative;
+            margin: 0;
+            background-position: center top;
+            margin-top: -20px;
+        }
+
+        /* ===== ХЕДЕР (КАК НА ГЛАВНОЙ) ===== */
+        .header {
+            background: #FFF4E5;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(226, 74, 44, 0.1);
+        }
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 0;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .logo {
+            flex-shrink: 0;
+        }
+        .logo img {
+            height: 80px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+        .nav {
+            display: flex;
+            gap: 25px;
+            flex: 1;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .nav-link {
+            color: #5A1F00;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 8px 0;
+            position: relative;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        .nav-link:hover {
+            color: #E24A2C;
+        }
+        .nav-link.active {
+            color: #E24A2C;
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #E24A2C;
+        }
+        .header-icons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .icon-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #E24A2C, #E66830);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .icon-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(226, 74, 44, 0.3);
+        }
+        .cart-link {
+            position: relative;
+        }
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #FF5722;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===== КОРЗИНА ===== */
+        .cart-header {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .cart-header h1 {
+            font-size: 32px;
+            color: #8B2000;
+        }
+        .cart-content {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .cart-left {
+            flex: 2;
+            min-width: 300px;
+        }
+        .cart-right {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .cart-item {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .cart-item-image {
+            width: 100px;
+            height: 100px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .cart-item-info {
+            flex: 1;
+            min-width: 150px;
+        }
+        .cart-item-info h3 {
+            margin: 0 0 5px;
+            color: #8B2000;
+            font-size: 18px;
+        }
+        .cart-item-info p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+        .cart-item-price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #E24A2C;
+            min-width: 100px;
+            text-align: center;
+        }
+        .cart-item-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .quantity-control button {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #E0A400;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+        .quantity-control button:hover {
+            background: #FFF6E1;
+        }
+        .quantity-control span {
+            min-width: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+        .delete-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: 0.3s;
+            padding: 5px;
+        }
+        .delete-btn:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .order-summary {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 20px;
+        }
+        .order-summary h3 {
+            margin-top: 0;
+            color: #8B2000;
+            border-bottom: 2px solid #E0A400;
+            padding-bottom: 10px;
+            font-size: 22px;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 12px 0;
+            font-size: 15px;
+        }
+        .summary-row.total {
+            font-weight: bold;
+            font-size: 20px;
+            color: #8B2000;
+            border-top: 2px solid #E0A400;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .delivery-select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #E0A400;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 15px;
+            background: white;
+            cursor: pointer;
+        }
+        .delivery-select:focus {
+            border-color: #E24A2C;
+            outline: none;
+        }
+        .checkout-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #E24A2C, #E66830);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: 0.3s;
+            box-shadow: 0 4px 12px rgba(226, 74, 44, 0.3);
+        }
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(226, 74, 44, 0.4);
+        }
+        .empty-cart {
+            text-align: center;
+            padding: 60px 40px;
+            background: white;
+            border-radius: 12px;
+            width: 100%;
+        }
+        .empty-cart h2 {
+            color: #8B2000;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .empty-cart p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .empty-cart .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #E24A2C, #E66830);
+            color: white;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            box-shadow: 0 4px 12px rgba(226, 74, 44, 0.3);
+        }
+        .empty-cart .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(226, 74, 44, 0.4);
+        }
+
+        /* ===== ПОДВАЛ ===== */
+        .footer {
+            background: #8B2000;
+            color: white;
+            margin-top: 50px;
+            padding: 40px 0 25px;
+            position: relative;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .footer h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+            position: relative;
+            display: inline-block;
+            color: #fff;
+        }
+        .footer h3::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 35px;
+            height: 2px;
+            background: #FBE8C7;
+        }
+        .footer p {
+            line-height: 1.6;
+            margin: 5px 0;
+            font-size: 14px;
+            color: #fff;
+        }
+        .footer a {
+            text-decoration: none;
+            color: #fff;
+            transition: opacity 0.3s ease;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+            opacity: 0.8;
+        }
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .social-icon {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            display: inline-block;
+            padding: 6px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            background: rgba(255, 255, 255, 0.15);
+            text-decoration: none;
+            border-color: #fff;
+        }
+
+        /* ====================================================== */
+        /* ===== АДАПТИВ ===== */
+        /* ====================================================== */
+
+        @media (max-width: 1024px) {
+            .header-content {
+                gap: 15px;
+            }
+            .nav {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* --- ХЕДЕР --- */
+            .header-content {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 12px 0;
+                gap: 10px;
+                flex-wrap: nowrap;
+            }
+            .logo {
+                order: 1;
+                flex: 0 0 auto;
+            }
+            .logo img {
+                height: 60px;
+            }
+            .nav {
+                order: 2;
+                width: 100%;
+                justify-content: center;
+                gap: 12px;
+                flex-wrap: wrap;
+                padding: 5px 0;
+            }
+            .header-icons {
+                order: 3;
+                gap: 10px;
+                flex: 0 0 auto;
+                justify-content: flex-end;
+            }
+            .icon-link {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            /* --- ОРНАМЕНТЫ --- */
+            .ornament-top {
+                background-size: 150% auto;
+                height: 320px;
+                top: -250px;
+                margin-bottom: -260px;
+            }
+            .ornament-header-bottom {
+                background-size: 150% auto;
+                height: 15px;
+                margin-top: -20px;
+            }
+            .ornament-bottom {
+                background-size: 150% auto;
+                height: 30px;
+                margin-top: -25px;
+            }
+
+            /* --- КОРЗИНА --- */
+            .cart-content {
+                flex-direction: column;
+            }
+            .cart-left {
+                min-width: unset;
+            }
+            .cart-right {
+                min-width: unset;
+            }
+            .cart-item {
+                flex-direction: column;
+                text-align: center;
+                padding: 15px;
+            }
+            .cart-item-image {
+                width: 120px;
+                height: 120px;
+                margin: 0 auto;
+            }
+            .cart-item-price {
+                min-width: unset;
+            }
+            .cart-item-actions {
+                justify-content: center;
+            }
+            .order-summary {
+                position: static;
+            }
+            .cart-header h1 {
+                font-size: 26px;
+            }
+
+            /* --- ПОДВАЛ --- */
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+                text-align: center;
+            }
+            .footer h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .social-icons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* --- ХЕДЕР --- */
+            .header-content {
+                padding: 10px 0;
+                gap: 8px;
+            }
+            .logo img {
+                height: 50px;
+            }
+            .nav {
+                gap: 8px 12px;
+            }
+            .nav-link {
+                font-size: 13px;
+            }
+            .header-icons {
+                gap: 8px;
+            }
+            .icon-link {
+                width: 36px;
+                height: 36px;
+                font-size: 14px;
+            }
+
+            /* --- ОРНАМЕНТЫ --- */
+            .ornament-top {
+                background-size: 200% auto;
+                height: 380px;
+                top: -300px;
+                margin-bottom: -310px;
+            }
+            .ornament-header-bottom {
+                background-size: 200% auto;
+                height: 15px;
+                margin-top: -20px;
+            }
+            .ornament-bottom {
+                background-size: 200% auto;
+                height: 35px;
+                margin-top: -30px;
+            }
+
+            /* --- КОРЗИНА --- */
+            .cart-header {
+                margin: 20px 0;
+            }
+            .cart-header h1 {
+                font-size: 22px;
+            }
+            .cart-item {
+                padding: 12px;
+                gap: 12px;
+            }
+            .cart-item-image {
+                width: 100px;
+                height: 100px;
+            }
+            .cart-item-info h3 {
+                font-size: 16px;
+            }
+            .cart-item-price {
+                font-size: 16px;
+            }
+            .order-summary {
+                padding: 18px;
+            }
+            .order-summary h3 {
+                font-size: 19px;
+            }
+            .summary-row.total {
+                font-size: 17px;
+            }
+            .checkout-btn {
+                font-size: 15px;
+                padding: 12px;
+            }
+            .empty-cart {
+                padding: 40px 20px;
+            }
+            .empty-cart h2 {
+                font-size: 22px;
+            }
+
+            /* --- ПОДВАЛ --- */
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                text-align: center;
+            }
+            .footer h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .social-icons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .nav {
+                flex-direction: column;
+                gap: 6px;
+            }
+            .logo img {
+                height: 42px;
+            }
+            .cart-item-image {
+                width: 80px;
+                height: 80px;
+            }
+            .quantity-control button {
+                width: 26px;
+                height: 26px;
+                font-size: 15px;
+            }
+
+            .ornament-top {
+                background-size: 250% auto;
+                height: 420px;
+                top: -330px;
+                margin-bottom: -340px;
+            }
+            .ornament-header-bottom {
+                background-size: 250% auto;
+                height: 15px;
+                margin-top: -20px;
+            }
+            .ornament-bottom {
+                background-size: 250% auto;
+                height: 40px;
+                margin-top: -35px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -49,20 +695,23 @@
             <div class="ornament-top"></div>
             <div class="container">
                 <div class="header-content">
-                    <div class="logo"><a href="index.html"><img src="images/logo.png" alt="Чувашский сувенир"></a></div>
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="images/logo.png" alt="Чувашский сувенир">
+                        </a>
+                    </div>
                     <nav class="nav">
                         <a href="index.html" class="nav-link">Главная</a>
                         <a href="catalog.html" class="nav-link">Каталог</a>
                         <a href="about.html" class="nav-link">О мастерах</a>
                         <a href="contacts.html" class="nav-link">Контакты</a>
                     </nav>
-                    <div class="header-actions">
-                        <div class="search-box"><input type="text" placeholder="Поиск товаров..." class="search-input"><button class="search-btn">🔍</button></div>
-                        <div class="header-icons">
-                            <a href="favorites.html" class="icon-link" title="Избранное">❤️</a>
-                            <a href="account.html" class="icon-link" title="Личный кабинет"><span class="icon">👤</span></a>
-                            <a href="cart.html" class="icon-link cart-link" title="Корзина"><span class="icon">🛒</span><span class="cart-count">0</span></a>
-                        </div>
+                    <div class="header-icons">
+                        <a href="#" id="accountLink" class="icon-link" title="Личный кабинет">👤</a>
+                        <a href="cart.html" class="icon-link cart-link" title="Корзина">
+                            🛒
+                            <span class="cart-count">0</span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -79,17 +728,55 @@
         <footer class="footer">
             <div class="ornament-bottom"></div>
             <div class="container footer-grid">
-                <div><h3>Контакты</h3><p>+7 (999) 444-44-44<br>test@gmail.com</p></div>
-                <div><h3>Разделы</h3><p><a href="index.html">Главная</a><br><a href="catalog.html">Каталог</a><br><a href="about.html">О мастерах</a></p></div>
-                <div><h3>Мы в соц-сетях</h3><div class="social-icons"><a href="#" class="social-icon">VK</a><a href="#" class="social-icon">TG</a></div></div>
+                <div>
+                    <h3>Контакты</h3>
+                    <p>+7 (999) 444-44-44<br>test@gmail.com</p>
+                </div>
+                <div>
+                    <h3>Разделы</h3>
+                    <p><a href="index.html">Главная</a><br><a href="catalog.html">Каталог</a><br><a href="about.html">О мастерах</a></p>
+                </div>
+                <div>
+                    <h3>Мы в соц-сетях</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon">VK</a>
+                        <a href="#" class="social-icon">TG</a>
+                    </div>
+                </div>
             </div>
         </footer>
     </div>
 
-    <script>
+    <script type="module">
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
+            authDomain: "chuvash-souvenir.firebaseapp.com",
+            projectId: "chuvash-souvenir",
+            storageBucket: "chuvash-souvenir.firebasestorage.app",
+            messagingSenderId: "754730678926",
+            appId: "1:754730678926:web:5e45e557c0d298072027df"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        const accountLink = document.getElementById('accountLink');
+        if (accountLink) {
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    accountLink.href = 'account.html';
+                } else {
+                    accountLink.href = 'login.html';
+                }
+            });
+        }
+
         let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
         let deliveryCost = 300;
-        
+
         function renderCart() {
             const container = document.getElementById('cartContent');
             if (!cartItems.length) {
@@ -103,7 +790,7 @@
                 updateCartCounter();
                 return;
             }
-            
+
             let subtotal = 0;
             let itemsHtml = '';
             cartItems.forEach((item, index) => {
@@ -118,7 +805,7 @@
                         <div class="cart-item-price">${item.price * item.quantity} ₽</div>
                         <div class="cart-item-actions">
                             <div class="quantity-control">
-                                <button class="qty-minus" data-index="${index}">-</button>
+                                <button class="qty-minus" data-index="${index}">−</button>
                                 <span>${item.quantity}</span>
                                 <button class="qty-plus" data-index="${index}">+</button>
                             </div>
@@ -127,9 +814,9 @@
                     </div>
                 `;
             });
-            
+
             const total = subtotal + deliveryCost;
-            
+
             container.innerHTML = `
                 <div class="cart-left">
                     ${itemsHtml}
@@ -138,7 +825,7 @@
                     <div class="order-summary">
                         <h3>Итоги заказа</h3>
                         <div class="summary-row">
-                            <span>Товары (${cartItems.reduce((s,i)=>s+i.quantity,0)} шт.)</span>
+                            <span>Товары (${cartItems.reduce((s, i) => s + i.quantity, 0)} шт.)</span>
                             <span>${subtotal} ₽</span>
                         </div>
                         <div class="summary-row">
@@ -158,7 +845,7 @@
                     </div>
                 </div>
             `;
-            
+
             document.querySelectorAll('.qty-minus').forEach(btn => {
                 btn.addEventListener('click', () => changeQuantity(parseInt(btn.dataset.index), -1));
             });
@@ -168,7 +855,7 @@
             document.querySelectorAll('.delete-btn').forEach(btn => {
                 btn.addEventListener('click', () => removeItem(parseInt(btn.dataset.index)));
             });
-            
+
             const deliverySelect = document.getElementById('deliverySelect');
             if (deliverySelect) {
                 deliverySelect.value = deliveryCost;
@@ -177,7 +864,7 @@
                     updateDeliveryAndTotal();
                 });
             }
-            
+
             document.getElementById('checkoutBtn')?.addEventListener('click', () => {
                 if (cartItems.length === 0) {
                     alert('Корзина пуста');
@@ -187,14 +874,14 @@
                 window.location.href = 'checkout.html';
             });
         }
-        
+
         function updateDeliveryAndTotal() {
             const subtotal = cartItems.reduce((s, i) => s + i.price * i.quantity, 0);
             const total = subtotal + deliveryCost;
             document.getElementById('deliveryAmount').textContent = deliveryCost + ' ₽';
             document.getElementById('totalAmount').textContent = total + ' ₽';
         }
-        
+
         function changeQuantity(index, delta) {
             const newQuantity = cartItems[index].quantity + delta;
             if (newQuantity >= 1 && newQuantity <= 10) {
@@ -207,60 +894,25 @@
                 alert('Максимальное количество - 10');
             }
         }
-        
+
         function removeItem(index) {
             cartItems.splice(index, 1);
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
             renderCart();
             updateCartCounter();
         }
-        
+
         function updateCartCounter() {
             const total = cartItems.reduce((s, i) => s + i.quantity, 0);
             const el = document.querySelector('.cart-count');
-            if (el) { el.textContent = total; el.style.display = total > 0 ? 'flex' : 'none'; }
+            if (el) {
+                el.textContent = total;
+                el.style.display = total > 0 ? 'flex' : 'none';
+            }
         }
-        
+
         renderCart();
         updateCartCounter();
     </script>
-    <script type="module">
-    import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-    
-    const firebaseConfig = {
-        apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
-        authDomain: "chuvash-souvenir.firebaseapp.com",
-        projectId: "chuvash-souvenir",
-        storageBucket: "chuvash-souvenir.firebasestorage.app",
-        messagingSenderId: "754730678926",
-        appId: "1:754730678926:web:5e45e557c0d298072027df"
-    };
-    
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    
-    const accountLink = document.querySelector('.icon-link[title="Личный кабинет"]');
-    if (accountLink) {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                accountLink.href = 'account.html';
-            } else {
-                accountLink.href = 'login.html';
-            }
-        });
-    }
-    
-    function updateCartCounter() {
-        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-        const total = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-        const cartCount = document.querySelector('.cart-count');
-        if (cartCount) {
-            cartCount.textContent = total;
-            cartCount.style.display = total > 0 ? 'flex' : 'none';
-        }
-    }
-    updateCartCounter();
-</script>
 </body>
 </html>
