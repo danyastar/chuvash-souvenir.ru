@@ -4,7 +4,519 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Регистрация - Чувашский сувенир</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ===== БАЗОВЫЕ СТИЛИ ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: #FFF4E5;
+            color: #5A1F00;
+            line-height: 1.6;
+        }
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .main-content .container {
+            flex: 1;
+        }
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* ===== ОРНАМЕНТЫ ===== */
+        .ornament-top {
+            background-image: url("images/patternorna.png");
+            background-size: contain;
+            background-repeat: repeat-x;
+            height: 250px;
+            position: relative;
+            margin: 0;
+            background-position: center bottom;
+            top: -180px;
+            margin-bottom: -190px;
+            z-index: 1;
+        }
+        .ornament-header-bottom {
+            background-image: url("images/headerpattern.png");
+            background-size: contain;
+            background-repeat: repeat-x;
+            height: 15px;
+            position: relative;
+            margin: 0;
+            background-position: center top;
+            margin-top: -20px;
+            z-index: 1;
+        }
+        .ornament-bottom {
+            background-image: url("images/bottompattern.png");
+            background-size: contain;
+            background-repeat: repeat-x;
+            height: 20px;
+            position: relative;
+            margin: 0;
+            background-position: center top;
+            margin-top: -20px;
+        }
+
+        /* ===== ХЕДЕР (КАК НА ГЛАВНОЙ) ===== */
+        .header {
+            background: #FFF4E5;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(226, 74, 44, 0.1);
+        }
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 0;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .logo {
+            flex-shrink: 0;
+        }
+        .logo img {
+            height: 80px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+        .nav {
+            display: flex;
+            gap: 25px;
+            flex: 1;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .nav-link {
+            color: #5A1F00;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 8px 0;
+            position: relative;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        .nav-link:hover {
+            color: #E24A2C;
+        }
+        .nav-link.active {
+            color: #E24A2C;
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #E24A2C;
+        }
+        .header-icons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .icon-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #E24A2C, #E66830);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .icon-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(226, 74, 44, 0.3);
+        }
+        .cart-link {
+            position: relative;
+        }
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #FF5722;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===== СТРАНИЦА РЕГИСТРАЦИИ ===== */
+        .auth-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 0;
+            flex: 1;
+        }
+        .auth-box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            border: 2px solid #E0A400;
+        }
+        .auth-box h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #8B2000;
+            font-size: 28px;
+        }
+        .auth-box .form-group {
+            margin-bottom: 15px;
+        }
+        .auth-box .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #5A1F00;
+            font-size: 14px;
+        }
+        .auth-box .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #E0A400;
+            border-radius: 8px;
+            font-size: 15px;
+            background: white;
+            font-family: inherit;
+        }
+        .auth-box .form-group input:focus {
+            border-color: #E24A2C;
+            outline: none;
+        }
+        .auth-box .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #E24A2C, #E66830);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: 0.3s;
+            box-shadow: 0 4px 12px rgba(226, 74, 44, 0.3);
+            margin-top: 10px;
+        }
+        .auth-box .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(226, 74, 44, 0.4);
+        }
+        .auth-link {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        .auth-link a {
+            color: #E24A2C;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .auth-link a:hover {
+            text-decoration: underline;
+        }
+        .error-msg {
+            color: #E24A2C;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* ===== ПОДВАЛ ===== */
+        .footer {
+            background: #8B2000;
+            color: white;
+            margin-top: 50px;
+            padding: 40px 0 25px;
+            position: relative;
+            flex-shrink: 0;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .footer h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+            position: relative;
+            display: inline-block;
+            color: #fff;
+        }
+        .footer h3::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 35px;
+            height: 2px;
+            background: #FBE8C7;
+        }
+        .footer p {
+            line-height: 1.6;
+            margin: 5px 0;
+            font-size: 14px;
+            color: #fff;
+        }
+        .footer a {
+            text-decoration: none;
+            color: #fff;
+            transition: opacity 0.3s ease;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+            opacity: 0.8;
+        }
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .social-icon {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            display: inline-block;
+            padding: 6px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            background: rgba(255, 255, 255, 0.15);
+            text-decoration: none;
+            border-color: #fff;
+        }
+
+        /* ====================================================== */
+        /* ===== АДАПТИВ ===== */
+        /* ====================================================== */
+
+        @media (max-width: 1024px) {
+            .header-content {
+                gap: 15px;
+            }
+            .nav {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* --- ХЕДЕР --- */
+            .header-content {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 12px 0;
+                gap: 10px;
+                flex-wrap: nowrap;
+            }
+            .logo {
+                order: 1;
+                flex: 0 0 auto;
+            }
+            .logo img {
+                height: 60px;
+            }
+            .nav {
+                order: 2;
+                width: 100%;
+                justify-content: center;
+                gap: 12px;
+                flex-wrap: wrap;
+                padding: 5px 0;
+            }
+            .header-icons {
+                order: 3;
+                gap: 10px;
+                flex: 0 0 auto;
+                justify-content: flex-end;
+            }
+            .icon-link {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            /* --- ОРНАМЕНТЫ --- */
+            .ornament-top {
+                background-size: 150% auto;
+                height: 320px;
+                top: -250px;
+                margin-bottom: -260px;
+            }
+            .ornament-header-bottom {
+                background-size: 150% auto;
+                height: 15px;
+                margin-top: -20px;
+            }
+            .ornament-bottom {
+                background-size: 150% auto;
+                height: 30px;
+                margin-top: -25px;
+            }
+
+            /* --- РЕГИСТРАЦИЯ --- */
+            .auth-box {
+                padding: 30px 25px;
+                margin: 0 15px;
+            }
+            .auth-box h2 {
+                font-size: 24px;
+            }
+
+            /* --- ПОДВАЛ --- */
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+                text-align: center;
+            }
+            .footer h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .social-icons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* --- ХЕДЕР --- */
+            .header-content {
+                padding: 10px 0;
+                gap: 8px;
+            }
+            .logo img {
+                height: 50px;
+            }
+            .nav {
+                gap: 8px 12px;
+            }
+            .nav-link {
+                font-size: 13px;
+            }
+            .header-icons {
+                gap: 8px;
+            }
+            .icon-link {
+                width: 36px;
+                height: 36px;
+                font-size: 14px;
+            }
+
+            /* --- ОРНАМЕНТЫ --- */
+            .ornament-top {
+                background-size: 200% auto;
+                height: 380px;
+                top: -300px;
+                margin-bottom: -310px;
+            }
+            .ornament-header-bottom {
+                background-size: 200% auto;
+                height: 15px;
+                margin-top: -20px;
+            }
+            .ornament-bottom {
+                background-size: 200% auto;
+                height: 35px;
+                margin-top: -30px;
+            }
+
+            /* --- РЕГИСТРАЦИЯ --- */
+            .auth-box {
+                padding: 25px 20px;
+                margin: 0 10px;
+            }
+            .auth-box h2 {
+                font-size: 22px;
+            }
+            .auth-box .form-group input {
+                padding: 10px;
+                font-size: 14px;
+            }
+            .auth-box .btn {
+                padding: 12px;
+                font-size: 15px;
+            }
+
+            /* --- ПОДВАЛ --- */
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                text-align: center;
+            }
+            .footer h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .social-icons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .nav {
+                flex-direction: column;
+                gap: 6px;
+            }
+            .logo img {
+                height: 42px;
+            }
+
+            .ornament-top {
+                background-size: 250% auto;
+                height: 420px;
+                top: -330px;
+                margin-bottom: -340px;
+            }
+            .ornament-header-bottom {
+                background-size: 250% auto;
+                height: 15px;
+                margin-top: -20px;
+            }
+            .ornament-bottom {
+                background-size: 250% auto;
+                height: 40px;
+                margin-top: -35px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="main-content">
@@ -23,20 +535,12 @@
                         <a href="about.html" class="nav-link">О мастерах</a>
                         <a href="contacts.html" class="nav-link">Контакты</a>
                     </nav>
-                    <div class="header-actions">
-                        <div class="search-box">
-                            <input type="text" placeholder="Поиск товаров..." class="search-input">
-                            <button class="search-btn">🔍</button>
-                        </div>
-                        <div class="header-icons">
-                            <a href="account.html" class="icon-link" title="Личный кабинет">
-                                <span class="icon">👤</span>
-                            </a>
-                            <a href="cart.html" class="icon-link cart-link" title="Корзина">
-                                <span class="icon">🛒</span>
-                                <span class="cart-count">0</span>
-                            </a>
-                        </div>
+                    <div class="header-icons">
+                        <a href="account.html" class="icon-link" title="Личный кабинет">👤</a>
+                        <a href="cart.html" class="icon-link cart-link" title="Корзина">
+                            🛒
+                            <span class="cart-count">0</span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -46,21 +550,22 @@
         <div class="container">
             <div class="auth-wrapper">
                 <div class="auth-box">
-                    <h2>Регистрация</h2>
+                    <h2>📝 Регистрация</h2>
                     <form id="registerForm">
                         <div class="form-group">
                             <label>Имя</label>
-                            <input type="text" id="regName" required>
+                            <input type="text" id="regName" placeholder="Введите ваше имя" required>
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" id="regEmail" required>
+                            <input type="email" id="regEmail" placeholder="example@mail.ru" required>
                         </div>
                         <div class="form-group">
                             <label>Пароль</label>
-                            <input type="password" id="regPassword" required>
+                            <input type="password" id="regPassword" placeholder="••••••••" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                        <div class="error-msg" id="errorMsg">Ошибка регистрации</div>
+                        <button type="submit" class="btn">Зарегистрироваться</button>
                         <p class="auth-link">Уже есть аккаунт? <a href="login.html">Войти</a></p>
                     </form>
                 </div>
@@ -70,9 +575,21 @@
         <footer class="footer">
             <div class="ornament-bottom"></div>
             <div class="container footer-grid">
-                <div><h3>Контакты</h3><p>+7 (999) 444-44-44<br>test@gmail.com</p></div>
-                <div><h3>Разделы</h3><p><a href="index.html">Главная</a><br><a href="catalog.html">Каталог</a><br><a href="about.html">О мастерах</a></p></div>
-                <div><h3>Мы в соц-сетях</h3><div class="social-icons"><a href="#" class="social-icon">VK</a><a href="#" class="social-icon">TG</a></div></div>
+                <div>
+                    <h3>Контакты</h3>
+                    <p>+7 (999) 444-44-44<br>test@gmail.com</p>
+                </div>
+                <div>
+                    <h3>Разделы</h3>
+                    <p><a href="index.html">Главная</a><br><a href="catalog.html">Каталог</a><br><a href="about.html">О мастерах</a></p>
+                </div>
+                <div>
+                    <h3>Мы в соц-сетях</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon">VK</a>
+                        <a href="#" class="social-icon">TG</a>
+                    </div>
+                </div>
             </div>
         </footer>
     </div>
@@ -81,7 +598,7 @@
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
         import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
         import { getFirestore, doc, setDoc } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
-        
+
         const firebaseConfig = {
             apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
             authDomain: "chuvash-souvenir.firebaseapp.com",
@@ -90,17 +607,20 @@
             messagingSenderId: "754730678926",
             appId: "1:754730678926:web:5e45e557c0d298072027df"
         };
-        
+
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
-        
-        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+
+        const registerForm = document.getElementById('registerForm');
+        const errorMsg = document.getElementById('errorMsg');
+
+        registerForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const name = document.getElementById('regName').value;
             const email = document.getElementById('regEmail').value;
             const password = document.getElementById('regPassword').value;
-            
+
             try {
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 await updateProfile(userCredential.user, { displayName: name });
@@ -109,31 +629,24 @@
                     email: email,
                     createdAt: new Date()
                 });
-                alert('Регистрация успешна!');
                 window.location.href = 'account.html';
             } catch (error) {
-                alert('Ошибка: ' + error.message);
+                errorMsg.style.display = 'block';
+                errorMsg.textContent = 'Ошибка: ' + error.message;
+                setTimeout(() => { errorMsg.style.display = 'none'; }, 3000);
             }
         });
-        
+
         function updateCartCounter() {
             const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
             const total = cartItems.reduce((sum, i) => sum + i.quantity, 0);
             const el = document.querySelector('.cart-count');
-            if (el) { el.textContent = total; el.style.display = total > 0 ? 'flex' : 'none'; }
+            if (el) {
+                el.textContent = total;
+                el.style.display = total > 0 ? 'flex' : 'none';
+            }
         }
         updateCartCounter();
     </script>
-    
-    <style>
-        .auth-wrapper { display: flex; justify-content: center; align-items: center; min-height: 60vh; }
-        .auth-box { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
-        .auth-box h2 { text-align: center; margin-bottom: 25px; color: #8B2000; }
-        .auth-box .form-group { margin-bottom: 15px; }
-        .auth-box .form-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; }
-        .auth-box .btn { width: 100%; padding: 12px; background: #E24A2C; color: white; border: none; border-radius: 8px; cursor: pointer; }
-        .auth-link { text-align: center; margin-top: 15px; }
-        .auth-link a { color: #E24A2C; text-decoration: none; }
-    </style>
 </body>
 </html>
