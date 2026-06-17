@@ -40,12 +40,12 @@
             background-image: url("images/patternorna.png");
             background-size: contain;
             background-repeat: repeat-x;
-            height: 250px;
+            height: 150px;
             position: relative;
             margin: 0;
             background-position: center bottom;
-            top: -180px;
-            margin-bottom: -190px;
+            top: -100px;
+            margin-bottom: -110px;
             z-index: 1;
         }
         .ornament-header-bottom {
@@ -56,7 +56,7 @@
             position: relative;
             margin: 0;
             background-position: center top;
-            margin-top: -20px;
+            margin-top: -15px;
             z-index: 1;
         }
         .ornament-bottom {
@@ -70,17 +70,18 @@
             margin-top: -20px;
         }
 
-        /* ===== ХЕДЕР ===== */
+        /* ===== ШАПКА (УПРОЩЁННАЯ) ===== */
         .header {
             background: #FFF4E5;
             position: relative;
             box-shadow: 0 2px 10px rgba(226, 74, 44, 0.1);
+            padding: 10px 0;
         }
         .header-content {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 15px 0;
+            padding: 10px 0;
             gap: 20px;
             flex-wrap: wrap;
         }
@@ -88,93 +89,47 @@
             flex-shrink: 0;
         }
         .logo img {
-            height: 80px;
+            height: 60px;
             width: auto;
             transition: transform 0.3s ease;
         }
         .logo img:hover {
             transform: scale(1.05);
         }
-        .nav {
-            display: flex;
-            gap: 25px;
-            flex: 1;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .nav-link {
-            color: #5A1F00;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-            padding: 8px 0;
-            position: relative;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-        .nav-link:hover {
-            color: #E24A2C;
-        }
-        .nav-link.active {
-            color: #E24A2C;
-        }
-        .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: #E24A2C;
-        }
-        .header-icons {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-        .icon-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, #E24A2C, #E66830);
-            border-radius: 50%;
-            color: white;
-            text-decoration: none;
-            font-size: 18px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        .icon-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(226, 74, 44, 0.3);
-        }
-        .cart-link {
-            position: relative;
-        }
-        .cart-count {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: #FF5722;
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            font-size: 11px;
+        .admin-title {
+            font-size: 20px;
             font-weight: bold;
-            display: none;
+            color: #E24A2C;
+            display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 10px;
         }
-        .admin-badge {
+        .admin-title span {
             background: #E24A2C;
             color: white;
             padding: 4px 12px;
             border-radius: 12px;
             font-size: 12px;
-            margin-left: 10px;
+        }
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .logout-btn {
+            background: linear-gradient(135deg, #E24A2C, #E66830);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(226, 74, 44, 0.3);
         }
 
         /* ===== АДМИН-ПАНЕЛЬ ===== */
@@ -302,7 +257,7 @@
             background: #8B2000;
             color: white;
             margin-top: 50px;
-            padding: 40px 0 25px;
+            padding: 30px 0 20px;
             position: relative;
             flex-shrink: 0;
         }
@@ -369,64 +324,38 @@
         /* ===== АДАПТИВ ===== */
         @media (max-width: 768px) {
             .header-content {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                padding: 12px 0;
+                flex-direction: column;
+                text-align: center;
                 gap: 10px;
-                flex-wrap: nowrap;
             }
-            .logo { order: 1; flex: 0 0 auto; }
-            .logo img { height: 60px; }
-            .nav { order: 2; width: 100%; justify-content: center; gap: 12px; flex-wrap: wrap; padding: 5px 0; }
-            .header-icons { order: 3; gap: 10px; flex: 0 0 auto; justify-content: flex-end; }
-            .icon-link { width: 40px; height: 40px; font-size: 16px; }
-
-            .ornament-top { background-size: 150% auto; height: 320px; top: -250px; margin-bottom: -260px; }
-            .ornament-header-bottom { background-size: 150% auto; height: 15px; margin-top: -20px; }
-            .ornament-bottom { background-size: 150% auto; height: 30px; margin-top: -25px; }
-
+            .ornament-top {
+                height: 200px;
+                top: -140px;
+                margin-bottom: -150px;
+            }
             .admin-header h1 { font-size: 24px; }
             .admin-stats { grid-template-columns: repeat(2, 1fr); }
             .order-card .order-top { flex-direction: column; align-items: flex-start; gap: 8px; }
-
             .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; text-align: center; }
             .footer h3::after { left: 50%; transform: translateX(-50%); }
             .social-icons { justify-content: center; }
         }
 
         @media (max-width: 480px) {
-            .header-content { padding: 10px 0; gap: 8px; }
-            .logo img { height: 50px; }
-            .nav { gap: 8px 12px; }
-            .nav-link { font-size: 13px; }
-            .header-icons { gap: 8px; }
-            .icon-link { width: 36px; height: 36px; font-size: 14px; }
-
-            .ornament-top { background-size: 200% auto; height: 380px; top: -300px; margin-bottom: -310px; }
-            .ornament-header-bottom { background-size: 200% auto; height: 15px; margin-top: -20px; }
-            .ornament-bottom { background-size: 200% auto; height: 35px; margin-top: -30px; }
-
+            .ornament-top { height: 250px; top: -180px; margin-bottom: -190px; }
+            .ornament-header-bottom { margin-top: -10px; }
             .admin-stats { grid-template-columns: 1fr; }
             .orders-list { padding: 15px; }
             .order-card { padding: 12px; }
-
             .footer-grid { grid-template-columns: 1fr; gap: 25px; text-align: center; }
             .footer h3::after { left: 50%; transform: translateX(-50%); }
             .social-icons { justify-content: center; }
-        }
-
-        @media (max-width: 360px) {
-            .nav { flex-direction: column; gap: 6px; }
-            .logo img { height: 42px; }
-            .ornament-top { background-size: 250% auto; height: 420px; top: -330px; margin-bottom: -340px; }
-            .ornament-header-bottom { background-size: 250% auto; height: 15px; margin-top: -20px; }
-            .ornament-bottom { background-size: 250% auto; height: 40px; margin-top: -35px; }
         }
     </style>
 </head>
 <body>
     <div class="main-content">
+        <!-- ===== ШАПКА (УПРОЩЁННАЯ) ===== -->
         <header class="header">
             <div class="ornament-top"></div>
             <div class="container">
@@ -436,33 +365,25 @@
                             <img src="images/logo.png" alt="Чувашский сувенир">
                         </a>
                     </div>
-                    <nav class="nav">
-                        <a href="index.html" class="nav-link">Главная</a>
-                        <a href="catalog.html" class="nav-link">Каталог</a>
-                        <a href="about.html" class="nav-link">О мастерах</a>
-                        <a href="contacts.html" class="nav-link">Контакты</a>
-                        <a href="admin.html" class="nav-link active">Админ <span class="admin-badge">🔥</span></a>
-                    </nav>
-                    <div class="header-icons">
-                        <a href="#" id="accountLink" class="icon-link" title="Личный кабинет">👤</a>
-                        <a href="cart.html" class="icon-link cart-link" title="Корзина">
-                            🛒
-                            <span class="cart-count">0</span>
-                        </a>
+                    <div class="admin-title">
+                        🔥 Админ-панель
+                        <span>ADMIN</span>
+                    </div>
+                    <div class="header-actions">
+                        <a href="index.html" class="logout-btn" style="background: #666; text-decoration: none;">🏠 На сайт</a>
+                        <button class="logout-btn" id="logoutBtn">🚪 Выйти</button>
                     </div>
                 </div>
             </div>
             <div class="ornament-header-bottom"></div>
         </header>
 
+        <!-- ===== ОСНОВНОЙ КОНТЕНТ ===== -->
         <div class="container">
-            <div class="admin-page" id="adminPage">
+            <div class="admin-page">
                 <div class="admin-header">
                     <h1>📊 Управление заказами</h1>
-                    <div>
-                        <button onclick="location.reload()" class="btn" style="padding: 8px 20px; font-size: 14px;">🔄 Обновить</button>
-                        <a href="index.html" class="btn" style="padding: 8px 20px; font-size: 14px; background: #666;">🏠 На сайт</a>
-                    </div>
+                    <button onclick="location.reload()" style="padding: 8px 20px; border-radius: 25px; border: 2px solid #E0A400; background: white; cursor: pointer; font-weight: 600;">🔄 Обновить</button>
                 </div>
 
                 <div class="admin-stats" id="adminStats">
@@ -482,11 +403,12 @@
             </div>
         </div>
 
+        <!-- ===== ПОДВАЛ ===== -->
         <footer class="footer">
             <div class="ornament-bottom"></div>
             <div class="container footer-grid">
                 <div><h3>Контакты</h3><p>+7 (999) 444-44-44<br>test@gmail.com</p></div>
-                <div><h3>Разделы</h3><p><a href="index.html">Главная</a><br><a href="catalog.html">Каталог</a><br><a href="about.html">О мастерах</a></p></div>
+                <div><h3>Разделы</h3><p><a href="index.html">Главная</a><br><a href="catalog.html">Каталог</a></p></div>
                 <div><h3>Мы в соц-сетях</h3><div class="social-icons"><a href="#" class="social-icon">VK</a><a href="#" class="social-icon">TG</a></div></div>
             </div>
         </footer>
@@ -495,7 +417,7 @@
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
         import { getFirestore, collection, getDocs, doc, updateDoc, query, orderBy } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
-        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+        import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
 
         const firebaseConfig = {
             apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
@@ -510,27 +432,27 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        const accountLink = document.getElementById('accountLink');
-
-        // 🔥 ТВОЙ UID АДМИНА (из Firebase)
+        // 🔥 ТВОЙ UID АДМИНА
         const ADMIN_UID = 'FRQ9vC3aBXUwgNgISezFuUG0YXf2';
 
-        // Проверка авторизации и прав админа
+        // Проверка авторизации
         onAuthStateChanged(auth, async (user) => {
             if (!user) {
                 window.location.href = 'login.html';
                 return;
             }
-            accountLink.href = 'account.html';
-            
-            // Проверка: является ли пользователь админом
             if (user.uid !== ADMIN_UID) {
                 alert('⛔ Доступ запрещён! Вы не администратор.');
                 window.location.href = 'index.html';
                 return;
             }
-            
             await loadOrders();
+        });
+
+        // Выход
+        document.getElementById('logoutBtn').addEventListener('click', async () => {
+            await signOut(auth);
+            window.location.href = 'login.html';
         });
 
         // Загрузка заказов
@@ -592,7 +514,6 @@
                     try {
                         await updateDoc(doc(db, 'orders', orderId), { status: newStatus });
                         select.dataset.current = newStatus;
-                        // Обновляем статистику
                         const snapshot = await getDocs(collection(db, 'orders'));
                         const allOrders = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
                         updateStats(allOrders);
@@ -619,18 +540,6 @@
             document.getElementById('shippedOrders').textContent = shippedCount;
             document.getElementById('deliveredOrders').textContent = deliveredCount;
         }
-
-        // Корзина
-        function updateCartCounter() {
-            const cart = JSON.parse(localStorage.getItem('cartItems')) || [];
-            const total = cart.reduce((s, i) => s + i.quantity, 0);
-            const el = document.querySelector('.cart-count');
-            if (el) {
-                el.textContent = total;
-                el.style.display = total > 0 ? 'flex' : 'none';
-            }
-        }
-        updateCartCounter();
     </script>
 </body>
 </html>
