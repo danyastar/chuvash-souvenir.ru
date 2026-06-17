@@ -108,7 +108,7 @@
             padding: 0 15px;
         }
 
-        /* ===== ХЕДЕР ===== */
+        /* ===== ХЕДЕР (КАК НА ГЛАВНОЙ) ===== */
         .header {
             background: #FFF4E5;
             position: relative;
@@ -165,43 +165,10 @@
             height: 2px;
             background: #E24A2C;
         }
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .search-box {
-            display: flex;
-            align-items: center;
-            background: white;
-            border: 2px solid #E0A400;
-            border-radius: 25px;
-            overflow: hidden;
-        }
-        .search-input {
-            border: none;
-            outline: none;
-            padding: 8px 15px;
-            width: 160px;
-            font-size: 14px;
-            background: transparent;
-        }
-        .search-btn {
-            background: linear-gradient(135deg, #E24A2C, #E66830);
-            border: none;
-            padding: 8px 14px;
-            cursor: pointer;
-            color: white;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-        .search-btn:hover {
-            opacity: 0.9;
-        }
         .header-icons {
             display: flex;
-            gap: 10px;
+            gap: 12px;
+            align-items: center;
         }
         .icon-link {
             display: flex;
@@ -218,7 +185,8 @@
             position: relative;
         }
         .icon-link:hover {
-            transform: scale(1.05);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(226, 74, 44, 0.3);
         }
         .cart-link {
             position: relative;
@@ -716,7 +684,7 @@
         }
 
         @media (max-width: 768px) {
-            /* --- ХЕДЕР --- */
+            /* --- ХЕДЕР (КАК НА ГЛАВНОЙ) --- */
             .header-content {
                 display: flex;
                 align-items: center;
@@ -740,7 +708,7 @@
                 flex-wrap: wrap;
                 padding: 5px 0;
             }
-            .header-actions {
+            .header-icons {
                 order: 3;
                 gap: 10px;
                 flex: 0 0 auto;
@@ -750,9 +718,6 @@
                 width: 40px;
                 height: 40px;
                 font-size: 16px;
-            }
-            .search-box {
-                display: none;
             }
 
             /* --- ОРНАМЕНТЫ --- */
@@ -891,7 +856,7 @@
         }
 
         @media (max-width: 480px) {
-            /* --- ХЕДЕР --- */
+            /* --- ХЕДЕР (КАК НА ГЛАВНОЙ) --- */
             .header-content {
                 padding: 10px 0;
                 gap: 8px;
@@ -905,7 +870,7 @@
             .nav-link {
                 font-size: 13px;
             }
-            .header-actions {
+            .header-icons {
                 gap: 8px;
             }
             .icon-link {
@@ -1068,20 +1033,12 @@
                         <a href="contacts.html" class="nav-link">Контакты</a>
                     </nav>
 
-                    <div class="header-actions">
-                        <div class="search-box">
-                            <input type="text" placeholder="Поиск товаров..." class="search-input">
-                            <button class="search-btn">🔍</button>
-                        </div>
-                        <div class="header-icons">
-                            <a href="account.html" class="icon-link" title="Личный кабинет">
-                                <span class="icon">👤</span>
-                            </a>
-                            <a href="cart.html" class="icon-link cart-link" title="Корзина">
-                                <span class="icon">🛒</span>
-                                <span class="cart-count">0</span>
-                            </a>
-                        </div>
+                    <div class="header-icons">
+                        <a href="#" id="accountLink" class="icon-link" title="Личный кабинет">👤</a>
+                        <a href="cart.html" class="icon-link cart-link" title="Корзина">
+                            🛒
+                            <span class="cart-count">0</span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -1384,7 +1341,7 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        const accountLink = document.querySelector('.icon-link[title="Личный кабинет"]');
+        const accountLink = document.getElementById('accountLink');
         if (accountLink) {
             onAuthStateChanged(auth, (user) => {
                 if (user) {
