@@ -32,17 +32,17 @@
             padding: 0 15px;
         }
 
-        /* ===== ОРНАМЕНТЫ (ДЕСКТОП) ===== */
+        /* ===== ОРНАМЕНТЫ ===== */
         .ornament-top {
             background-image: url("images/patternorna.png");
             background-size: contain;
             background-repeat: repeat-x;
-            height: 250px;
+            height: 280px;
             position: relative;
             margin: 0;
             background-position: center bottom;
-            top: -180px;
-            margin-bottom: -190px;
+            top: -210px;
+            margin-bottom: -220px;
             z-index: 1;
         }
         .ornament-header-bottom {
@@ -53,7 +53,7 @@
             position: relative;
             margin: 0;
             background-position: center top;
-            margin-top: -20px;
+            margin-top: -10px;
             z-index: 1;
         }
         .ornament-middle {
@@ -62,7 +62,7 @@
             background-repeat: repeat-x;
             height: 250px;
             position: relative;
-            margin: 0px 0 0px 0;
+            margin: -20px 0 -30px 0;
             background-position: center center;
             z-index: 1;
         }
@@ -91,12 +91,13 @@
             background: #FFF4E5;
             position: relative;
             box-shadow: 0 2px 10px rgba(226, 74, 44, 0.1);
+            padding-bottom: 5px;
         }
         .header-content {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 15px 0;
+            padding: 15px 0 5px 0;
             gap: 20px;
             flex-wrap: wrap;
         }
@@ -187,8 +188,8 @@
 
         /* ===== ГЕРОЙ ===== */
         .hero {
-            padding: 10px 0 0px;
-            margin-top: -60px;
+            padding: 5px 0 0px;
+            margin-top: -30px;
             position: relative;
             z-index: 2;
         }
@@ -235,7 +236,7 @@
             justify-content: center;
             align-items: flex-end;
             position: relative;
-            margin-bottom: -40px;
+            margin-bottom: -60px;
             z-index: 3;
         }
         .hero-girl {
@@ -249,8 +250,8 @@
 
         /* ===== ПОПУЛЯРНЫЕ ТОВАРЫ ===== */
         .popular {
-            padding: 40px 0;
-            margin-top: -30px;
+            padding: 30px 0 40px;
+            margin-top: -10px;
             position: relative;
             z-index: 1;
         }
@@ -365,7 +366,7 @@
 
         /* ===== О НАС ===== */
         .about {
-            padding: 50px 0;
+            padding: 40px 0 50px;
         }
         .about-content {
             display: flex;
@@ -487,10 +488,7 @@
             border-color: #fff;
         }
 
-        /* ====================================================== */
-        /* ===== АДАПТИВ — ОРНАМЕНТЫ СТАНОВЯТСЯ ШИРЕ И КРУПНЕЕ ===== */
-        /* ====================================================== */
-
+        /* ===== АДАПТИВ ===== */
         @media (max-width: 1024px) {
             .header-content {
                 gap: 15px;
@@ -507,12 +505,12 @@
         }
 
         @media (max-width: 768px) {
-            /* --- ХЕДЕР --- */
+            /* ХЕДЕР */
             .header-content {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                padding: 12px 0;
+                padding: 12px 0 5px 0;
                 gap: 10px;
                 flex-wrap: nowrap;
             }
@@ -543,11 +541,11 @@
                 font-size: 16px;
             }
 
-            /* --- ГЕРОЙ --- */
+            /* ГЕРОЙ */
             .hero-content {
                 flex-direction: column;
                 text-align: center;
-                gap: 10px;
+                gap: 5px;
             }
             .hero-text {
                 text-align: center;
@@ -557,31 +555,32 @@
                 font-size: 32px;
             }
             .hero {
-                margin-top: -40px;
+                margin-top: -20px;
                 padding: 5px 0 0px;
             }
             .hero-image-wrapper {
-                margin-bottom: -30px;
+                margin-bottom: -50px;
             }
             .hero-girl {
                 max-height: 320px;
             }
 
-            /* --- ОРНАМЕНТЫ НА ПЛАНШЕТЕ: СТАНОВЯТСЯ ШИРЕ И ВЫШЕ --- */
+            /* ОРНАМЕНТЫ */
             .ornament-top {
                 background-size: 150% auto;
                 height: 300px;
-                top: -220px;
-                margin-bottom: -230px;
+                top: -230px;
+                margin-bottom: -240px;
             }
             .ornament-middle {
                 background-size: 150% auto;
                 height: 300px;
+                margin: -30px 0 -40px 0;
             }
             .ornament-header-bottom {
                 background-size: 150% auto;
                 height: 20px;
-                margin-top: -25px;
+                margin-top: -15px;
             }
             .ornament-between {
                 background-size: 150% auto;
@@ -593,7 +592,7 @@
                 margin-top: -25px;
             }
 
-            /* --- ОСТАЛЬНОЕ --- */
+            /* ОСТАЛЬНОЕ */
             .about-content {
                 flex-direction: column;
                 text-align: center;
@@ -608,7 +607,8 @@
                 gap: 20px;
             }
             .popular {
-                margin-top: -20px;
+                padding: 20px 0 30px;
+                margin-top: 0px;
             }
             .footer-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -625,9 +625,9 @@
         }
 
         @media (max-width: 480px) {
-            /* --- ХЕДЕР --- */
+            /* ХЕДЕР */
             .header-content {
-                padding: 10px 0;
+                padding: 10px 0 5px 0;
                 gap: 8px;
             }
             .logo img {
@@ -648,7 +648,7 @@
                 font-size: 14px;
             }
 
-            /* --- ГЕРОЙ --- */
+            /* ГЕРОЙ */
             .hero-text h1 {
                 font-size: 24px;
             }
@@ -657,30 +657,31 @@
                 font-size: 13px;
             }
             .hero {
-                margin-top: -30px;
+                margin-top: -15px;
             }
             .hero-image-wrapper {
-                margin-bottom: -20px;
+                margin-bottom: -40px;
             }
             .hero-girl {
                 max-height: 250px;
             }
 
-            /* --- ОРНАМЕНТЫ НА ТЕЛЕФОНЕ: ЕЩЁ ШИРЕ И ВЫШЕ --- */
+            /* ОРНАМЕНТЫ */
             .ornament-top {
                 background-size: 200% auto;
                 height: 350px;
-                top: -260px;
-                margin-bottom: -270px;
+                top: -270px;
+                margin-bottom: -280px;
             }
             .ornament-middle {
                 background-size: 200% auto;
                 height: 350px;
+                margin: -40px 0 -50px 0;
             }
             .ornament-header-bottom {
                 background-size: 200% auto;
                 height: 25px;
-                margin-top: -30px;
+                margin-top: -20px;
             }
             .ornament-between {
                 background-size: 200% auto;
@@ -692,13 +693,14 @@
                 margin-top: -30px;
             }
 
-            /* --- ОСТАЛЬНОЕ --- */
+            /* ОСТАЛЬНОЕ */
             .popular-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
             .popular {
-                margin-top: -10px;
+                padding: 15px 0 25px;
+                margin-top: 5px;
             }
             .about-art img {
                 max-width: 160px;
@@ -732,24 +734,24 @@
                 max-height: 200px;
             }
             .hero-image-wrapper {
-                margin-bottom: -15px;
+                margin-bottom: -30px;
             }
 
-            /* --- ОРНАМЕНТЫ НА ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНАХ: МАКСИМАЛЬНО ШИРОКИЕ --- */
             .ornament-top {
                 background-size: 250% auto;
                 height: 400px;
-                top: -300px;
-                margin-bottom: -310px;
+                top: -310px;
+                margin-bottom: -320px;
             }
             .ornament-middle {
                 background-size: 250% auto;
                 height: 400px;
+                margin: -50px 0 -60px 0;
             }
             .ornament-header-bottom {
                 background-size: 250% auto;
                 height: 30px;
-                margin-top: -35px;
+                margin-top: -25px;
             }
             .ornament-between {
                 background-size: 250% auto;
