@@ -332,6 +332,95 @@
             box-shadow: 0 4px 12px rgba(226, 74, 44, 0.3);
         }
 
+        /* ===== ИЗБРАННОЕ - КАРТИНКИ АДАПТИВНЫЕ ===== */
+        .favorites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .favorite-item {
+            background: #FFF6E1;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #E0A400;
+            transition: 0.3s;
+        }
+        .favorite-item:hover {
+            transform: translateY(-3px);
+        }
+        .favorite-item .img-wrap {
+            width: 100%;
+            padding-bottom: 100%;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #f0e8d8;
+        }
+        .favorite-item .img-wrap img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .favorite-item h4 {
+            margin: 10px 0 5px;
+            color: #8B2000;
+            font-size: 16px;
+        }
+        .favorite-item p {
+            color: #E24A2C;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        .favorite-item .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #E24A2C, #E66830);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            margin-top: 10px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .favorite-item .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(226, 74, 44, 0.3);
+        }
+
+        .order-card {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .order-status {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            background: #FFF3E0;
+            color: #EF6C00;
+        }
+        .order-items {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        .order-total {
+            font-weight: bold;
+            text-align: right;
+        }
+
         /* ===== ПОДВАЛ ===== */
         .footer {
             background: #8B2000;
@@ -473,6 +562,10 @@
             .info-grid {
                 grid-template-columns: 1fr;
             }
+            .favorites-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 15px;
+            }
             .footer-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 30px;
@@ -528,6 +621,16 @@
             .account-main {
                 padding: 20px;
             }
+            .favorites-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 12px;
+            }
+            .favorite-item {
+                padding: 10px;
+            }
+            .favorite-item h4 {
+                font-size: 14px;
+            }
             .footer-grid {
                 grid-template-columns: 1fr;
                 gap: 25px;
@@ -549,6 +652,10 @@
             }
             .logo img {
                 height: 42px;
+            }
+            .favorites-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
             }
             .ornament-top {
                 background-size: 250% auto;
@@ -633,7 +740,7 @@
                     </div>
                     <div class="tab-content" id="favorites">
                         <div class="tab-header"><h2>Избранные товары</h2></div>
-                        <div id="favoritesGrid"></div>
+                        <div id="favoritesGrid" class="favorites-grid"></div>
                     </div>
                 </div>
             </div>
@@ -722,10 +829,12 @@
                     const product = productSnap.data();
                     grid.innerHTML += `
                         <div class="favorite-item">
-                            <img src="images/test.jpg" alt="${product.name}">
+                            <div class="img-wrap">
+                                <img src="images/test.jpg" alt="${product.name}">
+                            </div>
                             <h4>${product.name}</h4>
                             <p>${product.price} ₽</p>
-                            <a href="product.html?id=${id}" class="btn" style="display:inline-block;background:linear-gradient(135deg,#E24A2C,#E66830);color:white;padding:8px 16px;border-radius:25px;text-decoration:none;font-size:14px;margin-top:10px;">Подробнее</a>
+                            <a href="product.html?id=${id}" class="btn">Подробнее</a>
                         </div>
                     `;
                 }
