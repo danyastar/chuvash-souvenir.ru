@@ -33,7 +33,7 @@
             padding: 0 15px;
         }
 
-        /* ===== ОРНАМЕНТЫ (как в главной) ===== */
+        /* ===== ОРНАМЕНТЫ ===== */
         .ornament-top {
             background-image: url("images/patternorna.png");
             background-size: contain;
@@ -68,7 +68,7 @@
             margin-top: -20px;
         }
 
-        /* ===== ХЕДЕР (ТОЧНО КАК В ГЛАВНОЙ) ===== */
+        /* ===== ХЕДЕР (ТОЛЬКО ЛОГО + ВКЛАДКИ + ИКОНКИ) ===== */
         .header {
             background: #FFF4E5;
             position: relative;
@@ -514,7 +514,7 @@
         }
 
         @media (max-width: 768px) {
-            /* --- ХЕДЕР (КАК В ГЛАВНОЙ) --- */
+            /* --- ХЕДЕР --- */
             .header-content {
                 display: flex;
                 align-items: center;
@@ -603,7 +603,7 @@
         }
 
         @media (max-width: 480px) {
-            /* --- ХЕДЕР (КАК В ГЛАВНОЙ) --- */
+            /* --- ХЕДЕР --- */
             .header-content {
                 padding: 10px 0;
                 gap: 8px;
@@ -798,7 +798,7 @@
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
         import { getAuth, onAuthStateChanged, signOut, updateProfile } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
-        import { getFirestore, doc, getDoc, collection, query, where, getDocs, updateDoc } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+        import { getFirestore, doc, getDoc, collection, query, where, getDocs } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
 
         const firebaseConfig = {
             apiKey: "AIzaSyAVOJtq1tCCie0dDjB_GDoH8AQB0EKe_84",
