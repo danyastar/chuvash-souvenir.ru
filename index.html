@@ -32,7 +32,7 @@
             padding: 0 15px;
         }
 
-        /* ===== ОРНАМЕНТЫ ===== */
+        /* ===== ОРНАМЕНТЫ (ДЕСКТОП) ===== */
         .ornament-top {
             background-image: url("images/patternorna.png");
             background-size: contain;
@@ -487,7 +487,10 @@
             border-color: #fff;
         }
 
-        /* ===== АДАПТИВ ===== */
+        /* ====================================================== */
+        /* ===== АДАПТИВ — ОРНАМЕНТЫ СТАНОВЯТСЯ ШИРЕ И КРУПНЕЕ ===== */
+        /* ====================================================== */
+
         @media (max-width: 1024px) {
             .header-content {
                 gap: 15px;
@@ -504,7 +507,7 @@
         }
 
         @media (max-width: 768px) {
-            /* Хедер - логотип слева, иконки справа */
+            /* --- ХЕДЕР --- */
             .header-content {
                 display: flex;
                 align-items: center;
@@ -540,6 +543,7 @@
                 font-size: 16px;
             }
 
+            /* --- ГЕРОЙ --- */
             .hero-content {
                 flex-direction: column;
                 text-align: center;
@@ -563,6 +567,33 @@
                 max-height: 320px;
             }
 
+            /* --- ОРНАМЕНТЫ НА ПЛАНШЕТЕ: СТАНОВЯТСЯ ШИРЕ И ВЫШЕ --- */
+            .ornament-top {
+                background-size: 150% auto;
+                height: 300px;
+                top: -220px;
+                margin-bottom: -230px;
+            }
+            .ornament-middle {
+                background-size: 150% auto;
+                height: 300px;
+            }
+            .ornament-header-bottom {
+                background-size: 150% auto;
+                height: 20px;
+                margin-top: -25px;
+            }
+            .ornament-between {
+                background-size: 150% auto;
+                height: 40px;
+            }
+            .ornament-bottom {
+                background-size: 150% auto;
+                height: 30px;
+                margin-top: -25px;
+            }
+
+            /* --- ОСТАЛЬНОЕ --- */
             .about-content {
                 flex-direction: column;
                 text-align: center;
@@ -572,7 +603,6 @@
                 left: 50%;
                 transform: translateX(-50%);
             }
-
             .popular-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 20px;
@@ -580,7 +610,6 @@
             .popular {
                 margin-top: -20px;
             }
-
             .footer-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 30px;
@@ -596,6 +625,7 @@
         }
 
         @media (max-width: 480px) {
+            /* --- ХЕДЕР --- */
             .header-content {
                 padding: 10px 0;
                 gap: 8px;
@@ -618,6 +648,7 @@
                 font-size: 14px;
             }
 
+            /* --- ГЕРОЙ --- */
             .hero-text h1 {
                 font-size: 24px;
             }
@@ -635,6 +666,33 @@
                 max-height: 250px;
             }
 
+            /* --- ОРНАМЕНТЫ НА ТЕЛЕФОНЕ: ЕЩЁ ШИРЕ И ВЫШЕ --- */
+            .ornament-top {
+                background-size: 200% auto;
+                height: 350px;
+                top: -260px;
+                margin-bottom: -270px;
+            }
+            .ornament-middle {
+                background-size: 200% auto;
+                height: 350px;
+            }
+            .ornament-header-bottom {
+                background-size: 200% auto;
+                height: 25px;
+                margin-top: -30px;
+            }
+            .ornament-between {
+                background-size: 200% auto;
+                height: 50px;
+            }
+            .ornament-bottom {
+                background-size: 200% auto;
+                height: 35px;
+                margin-top: -30px;
+            }
+
+            /* --- ОСТАЛЬНОЕ --- */
             .popular-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
@@ -642,11 +700,9 @@
             .popular {
                 margin-top: -10px;
             }
-
             .about-art img {
                 max-width: 160px;
             }
-
             .footer-grid {
                 grid-template-columns: 1fr;
                 gap: 25px;
@@ -677,6 +733,32 @@
             }
             .hero-image-wrapper {
                 margin-bottom: -15px;
+            }
+
+            /* --- ОРНАМЕНТЫ НА ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНАХ: МАКСИМАЛЬНО ШИРОКИЕ --- */
+            .ornament-top {
+                background-size: 250% auto;
+                height: 400px;
+                top: -300px;
+                margin-bottom: -310px;
+            }
+            .ornament-middle {
+                background-size: 250% auto;
+                height: 400px;
+            }
+            .ornament-header-bottom {
+                background-size: 250% auto;
+                height: 30px;
+                margin-top: -35px;
+            }
+            .ornament-between {
+                background-size: 250% auto;
+                height: 60px;
+            }
+            .ornament-bottom {
+                background-size: 250% auto;
+                height: 40px;
+                margin-top: -35px;
             }
         }
     </style>
