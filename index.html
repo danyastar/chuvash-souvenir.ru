@@ -561,23 +561,28 @@
                 justify-content: center;
             }
 
-            /* Орнаменты на планшете - увеличиваем */
+            /* Орнаменты на планшете - увеличиваем масштаб картинки, но высота и отступы остаются */
             .ornament-top {
-                height: 300px;
-                top: -220px;
-                margin-bottom: -230px;
+                background-size: 200% auto;
+                top: -180px;
+                margin-bottom: -190px;
+                height: 250px;
             }
             .ornament-middle {
-                height: 300px;
+                background-size: 200% auto;
+                height: 250px;
             }
             .ornament-between {
-                height: 40px;
+                background-size: 200% auto;
+                height: 30px;
             }
             .ornament-header-bottom {
-                height: 20px;
+                background-size: 200% auto;
+                height: 15px;
             }
             .ornament-bottom {
-                height: 25px;
+                background-size: 200% auto;
+                height: 20px;
             }
         }
 
@@ -636,26 +641,28 @@
                 justify-content: center;
             }
 
-            /* Орнаменты на телефоне - делаем еще больше */
+            /* Орнаменты на телефоне - еще крупнее, но высота и отступы те же */
             .ornament-top {
-                height: 350px;
-                top: -260px;
-                margin-bottom: -270px;
+                background-size: 300% auto;
+                top: -180px;
+                margin-bottom: -190px;
+                height: 250px;
             }
             .ornament-middle {
-                height: 350px;
-                margin: 5px 0;
+                background-size: 300% auto;
+                height: 250px;
             }
             .ornament-between {
-                height: 50px;
+                background-size: 300% auto;
+                height: 30px;
             }
             .ornament-header-bottom {
-                height: 25px;
-                margin-top: -15px;
+                background-size: 300% auto;
+                height: 15px;
             }
             .ornament-bottom {
-                height: 30px;
-                margin-top: -15px;
+                background-size: 300% auto;
+                height: 20px;
             }
         }
 
@@ -671,17 +678,28 @@
                 font-size: 22px;
             }
             
-            /* Орнаменты на очень маленьких экранах */
+            /* Орнаменты на очень маленьких экранах - еще крупнее */
             .ornament-top {
-                height: 400px;
-                top: -300px;
-                margin-bottom: -310px;
+                background-size: 400% auto;
+                height: 250px;
+                top: -180px;
+                margin-bottom: -190px;
             }
             .ornament-middle {
-                height: 400px;
+                background-size: 400% auto;
+                height: 250px;
             }
             .ornament-between {
-                height: 60px;
+                background-size: 400% auto;
+                height: 30px;
+            }
+            .ornament-header-bottom {
+                background-size: 400% auto;
+                height: 15px;
+            }
+            .ornament-bottom {
+                background-size: 400% auto;
+                height: 20px;
             }
         }
     </style>
