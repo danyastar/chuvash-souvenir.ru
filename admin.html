@@ -512,14 +512,24 @@
 
         const accountLink = document.getElementById('accountLink');
 
-        // Проверка авторизации
+        // 🔥 ТВОЙ UID АДМИНА (из Firebase)
+        const ADMIN_UID = 'FRQ9vC3aBXUwgNgISezFuUG0YXf2';
+
+        // Проверка авторизации и прав админа
         onAuthStateChanged(auth, async (user) => {
             if (!user) {
-                // Если не авторизован — отправляем на логин
                 window.location.href = 'login.html';
                 return;
             }
             accountLink.href = 'account.html';
+            
+            // Проверка: является ли пользователь админом
+            if (user.uid !== ADMIN_UID) {
+                alert('⛔ Доступ запрещён! Вы не администратор.');
+                window.location.href = 'index.html';
+                return;
+            }
+            
             await loadOrders();
         });
 
@@ -582,8 +592,10 @@
                     try {
                         await updateDoc(doc(db, 'orders', orderId), { status: newStatus });
                         select.dataset.current = newStatus;
-                        // Перезагружаем статистику
-                        await loadOrders();
+                        // Обновляем статистику
+                        const snapshot = await getDocs(collection(db, 'orders'));
+                        const allOrders = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+                        updateStats(allOrders);
                     } catch (error) {
                         console.error('Ошибка обновления статуса:', error);
                         alert('Ошибка при обновлении статуса');
