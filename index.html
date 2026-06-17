@@ -32,57 +32,57 @@
             padding: 0 15px;
         }
 
-        /* ===== ОРНАМЕНТЫ (исправлены) ===== */
+        /* ===== ОРНАМЕНТЫ (десктоп - как было) ===== */
         .ornament-top {
             background-image: url("images/patternorna.png");
-            background-size: 100% auto;
+            background-size: contain;
             background-repeat: repeat-x;
-            height: 200px;
+            height: 250px;
             position: relative;
             margin: 0;
             background-position: center bottom;
-            top: -160px;
-            margin-bottom: -180px;
+            top: -180px;
+            margin-bottom: -190px;
             z-index: 1;
         }
         .ornament-header-bottom {
             background-image: url("images/headerpattern.png");
-            background-size: 100% auto;
+            background-size: contain;
             background-repeat: repeat-x;
-            height: 30px;
+            height: 15px;
             position: relative;
             margin: 0;
             background-position: center top;
-            margin-top: -10px;
+            margin-top: -20px;
             z-index: 1;
         }
         .ornament-middle {
             background-image: url("images/patternorna.png");
-            background-size: 100% auto;
+            background-size: contain;
             background-repeat: repeat-x;
-            height: 200px;
+            height: 250px;
             position: relative;
-            margin: 10px 0;
+            margin: 0px 0 0px 0;
             background-position: center center;
         }
         .ornament-between {
             background-image: url("images/midpattern.png");
-            background-size: 100% auto;
+            background-size: contain;
             background-repeat: repeat-x;
-            height: 50px;
+            height: 30px;
             position: relative;
-            margin: 10px 0;
+            margin: 5px 0;
             background-position: center center;
         }
         .ornament-bottom {
             background-image: url("images/bottompattern.png");
-            background-size: 100% auto;
+            background-size: contain;
             background-repeat: repeat-x;
-            height: 30px;
+            height: 20px;
             position: relative;
             margin: 0;
             background-position: center top;
-            margin-top: -10px;
+            margin-top: -20px;
         }
 
         /* ===== ХЕДЕР ===== */
@@ -186,15 +186,15 @@
 
         /* ===== ГЕРОЙ ===== */
         .hero {
-            padding: 20px 0 30px;
-            margin-top: -20px;
+            padding: 30px 0;
+            margin-top: -40px;
         }
         .hero-content {
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 40px;
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
         }
         .hero-text {
@@ -230,25 +230,28 @@
             flex: 1;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-end;
+            position: relative;
         }
         .hero-girl {
             max-width: 100%;
             height: auto;
-            max-height: 380px;
-            filter: drop-shadow(0 8px 20px rgba(90, 31, 0, 0.25));
+            max-height: 400px;
+            filter: drop-shadow(0 10px 20px rgba(90, 31, 0, 0.3));
             object-fit: contain;
+            margin-bottom: -50px;
         }
 
         /* ===== ПОПУЛЯРНЫЕ ТОВАРЫ ===== */
         .popular {
-            padding: 30px 0 20px;
+            padding: 40px 0;
+            margin-top: -50px;
         }
         .popular h2 {
             text-align: center;
             font-size: 32px;
             color: #8B2000;
-            margin-bottom: 10px;
+            margin-bottom: 30px;
         }
         .popular h2::after {
             content: '';
@@ -262,7 +265,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
-            margin-top: 35px;
+            margin-top: 30px;
         }
         .card {
             background: #FFF6E1;
@@ -270,7 +273,7 @@
             border-radius: 12px;
             overflow: hidden;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(90, 31, 0, 0.08);
+            box-shadow: 0 4px 8px rgba(90, 31, 0, 0.1);
             display: flex;
             flex-direction: column;
         }
@@ -281,7 +284,7 @@
         }
         .card-image {
             height: 200px;
-            background: #f0e8d8;
+            background: #f5f5f5;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -300,7 +303,7 @@
             flex: 1;
         }
         .card-content h3 {
-            margin: 0 0 8px;
+            margin: 0 0 10px;
             color: #8B2000;
             font-size: 20px;
         }
@@ -311,7 +314,7 @@
             flex: 1;
         }
         .price {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
             color: #E24A2C;
             margin-bottom: 15px;
@@ -323,10 +326,10 @@
             flex-wrap: wrap;
         }
         .card-buttons .btn {
-            padding: 10px 20px;
-            font-size: 14px;
+            padding: 8px 16px;
             border-radius: 25px;
             text-decoration: none;
+            font-size: 14px;
             cursor: pointer;
             border: none;
             font-weight: 600;
@@ -355,13 +358,13 @@
 
         /* ===== О НАС ===== */
         .about {
-            padding: 40px 0;
+            padding: 50px 0;
         }
         .about-content {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 50px;
+            gap: 40px;
             max-width: 1000px;
             margin: 0 auto;
         }
@@ -385,25 +388,24 @@
         }
         .about-text p {
             color: #5A1F00;
-            line-height: 1.8;
-            font-size: 16px;
+            line-height: 1.7;
         }
         .about-art img {
-            max-width: 200px;
+            max-width: 220px;
             height: auto;
-            display: block;
+            border-radius: 12px;
         }
         .btn-outline {
-            background: transparent;
+            background: white;
             border: 2px solid #E24A2C;
             color: #E24A2C;
-            padding: 12px 28px;
+            padding: 10px 25px;
             border-radius: 25px;
             text-decoration: none;
             display: inline-block;
-            margin-top: 18px;
-            font-weight: 600;
+            margin-top: 15px;
             transition: all 0.3s ease;
+            font-weight: 600;
         }
         .btn-outline:hover {
             background: #E24A2C;
@@ -414,7 +416,7 @@
         .footer {
             background: #8B2000;
             color: white;
-            margin-top: 30px;
+            margin-top: 50px;
             padding: 40px 0 25px;
             position: relative;
         }
@@ -441,14 +443,15 @@
             height: 2px;
             background: #FBE8C7;
         }
-        .footer p,
-        .footer a {
-            color: #fff;
-            line-height: 1.8;
+        .footer p {
+            line-height: 1.6;
+            margin: 5px 0;
             font-size: 14px;
+            color: #fff;
         }
         .footer a {
             text-decoration: none;
+            color: #fff;
             transition: opacity 0.3s ease;
         }
         .footer a:hover {
@@ -457,35 +460,36 @@
         }
         .social-icons {
             display: flex;
-            gap: 12px;
+            gap: 15px;
             margin-top: 10px;
             flex-wrap: wrap;
         }
         .social-icon {
             color: white;
             text-decoration: none;
-            padding: 6px 16px;
+            font-size: 16px;
+            display: inline-block;
+            padding: 6px 14px;
             border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 20px;
-            font-size: 14px;
             transition: all 0.3s ease;
         }
         .social-icon:hover {
             background: rgba(255, 255, 255, 0.15);
-            border-color: #fff;
             text-decoration: none;
+            border-color: #fff;
         }
 
         /* ===== АДАПТИВ ===== */
-        @media (max-width: 992px) {
+        @media (max-width: 1024px) {
+            .header-content {
+                gap: 15px;
+            }
+            .nav {
+                gap: 20px;
+            }
             .hero-text h1 {
-                font-size: 34px;
-            }
-            .hero-girl {
-                max-height: 320px;
-            }
-            .popular-grid {
-                grid-template-columns: repeat(2, 1fr);
+                font-size: 36px;
             }
         }
 
@@ -496,24 +500,37 @@
                 text-align: center;
                 gap: 15px;
             }
+            .logo {
+                order: 1;
+            }
             .nav {
+                order: 2;
+                width: 100%;
                 justify-content: center;
                 gap: 15px;
+                flex-wrap: wrap;
             }
             .header-icons {
+                order: 3;
+                gap: 12px;
                 justify-content: center;
             }
 
             .hero-content {
                 flex-direction: column;
                 text-align: center;
-                gap: 20px;
+                gap: 30px;
+            }
+            .hero-text {
+                text-align: center;
+                max-width: 100%;
             }
             .hero-text h1 {
-                font-size: 30px;
+                font-size: 32px;
             }
             .hero-girl {
-                max-height: 280px;
+                max-height: 300px;
+                margin-bottom: 0;
             }
 
             .about-content {
@@ -525,19 +542,16 @@
                 left: 50%;
                 transform: translateX(-50%);
             }
-            .about-art img {
-                margin: 0 auto;
-            }
 
             .popular-grid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: repeat(2, 1fr);
                 gap: 20px;
             }
 
             .footer-grid {
-                grid-template-columns: 1fr 1fr;
-                text-align: center;
+                grid-template-columns: repeat(2, 1fr);
                 gap: 30px;
+                text-align: center;
             }
             .footer h3::after {
                 left: 50%;
@@ -547,76 +561,101 @@
                 justify-content: center;
             }
 
-            /* Орнаменты на планшете */
+            /* Орнаменты на планшете - увеличиваем */
             .ornament-top {
-                height: 150px;
-                top: -120px;
-                margin-bottom: -140px;
+                height: 300px;
+                top: -220px;
+                margin-bottom: -230px;
             }
             .ornament-middle {
-                height: 150px;
+                height: 300px;
             }
             .ornament-between {
                 height: 40px;
             }
             .ornament-header-bottom {
-                height: 25px;
+                height: 20px;
             }
             .ornament-bottom {
                 height: 25px;
             }
         }
 
-        @media (max-width: 500px) {
-            .popular-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-            .hero-text h1 {
-                font-size: 26px;
-            }
-            .btn {
-                padding: 12px 24px;
-                font-size: 14px;
-            }
-            .card-buttons .btn {
-                padding: 8px 16px;
-                font-size: 13px;
+        @media (max-width: 480px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
             }
             .logo img {
-                height: 55px;
+                height: 60px;
             }
             .nav {
-                gap: 10px;
+                flex-wrap: wrap;
+                gap: 10px 15px;
             }
             .nav-link {
                 font-size: 14px;
             }
+            .header-icons {
+                gap: 10px;
+            }
+            .icon-link {
+                width: 38px;
+                height: 38px;
+                font-size: 16px;
+            }
 
-            /* Орнаменты на телефоне */
+            .hero-text h1 {
+                font-size: 26px;
+            }
+            .btn {
+                padding: 12px 25px;
+                font-size: 14px;
+            }
+
+            .popular-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .about-art img {
+                max-width: 180px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                text-align: center;
+            }
+            .footer h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .social-icons {
+                justify-content: center;
+            }
+
+            /* Орнаменты на телефоне - делаем еще больше */
             .ornament-top {
-                height: 100px;
-                top: -80px;
-                margin-bottom: -100px;
+                height: 350px;
+                top: -260px;
+                margin-bottom: -270px;
             }
             .ornament-middle {
-                height: 100px;
+                height: 350px;
                 margin: 5px 0;
             }
             .ornament-between {
-                height: 30px;
+                height: 50px;
             }
             .ornament-header-bottom {
-                height: 20px;
-                margin-top: -5px;
+                height: 25px;
+                margin-top: -15px;
             }
             .ornament-bottom {
-                height: 20px;
-                margin-top: -5px;
+                height: 30px;
+                margin-top: -15px;
             }
         }
 
@@ -626,32 +665,34 @@
                 gap: 8px;
             }
             .logo img {
-                height: 45px;
+                height: 50px;
             }
             .hero-text h1 {
                 font-size: 22px;
             }
+            
+            /* Орнаменты на очень маленьких экранах */
             .ornament-top {
-                height: 80px;
-                top: -60px;
-                margin-bottom: -80px;
+                height: 400px;
+                top: -300px;
+                margin-bottom: -310px;
             }
             .ornament-middle {
-                height: 80px;
+                height: 400px;
+            }
+            .ornament-between {
+                height: 60px;
             }
         }
     </style>
 </head>
 <body>
     <div class="main-content">
-        <!-- ===== ХЕДЕР ===== -->
         <header class="header">
             <div class="ornament-top"></div>
             <div class="container">
                 <div class="header-content">
-                    <div class="logo">
-                        <a href="index.html"><img src="images/logo.png" alt="Чувашский сувенир"></a>
-                    </div>
+                    <div class="logo"><a href="index.html"><img src="images/logo.png" alt="Чувашский сувенир"></a></div>
                     <nav class="nav">
                         <a href="index.html" class="nav-link active">Главная</a>
                         <a href="catalog.html" class="nav-link">Каталог</a>
@@ -670,7 +711,6 @@
             <div class="ornament-header-bottom"></div>
         </header>
 
-        <!-- ===== ГЕРОЙ ===== -->
         <section class="hero container">
             <div class="hero-content">
                 <div class="hero-text">
@@ -683,10 +723,8 @@
             </div>
         </section>
 
-        <!-- ===== ОРНАМЕНТ ===== -->
         <div class="ornament-middle"></div>
 
-        <!-- ===== ПОПУЛЯРНЫЕ ТОВАРЫ ===== -->
         <section class="popular container">
             <h2>Популярные товары</h2>
             <div class="popular-grid">
@@ -729,10 +767,8 @@
             </div>
         </section>
 
-        <!-- ===== ОРНАМЕНТ ===== -->
         <div class="ornament-between"></div>
 
-        <!-- ===== О НАС ===== -->
         <section class="about container">
             <div class="about-content">
                 <div class="about-text">
@@ -740,38 +776,32 @@
                     <p>«Чувашский сувенир» — это не просто интернет-магазин, а живой мост между богатым культурным наследием Чувашии и современным миром. Каждый орнамент хранит многовековую мудрость, а каждое изделие — это частица души чувашского народа.</p>
                     <a href="contacts.html" class="btn-outline">Узнать больше</a>
                 </div>
-                <div class="about-art">
-                    <img src="images/ornament.png" alt="Чувашский орнамент">
-                </div>
+                <div class="about-art"><img src="images/ornament.png" alt="Чувашский орнамент"></div>
             </div>
         </section>
 
-        <!-- ===== ПОДВАЛ ===== -->
         <footer class="footer">
             <div class="ornament-bottom"></div>
-            <div class="container">
-                <div class="footer-grid">
-                    <div>
-                        <h3>Контакты</h3>
-                        <p>+7 (999) 444-44-44<br>test@gmail.com</p>
-                    </div>
-                    <div>
-                        <h3>Разделы</h3>
-                        <p><a href="index.html">Главная</a><br><a href="catalog.html">Каталог</a><br><a href="about.html">О мастерах</a></p>
-                    </div>
-                    <div>
-                        <h3>Мы в соц-сетях</h3>
-                        <div class="social-icons">
-                            <a href="#" class="social-icon">VK</a>
-                            <a href="#" class="social-icon">TG</a>
-                        </div>
+            <div class="container footer-grid">
+                <div>
+                    <h3>Контакты</h3>
+                    <p>+7 (999) 444-44-44<br>test@gmail.com</p>
+                </div>
+                <div>
+                    <h3>Разделы</h3>
+                    <p><a href="index.html">Главная</a><br><a href="catalog.html">Каталог</a><br><a href="about.html">О мастерах</a></p>
+                </div>
+                <div>
+                    <h3>Мы в соц-сетях</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon">VK</a>
+                        <a href="#" class="social-icon">TG</a>
                     </div>
                 </div>
             </div>
         </footer>
     </div>
 
-    <!-- ===== СКРИПТЫ ===== -->
     <script>
         function updateCartCounter() {
             let cart = JSON.parse(localStorage.getItem('cartItems')) || [];
@@ -782,18 +812,15 @@
                 el.style.display = total > 0 ? 'flex' : 'none';
             }
         }
-
+        
         document.querySelectorAll('.add-to-cart').forEach(btn => {
             btn.addEventListener('click', () => {
                 let name = btn.dataset.name;
                 let price = parseInt(btn.dataset.price);
                 let cart = JSON.parse(localStorage.getItem('cartItems')) || [];
                 let existing = cart.find(i => i.name === name);
-                if (existing) {
-                    existing.quantity = Math.min(existing.quantity + 1, 10);
-                } else {
-                    cart.push({ id: Date.now(), name, price, quantity: 1 });
-                }
+                if (existing) existing.quantity = Math.min(existing.quantity + 1, 10);
+                else cart.push({ id: Date.now(), name, price, quantity: 1 });
                 localStorage.setItem('cartItems', JSON.stringify(cart));
                 updateCartCounter();
                 alert(`"${name}" добавлен в корзину`);
@@ -801,7 +828,7 @@
         });
         updateCartCounter();
     </script>
-
+    
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
         import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
